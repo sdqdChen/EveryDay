@@ -1,0 +1,43 @@
+//
+//  PrefixHeader.pch
+//  EveryDay
+//
+//  Created by 陈晓 on 2017/1/2.
+//  Copyright © 2017年 陈晓. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "UIView+CXExtension.h"
+#import "NSCalendar+CXExtension.h"
+
+
+#define CachesPath NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject
+
+/*
+ * 屏幕
+ */
+#define CXScreenH [UIScreen mainScreen].bounds.size.height
+#define CXScreenW [UIScreen mainScreen].bounds.size.width
+
+/**
+ * 颜色
+ */
+#define CXColorA(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)/255.0]
+#define CXColor(r, g, b) CXColorA((r), (g), (b), 255)
+#define CXGrayColor(v) CXColor((v), (v), (v))
+#define CXRandomColor CXColor(arc4random_uniform(255), arc4random_uniform(255), arc4random_uniform(255))
+
+/**
+ * 日志
+ */
+#ifdef DEBUG
+#define CXLog(...) NSLog(__VA_ARGS__)
+#else
+#define CXLog(...)
+#endif
+
+#define CXLogFunc CXLog(@"%s", __func__)
+
+#endif

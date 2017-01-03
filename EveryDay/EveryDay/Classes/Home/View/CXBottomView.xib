@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="fAU-4U-3Em" customClass="CXBottomView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsN-6O-02k" customClass="CXBottomButton">
+                    <rect key="frame" x="20" y="1" width="44" height="44"/>
+                    <state key="normal" backgroundImage="homeButton"/>
+                    <state key="selected" backgroundImage="homeCloseButton"/>
+                    <connections>
+                        <action selector="bottomButtonClick:" destination="fAU-4U-3Em" eventType="touchUpInside" id="hVI-JO-sAP"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="fsN-6O-02k" secondAttribute="bottom" constant="1" id="LFQ-u9-gs8"/>
+                <constraint firstItem="fsN-6O-02k" firstAttribute="leading" secondItem="fAU-4U-3Em" secondAttribute="leading" constant="20" id="US0-dH-QOC"/>
+                <constraint firstItem="fsN-6O-02k" firstAttribute="top" secondItem="fAU-4U-3Em" secondAttribute="top" constant="1" id="UZL-dC-WKz"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="bottomButton" destination="fsN-6O-02k" id="QrH-gC-IM9"/>
+            </connections>
+            <point key="canvasLocation" x="-52.5" y="78"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="homeButton" width="44" height="44"/>
+        <image name="homeCloseButton" width="44" height="44"/>
+    </resources>
+</document>
