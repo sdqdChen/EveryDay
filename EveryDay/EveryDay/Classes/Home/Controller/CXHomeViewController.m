@@ -14,16 +14,36 @@
 #import <SVProgressHUD.h>
 #import "CXUserDefaults.h"
 #import "CXBottomView.h"
+#import "CXNoteLabel.h"
+#import <MJRefresh.h>
+
+typedef NS_OPTIONS(NSUInteger, CXMonthKey) {
+    CXJan = 1,
+    CXFeb,
+    CXMar,
+    CXApr,
+    CXMay,
+    CXJun,
+    CXJul,
+    CXAug,
+    CXSep,
+    CXOct,
+    CXNov,
+    CXDec
+};
 
 @interface CXHomeViewController ()
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 /** 顶部图片 */
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;
-/** 时间 */
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+/** 月份 */
+@property (weak, nonatomic) IBOutlet UILabel *monthLabel;
+/** 天 */
+@property (weak, nonatomic) IBOutlet UILabel *dayLabel;
 /** 问候语 */
 @property (weak, nonatomic) IBOutlet UILabel *helloLabel;
 /** 句子内容 */
-@property (weak, nonatomic) IBOutlet UILabel *noteLabel;
+@property (weak, nonatomic) IBOutlet CXNoteLabel *noteLabel;
 @property (nonatomic, weak) NSString *dateStr;
 /** 模型对象 */
 @property (nonatomic, strong) CXHomeItem *item;
@@ -39,6 +59,8 @@ static NSString *pathKey = @"filePath";
 #pragma mark - 初始化
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //设置scrollView
+    [self setupScrollView];
     //添加底部按钮条
     [self setupBottomView];
     //设置开头加载指示器
@@ -49,8 +71,6 @@ static NSString *pathKey = @"filePath";
     [self setupDateLabel];
     //设置问候语
     [self setupHelloLabel];
-    //设置句子
-    [self setupNoteLabel];
     //    CXLog(@"%@", NSHomeDirectory());
 }
 - (void)viewDidLayoutSubviews
@@ -66,7 +86,26 @@ static NSString *pathKey = @"filePath";
 {
     return UIStatusBarStyleLightContent;
 }
-#pragma mark - 添加控件
+#pragma mark - 设置子控件
+- (void)setupScrollView
+{
+    self.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];
+    self.scrollView.mj_header.automaticallyChangeAlpha = YES;
+    self.scrollView.contentSize = CGSizeMake(CXScreenW, CXScreenH);
+    self.scrollView.showsVerticalScrollIndicator = NO;
+}
+/*
+ * 下拉刷新
+ */
+- (void)refresh
+{
+    //获取网络数据
+    [self loadDataFromNet];
+    //设置日期
+    [self setupDateLabel];
+    //设置问候语
+    [self setupHelloLabel];
+}
 /*
  * 设置开头加载指示器
  */
@@ -112,13 +151,15 @@ static NSString *pathKey = @"filePath";
  */
 - (void)setupDateLabel
 {
-    NSDateFormatter *fom = [[NSDateFormatter alloc] init];
-    fom.dateFormat = @"MM.dd";
     NSDate *date = [NSDate date];
-    NSString *dateStr = [fom stringFromDate:date];
-    self.dateStr = dateStr;
-    self.dateLabel.text = dateStr;
-    self.dateLabel.font = [UIFont fontWithName:@"Hiragino Sans" size:40];
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *cmps = [cal components:NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
+    //月份
+    [self monthToEnWith:cmps.month];
+    self.monthLabel.font = [UIFont fontWithName:@"Hiragino Sans" size:20];
+    //天
+    self.dayLabel.text = [NSString stringWithFormat:@"%ld", cmps.day];
+    self.dayLabel.font = [UIFont fontWithName:@"Hiragino Sans" size:40];
 }
 /*
  * 设置问候语
@@ -136,29 +177,40 @@ static NSString *pathKey = @"filePath";
     } else if (hour >= 22 || hour < 6) {
         self.helloLabel.text = @"Good night";
     }
-    self.helloLabel.font = [UIFont fontWithName:@"Futura" size:18];
-}
-/*
- * 设置句子
- */
-- (void)setupNoteLabel
-{
-    self.noteLabel.font = [UIFont fontWithName:@"PingFang SC" size:18];
+    self.helloLabel.font = [UIFont fontWithName:@"Futura" size:20];
 }
 #pragma mark - 获取网络数据
 - (void)loadData
 {
     //先从缓存模型对象
+    [self loadDataFromCache];
+    //网络请求
+    [self loadDataFromNet];
+}
+/*
+ * 从本地缓存加载
+ */
+- (void)loadDataFromCache
+{
     NSString *path = [CachesPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.data", [CXUserDefaults readObjectForKey:pathKey]]];
     CXHomeItem *item = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
     if (item) {
+        [self.headImageView sd_setImageWithURL:[NSURL URLWithString:item.picture2]];
         [self loadSuccessWithItem:item];
     }
-    //网络请求
+}
+/*
+ * 获取网络数据
+ */
+- (void)loadDataFromNet
+{
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
     [manager GET:@"http://open.iciba.com/dsapi/" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         CXHomeItem *item = [CXHomeItem mj_objectWithKeyValues:responseObject];
         self.item = item;
+        if (![item.sid isEqualToString:[CXUserDefaults readObjectForKey:pathKey]]) {
+            [self.headImageView sd_setImageWithURL:[NSURL URLWithString:item.picture2]];
+        }
         [self loadSuccessWithItem:item];
         //保存模型对象到本地
         NSString *filePath = [CachesPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.data", item.sid]];
@@ -169,14 +221,61 @@ static NSString *pathKey = @"filePath";
         [SVProgressHUD showErrorWithStatus:@"似乎已断开与网络的链接..."];
         [self.indicatorView stopAnimating];
         self.notInternet.hidden = NO;
+        [self.scrollView.mj_header endRefreshing];
     }];
 }
 - (void)loadSuccessWithItem:(CXHomeItem *)item
 {
-    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:item.picture2]];
     self.noteLabel.text = item.note;
     [self.indicatorView stopAnimating];
     self.tmpView.hidden = YES;
     self.notInternet.hidden = YES;
+    [self.scrollView.mj_header endRefreshing];
+}
+/*
+ * 月份转英文
+ */
+- (void)monthToEnWith:(NSInteger)month
+{
+    switch (month) {
+        case CXJan:
+            self.monthLabel.text = @"Jan.";
+            break;
+        case CXFeb:
+            self.monthLabel.text = @"Feb.";
+            break;
+        case CXMar:
+            self.monthLabel.text = @"Mar.";
+            break;
+        case CXApr:
+            self.monthLabel.text = @"Apr.";
+            break;
+        case CXMay:
+            self.monthLabel.text = @"May.";
+            break;
+        case CXJun:
+            self.monthLabel.text = @"Jun.";
+            break;
+        case CXJul:
+            self.monthLabel.text = @"Jul.";
+            break;
+        case CXAug:
+            self.monthLabel.text = @"Aug.";
+            break;
+        case CXSep:
+            self.monthLabel.text = @"Sep.";
+            break;
+        case CXOct:
+            self.monthLabel.text = @"Oct.";
+            break;
+        case CXNov:
+            self.monthLabel.text = @"Nov.";
+            break;
+        case CXDec:
+            self.monthLabel.text = @"Dec.";
+            break;
+        default:
+            break;
+    }
 }
 @end

@@ -8,8 +8,10 @@
 
 #import "CXBottomView.h"
 #import "CXBottomButton.h"
+#import "CXArticleViewController.h"
+#import "CXHomeViewController.h"
 
-@interface CXBottomView ()
+@interface CXBottomView () 
 @property (weak, nonatomic) IBOutlet CXBottomButton *bottomButton;
 @property (nonatomic, strong) NSMutableArray *items;
 @end
@@ -107,6 +109,20 @@ static CGFloat buttonAnimation = 0.7;
  */
 - (void)clickBottomButton:(CXBottomButton *)button
 {
-    CXLog(@"%ld", button.tag);
+    //先让4个按钮收回去
+    [self bottomButtonClick:self.bottomButton];
+    
+    if (button.tag == 1) { //文章
+        CXArticleViewController *articleVc = [[CXArticleViewController alloc] init];
+        articleVc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        UIViewController *home = [UIApplication sharedApplication].keyWindow.rootViewController;
+        [home presentViewController:articleVc animated:YES completion:nil];
+    } else if (button.tag == 2) {
+        CXLog(@"诗");
+    } else if (button.tag == 3) {
+        CXLog(@"图片");
+    } else if (button.tag == 4) {
+        CXLog(@"我的");
+    }
 }
 @end

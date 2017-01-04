@@ -22,6 +22,12 @@
 		65C350FF1E1A866E00A84399 /* CXBottomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C350FB1E1A866E00A84399 /* CXBottomButton.m */; };
 		65C351001E1A866E00A84399 /* CXBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C350FD1E1A866E00A84399 /* CXBottomView.m */; };
 		65C351011E1A866E00A84399 /* CXBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C350FE1E1A866E00A84399 /* CXBottomView.xib */; };
+		65C3510D1E1B42A200A84399 /* CXArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C3510B1E1B42A200A84399 /* CXArticleViewController.m */; };
+		65C3510E1E1B42A200A84399 /* CXArticleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C3510C1E1B42A200A84399 /* CXArticleViewController.xib */; };
+		65C351691E1B872B00A84399 /* index.css in Resources */ = {isa = PBXBuildFile; fileRef = 65C351671E1B872B00A84399 /* index.css */; };
+		65C3516A1E1B872B00A84399 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = 65C351681E1B872B00A84399 /* index.js */; };
+		65C351B21E1C040200A84399 /* CXLoadingAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C351B11E1C040200A84399 /* CXLoadingAnimation.m */; };
+		65C352041E1CC30200A84399 /* CXNoteLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C352031E1CC30200A84399 /* CXNoteLabel.m */; };
 		847DC762218483F2AADED8CD /* libPods-EveryDay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC47CFCCF2F6F14528BDC31 /* libPods-EveryDay.a */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +80,15 @@
 		65C350FC1E1A866E00A84399 /* CXBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXBottomView.h; sourceTree = "<group>"; };
 		65C350FD1E1A866E00A84399 /* CXBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXBottomView.m; sourceTree = "<group>"; };
 		65C350FE1E1A866E00A84399 /* CXBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CXBottomView.xib; sourceTree = "<group>"; };
+		65C3510A1E1B42A200A84399 /* CXArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXArticleViewController.h; sourceTree = "<group>"; };
+		65C3510B1E1B42A200A84399 /* CXArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXArticleViewController.m; sourceTree = "<group>"; };
+		65C3510C1E1B42A200A84399 /* CXArticleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CXArticleViewController.xib; sourceTree = "<group>"; };
+		65C351671E1B872B00A84399 /* index.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = index.css; sourceTree = "<group>"; };
+		65C351681E1B872B00A84399 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+		65C351B01E1C040200A84399 /* CXLoadingAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXLoadingAnimation.h; sourceTree = "<group>"; };
+		65C351B11E1C040200A84399 /* CXLoadingAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXLoadingAnimation.m; sourceTree = "<group>"; };
+		65C352021E1CC30200A84399 /* CXNoteLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXNoteLabel.h; sourceTree = "<group>"; };
+		65C352031E1CC30200A84399 /* CXNoteLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXNoteLabel.m; sourceTree = "<group>"; };
 		CEC47CFCCF2F6F14528BDC31 /* libPods-EveryDay.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EveryDay.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7094831A399E410AB192050 /* Pods-EveryDay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryDay.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EveryDay/Pods-EveryDay.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,6 +192,10 @@
 			children = (
 				65C350AE1E1A451B00A84399 /* Tool */,
 				65C3509A1E19E44200A84399 /* Home */,
+				65C351061E1B426800A84399 /* Article */,
+				65C351171E1B42EA00A84399 /* Poem */,
+				65C351131E1B42E500A84399 /* Picture */,
+				65C3510F1E1B42DC00A84399 /* Mine */,
 				652F5BEB1E19E36B00D3783C /* Other */,
 			);
 			path = Classes;
@@ -231,6 +250,8 @@
 				65C350FC1E1A866E00A84399 /* CXBottomView.h */,
 				65C350FD1E1A866E00A84399 /* CXBottomView.m */,
 				65C350FE1E1A866E00A84399 /* CXBottomView.xib */,
+				65C352021E1CC30200A84399 /* CXNoteLabel.h */,
+				65C352031E1CC30200A84399 /* CXNoteLabel.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -249,7 +270,6 @@
 		65C350AE1E1A451B00A84399 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
-				65C351021E1AB62E00A84399 /* CXArchiver */,
 				65C350AF1E1A451B00A84399 /* CXUserDefaults */,
 			);
 			path = Tool;
@@ -264,11 +284,143 @@
 			path = CXUserDefaults;
 			sourceTree = "<group>";
 		};
-		65C351021E1AB62E00A84399 /* CXArchiver */ = {
+		65C351061E1B426800A84399 /* Article */ = {
+			isa = PBXGroup;
+			children = (
+				65C351661E1B86F700A84399 /* HTML */,
+				65C351071E1B426800A84399 /* Controller */,
+				65C351081E1B426800A84399 /* Model */,
+				65C351091E1B426800A84399 /* View */,
+			);
+			path = Article;
+			sourceTree = "<group>";
+		};
+		65C351071E1B426800A84399 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				65C3510A1E1B42A200A84399 /* CXArticleViewController.h */,
+				65C3510B1E1B42A200A84399 /* CXArticleViewController.m */,
+				65C3510C1E1B42A200A84399 /* CXArticleViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		65C351081E1B426800A84399 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = CXArchiver;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		65C351091E1B426800A84399 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				65C351B01E1C040200A84399 /* CXLoadingAnimation.h */,
+				65C351B11E1C040200A84399 /* CXLoadingAnimation.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		65C3510F1E1B42DC00A84399 /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				65C351101E1B42DC00A84399 /* Controller */,
+				65C351111E1B42DC00A84399 /* Model */,
+				65C351121E1B42DC00A84399 /* View */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
+		65C351101E1B42DC00A84399 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		65C351111E1B42DC00A84399 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		65C351121E1B42DC00A84399 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		65C351131E1B42E500A84399 /* Picture */ = {
+			isa = PBXGroup;
+			children = (
+				65C351141E1B42E500A84399 /* Controller */,
+				65C351151E1B42E500A84399 /* Model */,
+				65C351161E1B42E500A84399 /* View */,
+			);
+			path = Picture;
+			sourceTree = "<group>";
+		};
+		65C351141E1B42E500A84399 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		65C351151E1B42E500A84399 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		65C351161E1B42E500A84399 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		65C351171E1B42EA00A84399 /* Poem */ = {
+			isa = PBXGroup;
+			children = (
+				65C351181E1B42EA00A84399 /* Controller */,
+				65C351191E1B42EA00A84399 /* Model */,
+				65C3511A1E1B42EA00A84399 /* View */,
+			);
+			path = Poem;
+			sourceTree = "<group>";
+		};
+		65C351181E1B42EA00A84399 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		65C351191E1B42EA00A84399 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		65C3511A1E1B42EA00A84399 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		65C351661E1B86F700A84399 /* HTML */ = {
+			isa = PBXGroup;
+			children = (
+				65C351671E1B872B00A84399 /* index.css */,
+				65C351681E1B872B00A84399 /* index.js */,
+			);
+			path = HTML;
 			sourceTree = "<group>";
 		};
 		C4CC73C2B94DD36FEF1ABF8C /* Frameworks */ = {
@@ -392,6 +544,9 @@
 			files = (
 				65C351011E1A866E00A84399 /* CXBottomView.xib in Resources */,
 				65C350A71E19E5F600A84399 /* CXHomeViewController.xib in Resources */,
+				65C351691E1B872B00A84399 /* index.css in Resources */,
+				65C3510E1E1B42A200A84399 /* CXArticleViewController.xib in Resources */,
+				65C3516A1E1B872B00A84399 /* index.js in Resources */,
 				652F5BC71E19E0EC00D3783C /* LaunchScreen.storyboard in Resources */,
 				652F5BC41E19E0EC00D3783C /* Assets.xcassets in Resources */,
 			);
@@ -470,9 +625,12 @@
 				65C350A61E19E5F600A84399 /* CXHomeViewController.m in Sources */,
 				65C350A21E19E58900A84399 /* UIView+CXExtension.m in Sources */,
 				652F5BEF1E19E36B00D3783C /* AppDelegate.m in Sources */,
+				65C351B21E1C040200A84399 /* CXLoadingAnimation.m in Sources */,
 				652F5BF01E19E36B00D3783C /* main.m in Sources */,
 				65C350B21E1A452B00A84399 /* CXUserDefaults.m in Sources */,
+				65C3510D1E1B42A200A84399 /* CXArticleViewController.m in Sources */,
 				65C350AD1E1A0D6C00A84399 /* NSCalendar+CXExtension.m in Sources */,
+				65C352041E1CC30200A84399 /* CXNoteLabel.m in Sources */,
 				65C351001E1A866E00A84399 /* CXBottomView.m in Sources */,
 				65C350FF1E1A866E00A84399 /* CXBottomButton.m in Sources */,
 			);
