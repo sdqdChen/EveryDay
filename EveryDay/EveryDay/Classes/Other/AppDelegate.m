@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "CXHomeViewController.h"
+#import "CXUserDefaults.h"
+#import "CXNavigationController.h"
 
 @interface AppDelegate ()
 
@@ -19,7 +21,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = [[CXHomeViewController alloc] init];
+    CXNavigationController *nav = [[CXNavigationController alloc] initWithRootViewController:[[CXHomeViewController alloc] init]];
+    self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -36,9 +39,20 @@
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
-
+/*
+ * 应用从后台到前台
+ */
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    //旧的日期
+    NSString *oldDateStr = [CXUserDefaults readObjectForKey:todayDateStrKey];
+    [CXUserDefaults setObject:oldDateStr forKey:oldDateStrKey];
+    //当天
+    NSDate *date = [NSDate date];
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *cmps = [cal components:NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
+    //把日期保存起来，为了判断是否刷新文章
+    NSString *todayDateStr = [NSString stringWithFormat:@"%ld月%ld日", cmps.month, cmps.day];
+    [CXUserDefaults setObject:todayDateStr forKey:todayDateStrKey];
 }
 
 

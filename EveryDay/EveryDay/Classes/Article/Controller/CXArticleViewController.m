@@ -9,7 +9,6 @@
 #import "CXArticleViewController.h"
 #import <AFNetworking.h>
 #import <SVProgressHUD.h>
-#import "CXUserDefaults.h"
 #import "CXLoadingAnimation.h"
 
 static NSString * itemidKey = @"itemid";
@@ -59,35 +58,44 @@ static NSString * itemidKey = @"itemid";
  */
 - (void)loadArticleData
 {
+    //获取当天日期
+    NSString *todayDateStr = [CXUserDefaults readObjectForKey:todayDateStrKey];
+    //之前保存的日期
+    NSString *oldDateStr = [CXUserDefaults readObjectForKey:oldDateStrKey];
     //先从缓存中取数据
     NSString *filePath = [CachesPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", [CXUserDefaults readObjectForKey:itemidKey]]];
     self.randomData = [NSDictionary dictionaryWithContentsOfFile:filePath];
-    if (self.randomData) {
+    if (self.randomData && [oldDateStr isEqualToString:todayDateStr]) {
+        //如果本地有数据，并且是同一天，就从本地加载数据
         //拼接HTML
         [self setupHtmlWithDictionary:self.randomData];
+    } else if (!self.randomData || ![oldDateStr isEqualToString:todayDateStr]) { //如果本地没有数据或者不是同一天，就从网络加载
+        //网络请求
+        NSInteger pageIndex = arc4random_uniform(27);//0-26
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        NSString *urlStr = [NSString stringWithFormat:@"http://www.finndy.com/api.php?pagesize=20&pageindex=%ld&datatype=json&sortby=desc&token=1.0_7iiSVVWVgqpyHHHiSVVU766085fd", pageIndex];
+        [manager GET:urlStr parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            //        [responseObject writeToFile:@"/Users/chenxiao/Desktop/article.plist" atomically:YES];
+            //文章的数组
+            NSArray *datalistArray = responseObject[@"datalist"];
+            NSUInteger count = datalistArray.count;
+            NSInteger randomNum = arc4random() % count;
+            NSDictionary *random = datalistArray[randomNum];//后面改成随机的
+            //把字典保存到本地(根据itemid)
+            NSString *filePath = [CachesPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", random[@"itemid"]]];
+            [random writeToFile:filePath atomically:YES];
+            [CXUserDefaults setObject:random[@"itemid"] forKey:itemidKey];
+            //拼接HTML
+            [self setupHtmlWithDictionary:random];
+            //移除加载动画
+            [self.animationView removeFromSuperview];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            CXLog(@"%@", error);
+            [SVProgressHUD showErrorWithStatus:@"似乎已断开与网络的链接..."];
+            //移除加载动画
+            [self.animationView removeFromSuperview];
+        }];
     }
-    //网络请求
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    NSString *urlStr = @"http://www.finndy.com/api.php?pagesize=20&pageindex=0&datatype=json&sortby=desc&token=1.0_7iiSVVWVgqpyHHHiSVVU766085fd";
-    [manager GET:urlStr parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        //        [responseObject writeToFile:@"/Users/chenxiao/Desktop/article.plist" atomically:YES];
-        //文章的数组
-        NSArray *datalistArray = responseObject[@"datalist"];
-        NSDictionary *random = datalistArray[1];//后面改成随机的
-        //把字典保存到本地(根据itemid)
-        NSString *filePath = [CachesPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", random[@"itemid"]]];
-        [random writeToFile:filePath atomically:YES];
-        [CXUserDefaults setObject:random[@"itemid"] forKey:itemidKey];
-        //拼接HTML
-        [self setupHtmlWithDictionary:random];
-        //移除加载动画
-        [self.animationView removeFromSuperview];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        CXLog(@"%@", error);
-        [SVProgressHUD showErrorWithStatus:@"似乎已断开与网络的链接..."];
-        //移除加载动画
-        [self.animationView removeFromSuperview];
-    }];
 }
 /*
  * 拼接HTML
@@ -140,7 +148,7 @@ static NSString * itemidKey = @"itemid";
         [self performSelector:selector];
     }
 }
-#pragma mark - 监听事件
+#pragma mark - 处理webView的点击与滑动
 /*
  * 向下滑动->隐藏状态栏
  */
@@ -178,7 +186,7 @@ static NSString * itemidKey = @"itemid";
         }
     }];
 }
-
+#pragma mark - 监听事件
 /*
  * 收藏
  */

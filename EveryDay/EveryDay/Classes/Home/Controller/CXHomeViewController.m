@@ -12,11 +12,11 @@
 #import <UIImageView+WebCache.h>
 #import "CXHomeItem.h"
 #import <SVProgressHUD.h>
-#import "CXUserDefaults.h"
 #import "CXBottomView.h"
 #import "CXNoteLabel.h"
 #import <MJRefresh.h>
-
+#import "UIBarButtonItem+CXBarButtonItem.h"
+/** 月份 */
 typedef NS_OPTIONS(NSUInteger, CXMonthKey) {
     CXJan = 1,
     CXFeb,
@@ -33,6 +33,7 @@ typedef NS_OPTIONS(NSUInteger, CXMonthKey) {
 };
 
 @interface CXHomeViewController ()
+@property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 /** 顶部图片 */
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;
@@ -59,6 +60,8 @@ static NSString *pathKey = @"filePath";
 #pragma mark - 初始化
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //添加导航栏按钮
+    [self setupNavButton];
     //设置scrollView
     [self setupScrollView];
     //添加底部按钮条
@@ -78,15 +81,25 @@ static NSString *pathKey = @"filePath";
     [super viewDidLayoutSubviews];
     self.indicatorView.center = self.view.center;
     self.notInternet.center = self.view.center;
-}
-/*
- * 设置状态栏为白色
- */
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
+    self.bgView.frame = CGRectMake(0, -CXNavigationBarMaxY, CXScreenW, CXScreenH);
+    self.scrollView.frame = CGRectMake(0, -CXNavigationBarMaxY, CXScreenW, CXScreenH);
 }
 #pragma mark - 设置子控件
+/*
+ * 设置导航栏-我的按钮
+ */
+- (void)setupNavButton
+{
+    UIBarButtonItem *mineItem = [UIBarButtonItem itemWithImage:[UIImage imageNamed:@"mineButton"] highImage:nil target:self action:@selector(mineButtonClick)];
+    self.navigationItem.rightBarButtonItem = mineItem;
+}
+/*
+ * 点击进入我的界面
+ */
+- (void)mineButtonClick
+{
+    CXLog(@"我的界面");
+}
 - (void)setupScrollView
 {
     self.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];
@@ -151,6 +164,10 @@ static NSString *pathKey = @"filePath";
  */
 - (void)setupDateLabel
 {
+    //先把之前保存的日期取出来，变成旧的日期
+    NSString *oldDateStr = [CXUserDefaults readObjectForKey:todayDateStrKey];
+    [CXUserDefaults setObject:oldDateStr forKey:oldDateStrKey];
+    //今天
     NSDate *date = [NSDate date];
     NSCalendar *cal = [NSCalendar currentCalendar];
     NSDateComponents *cmps = [cal components:NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
@@ -160,6 +177,9 @@ static NSString *pathKey = @"filePath";
     //天
     self.dayLabel.text = [NSString stringWithFormat:@"%ld", cmps.day];
     self.dayLabel.font = [UIFont fontWithName:@"Hiragino Sans" size:40];
+    //把日期保存起来，为了判断是否刷新文章
+    NSString *todayDateStr = [NSString stringWithFormat:@"%ld月%ld日", cmps.month, cmps.day];
+    [CXUserDefaults setObject:todayDateStr forKey:todayDateStrKey];
 }
 /*
  * 设置问候语
@@ -224,6 +244,9 @@ static NSString *pathKey = @"filePath";
         [self.scrollView.mj_header endRefreshing];
     }];
 }
+/*
+ * 成功获取网络数据
+ */
 - (void)loadSuccessWithItem:(CXHomeItem *)item
 {
     self.noteLabel.text = item.note;

@@ -11,7 +11,14 @@
 #import "CXArticleViewController.h"
 #import "CXHomeViewController.h"
 
-@interface CXBottomView () 
+typedef NS_OPTIONS(NSUInteger, CXButonType) {
+    CXArtileButton = 1,
+    CXPoemButton,
+    CXMusicButton,
+    CXPictureButton
+};
+
+@interface CXBottomView ()
 @property (weak, nonatomic) IBOutlet CXBottomButton *bottomButton;
 @property (nonatomic, strong) NSMutableArray *items;
 @end
@@ -41,8 +48,8 @@ static CGFloat buttonAnimation = 0.7;
     if (self = [super initWithCoder:aDecoder]) {
         [self addBtnWithImgName:@"articleButton" andTag:1];
         [self addBtnWithImgName:@"poemButton" andTag:2];
-        [self addBtnWithImgName:@"pictureButton" andTag:3];
-        [self addBtnWithImgName:@"mineButton" andTag:4];
+        [self addBtnWithImgName:@"musicButton" andTag:3];
+        [self addBtnWithImgName:@"pictureButton" andTag:4];
     }
     return self;
 }
@@ -112,17 +119,17 @@ static CGFloat buttonAnimation = 0.7;
     //先让4个按钮收回去
     [self bottomButtonClick:self.bottomButton];
     
-    if (button.tag == 1) { //文章
+    if (button.tag == CXArtileButton) { //文章
         CXArticleViewController *articleVc = [[CXArticleViewController alloc] init];
         articleVc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
         UIViewController *home = [UIApplication sharedApplication].keyWindow.rootViewController;
         [home presentViewController:articleVc animated:YES completion:nil];
-    } else if (button.tag == 2) {
+    } else if (button.tag == CXPoemButton) {
         CXLog(@"诗");
-    } else if (button.tag == 3) {
+    } else if (button.tag == CXMusicButton) {
+        CXLog(@"音乐");
+    } else if (button.tag == CXPictureButton) {
         CXLog(@"图片");
-    } else if (button.tag == 4) {
-        CXLog(@"我的");
     }
 }
 @end

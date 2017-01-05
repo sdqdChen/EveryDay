@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CXHomeViewController">
             <connections>
+                <outlet property="bgView" destination="TGk-id-K8J" id="RLR-Dr-vLX"/>
                 <outlet property="dayLabel" destination="39P-0V-i3K" id="DhN-kb-V1E"/>
                 <outlet property="headImageView" destination="yNb-Ma-BBo" id="Cm3-FV-Qvr"/>
                 <outlet property="helloLabel" destination="Vd1-ij-ffT" id="Tlk-bK-rkJ"/>

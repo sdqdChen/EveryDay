@@ -13,6 +13,9 @@
 		652F5BDD1E19E0EC00D3783C /* EveryDayUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 652F5BDC1E19E0EC00D3783C /* EveryDayUITests.m */; };
 		652F5BEF1E19E36B00D3783C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 652F5BED1E19E36B00D3783C /* AppDelegate.m */; };
 		652F5BF01E19E36B00D3783C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 652F5BEE1E19E36B00D3783C /* main.m */; };
+		653CF20C1E1DD4E10063CAD2 /* CXNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 653CF20B1E1DD4E10063CAD2 /* CXNavigationController.m */; };
+		653CF20F1E1DD9A90063CAD2 /* UIBarButtonItem+CXBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 653CF20E1E1DD9A90063CAD2 /* UIBarButtonItem+CXBarButtonItem.m */; };
+		653CF2121E1DDF220063CAD2 /* CXConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 653CF2111E1DDF220063CAD2 /* CXConst.m */; };
 		65C350A21E19E58900A84399 /* UIView+CXExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C350A11E19E58900A84399 /* UIView+CXExtension.m */; };
 		65C350A61E19E5F600A84399 /* CXHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C350A41E19E5F600A84399 /* CXHomeViewController.m */; };
 		65C350A71E19E5F600A84399 /* CXHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C350A51E19E5F600A84399 /* CXHomeViewController.xib */; };
@@ -63,6 +66,12 @@
 		652F5BEC1E19E36B00D3783C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		652F5BED1E19E36B00D3783C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		652F5BEE1E19E36B00D3783C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		653CF20A1E1DD4E10063CAD2 /* CXNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXNavigationController.h; sourceTree = "<group>"; };
+		653CF20B1E1DD4E10063CAD2 /* CXNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXNavigationController.m; sourceTree = "<group>"; };
+		653CF20D1E1DD9A90063CAD2 /* UIBarButtonItem+CXBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+CXBarButtonItem.h"; sourceTree = "<group>"; };
+		653CF20E1E1DD9A90063CAD2 /* UIBarButtonItem+CXBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+CXBarButtonItem.m"; sourceTree = "<group>"; };
+		653CF2101E1DDF220063CAD2 /* CXConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXConst.h; sourceTree = "<group>"; };
+		653CF2111E1DDF220063CAD2 /* CXConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXConst.m; sourceTree = "<group>"; };
 		65C3509E1E19E49300A84399 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		65C350A01E19E58900A84399 /* UIView+CXExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CXExtension.h"; sourceTree = "<group>"; };
 		65C350A11E19E58900A84399 /* UIView+CXExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CXExtension.m"; sourceTree = "<group>"; };
@@ -190,6 +199,7 @@
 		652F5BEA1E19E36B00D3783C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				653CF2081E1DD4C80063CAD2 /* Main */,
 				65C350AE1E1A451B00A84399 /* Tool */,
 				65C3509A1E19E44200A84399 /* Home */,
 				65C351061E1B426800A84399 /* Article */,
@@ -207,10 +217,29 @@
 				65C3509F1E19E55B00A84399 /* Category */,
 				652F5BEC1E19E36B00D3783C /* AppDelegate.h */,
 				652F5BED1E19E36B00D3783C /* AppDelegate.m */,
+				653CF2101E1DDF220063CAD2 /* CXConst.h */,
+				653CF2111E1DDF220063CAD2 /* CXConst.m */,
 				652F5BEE1E19E36B00D3783C /* main.m */,
 				65C3509E1E19E49300A84399 /* PrefixHeader.pch */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		653CF2081E1DD4C80063CAD2 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				653CF2091E1DD4C80063CAD2 /* Controller */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		653CF2091E1DD4C80063CAD2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				653CF20A1E1DD4E10063CAD2 /* CXNavigationController.h */,
+				653CF20B1E1DD4E10063CAD2 /* CXNavigationController.m */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		65C3509A1E19E44200A84399 /* Home */ = {
@@ -259,6 +288,8 @@
 		65C3509F1E19E55B00A84399 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				653CF20D1E1DD9A90063CAD2 /* UIBarButtonItem+CXBarButtonItem.h */,
+				653CF20E1E1DD9A90063CAD2 /* UIBarButtonItem+CXBarButtonItem.m */,
 				65C350AB1E1A0D6C00A84399 /* NSCalendar+CXExtension.h */,
 				65C350AC1E1A0D6C00A84399 /* NSCalendar+CXExtension.m */,
 				65C350A01E19E58900A84399 /* UIView+CXExtension.h */,
@@ -622,6 +653,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65C350AA1E19ED6200A84399 /* CXHomeItem.m in Sources */,
+				653CF20C1E1DD4E10063CAD2 /* CXNavigationController.m in Sources */,
 				65C350A61E19E5F600A84399 /* CXHomeViewController.m in Sources */,
 				65C350A21E19E58900A84399 /* UIView+CXExtension.m in Sources */,
 				652F5BEF1E19E36B00D3783C /* AppDelegate.m in Sources */,
@@ -631,7 +663,9 @@
 				65C3510D1E1B42A200A84399 /* CXArticleViewController.m in Sources */,
 				65C350AD1E1A0D6C00A84399 /* NSCalendar+CXExtension.m in Sources */,
 				65C352041E1CC30200A84399 /* CXNoteLabel.m in Sources */,
+				653CF2121E1DDF220063CAD2 /* CXConst.m in Sources */,
 				65C351001E1A866E00A84399 /* CXBottomView.m in Sources */,
+				653CF20F1E1DD9A90063CAD2 /* UIBarButtonItem+CXBarButtonItem.m in Sources */,
 				65C350FF1E1A866E00A84399 /* CXBottomButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

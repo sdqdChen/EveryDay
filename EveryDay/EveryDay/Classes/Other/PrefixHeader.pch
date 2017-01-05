@@ -11,10 +11,13 @@
 
 #import "UIView+CXExtension.h"
 #import "NSCalendar+CXExtension.h"
+#import "CXUserDefaults.h"
+#import "CXConst.h"
 
 
 #define CachesPath NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject
-
+#define todayDateStrKey @"todayDateStrKey"
+#define oldDateStrKey @"oldDateStrKey"
 /*
  * 屏幕
  */
