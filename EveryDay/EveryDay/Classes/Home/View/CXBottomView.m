@@ -11,6 +11,7 @@
 #import "CXArticleViewController.h"
 #import "CXHomeViewController.h"
 #import "CXPoemViewController.h"
+#import "CXPictureViewController.h"
 
 typedef NS_OPTIONS(NSUInteger, CXButonType) {
     CXArtileButton = 1,
@@ -121,19 +122,22 @@ static CGFloat buttonAnimation = 0.7;
     [self bottomButtonClick:self.bottomButton];
     
     if (button.tag == CXArtileButton) { //文章
-        CXArticleViewController *articleVc = [[CXArticleViewController alloc] init];
-        articleVc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-        UIViewController *home = [UIApplication sharedApplication].keyWindow.rootViewController;
-        [home presentViewController:articleVc animated:YES completion:nil];
+        [self presentNextVc:[[CXArticleViewController alloc] init]];
     } else if (button.tag == CXPoemButton) {
-        CXPoemViewController *poemVc = [[CXPoemViewController alloc] init];
-        poemVc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-        UIViewController *home = [UIApplication sharedApplication].keyWindow.rootViewController;
-        [home presentViewController:poemVc animated:YES completion:nil];
+        [self presentNextVc:[[CXPoemViewController alloc] init]];
     } else if (button.tag == CXMusicButton) {
         CXLog(@"音乐");
     } else if (button.tag == CXPictureButton) {
-        CXLog(@"图片");
+        [self presentNextVc:[[CXPictureViewController alloc] init]];
     }
+}
+/*
+ * 进入下一个控制器
+ */
+- (void)presentNextVc:(UIViewController *)viewController
+{
+    viewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    UIViewController *home = [UIApplication sharedApplication].keyWindow.rootViewController;
+    [home presentViewController:viewController animated:YES completion:nil];
 }
 @end

@@ -21,8 +21,8 @@ static NSString * poemItemidKey = @"poemItemidKey";
 @property (nonatomic, weak) CXLoadingAnimation *animationView;
 //本地文章数据
 @property (nonatomic, strong) NSDictionary *randomData;
-/** 网络是否正常 */
-@property (nonatomic, assign, getter=isNetNormal) BOOL netNormal;
+/** 网页是否加载完成 */
+@property (nonatomic, assign, getter=isLoadComplete) BOOL loadComplete;
 @end
 
 @implementation CXPoemViewController
@@ -37,10 +37,10 @@ static NSString * poemItemidKey = @"poemItemidKey";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    //如果本地缓存为空并且网络正常，才有加载动画
-    if (!self.randomData && self.isNetNormal == YES) {
+    if (self.isLoadComplete == NO) {
         [self setupLoadAnimationToView];
     }
+    
 }
 /*
  * 设置加载动画
@@ -102,17 +102,19 @@ static NSString * poemItemidKey = @"poemItemidKey";
             NSString *filePath = [CachesPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", random[@"itemid"]]];
             [random writeToFile:filePath atomically:YES];
             [CXUserDefaults setObject:random[@"itemid"] forKey:poemItemidKey];
-            self.netNormal = YES;
             //拼接HTML
             [self setupHtmlWithDictionary:random];
-            //移除加载动画
-            [self.animationView removeFromSuperview];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             CXLog(@"%@", error);
-            self.netNormal = NO;
             [SVProgressHUD showErrorWithStatus:@"似乎已断开与网络的链接..."];
             //移除加载动画
-            [self.animationView removeFromSuperview];
+            if (self.animationView) {
+                [self.animationView removeFromSuperview];
+            } else {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.animationView removeFromSuperview];
+                });
+            }
         }];
     }
 }
@@ -125,7 +127,6 @@ static NSString * poemItemidKey = @"poemItemidKey";
     NSString *mes = random[@"message"];
     //去掉空格
     NSString *newMes = [mes stringByReplacingOccurrencesOfString:@"<p>　　" withString:@"<p>"];
-    
     NSString *mes1 = [NSString stringWithFormat:@"<div id=content>%@</div>", newMes];
     //标题标签
     //把标题中的《》去掉
@@ -170,6 +171,12 @@ static NSString * poemItemidKey = @"poemItemidKey";
         SEL selector = NSSelectorFromString(method);
         [self performSelector:selector];
     }
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    self.loadComplete = YES;
+    //移除加载动画
+    [self.animationView removeFromSuperview];
 }
 #pragma mark - 处理webView的点击与滑动
 /*

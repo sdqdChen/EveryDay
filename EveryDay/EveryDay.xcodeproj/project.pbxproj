@@ -20,6 +20,8 @@
 		653CF21B1E1DE11C0063CAD2 /* CXPoemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 653CF2191E1DE11C0063CAD2 /* CXPoemViewController.xib */; };
 		653CF21F1E1DE42C0063CAD2 /* poem.css in Resources */ = {isa = PBXBuildFile; fileRef = 653CF21D1E1DE42C0063CAD2 /* poem.css */; };
 		653CF2201E1DE42C0063CAD2 /* poem.js in Resources */ = {isa = PBXBuildFile; fileRef = 653CF21E1E1DE42C0063CAD2 /* poem.js */; };
+		653CF2241E1E38B00063CAD2 /* CXPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 653CF2221E1E38B00063CAD2 /* CXPictureViewController.m */; };
+		653CF2251E1E38B00063CAD2 /* CXPictureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 653CF2231E1E38B00063CAD2 /* CXPictureViewController.xib */; };
 		65C350A21E19E58900A84399 /* UIView+CXExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C350A11E19E58900A84399 /* UIView+CXExtension.m */; };
 		65C350A61E19E5F600A84399 /* CXHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C350A41E19E5F600A84399 /* CXHomeViewController.m */; };
 		65C350A71E19E5F600A84399 /* CXHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C350A51E19E5F600A84399 /* CXHomeViewController.xib */; };
@@ -81,6 +83,9 @@
 		653CF2191E1DE11C0063CAD2 /* CXPoemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CXPoemViewController.xib; sourceTree = "<group>"; };
 		653CF21D1E1DE42C0063CAD2 /* poem.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = poem.css; sourceTree = "<group>"; };
 		653CF21E1E1DE42C0063CAD2 /* poem.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = poem.js; sourceTree = "<group>"; };
+		653CF2211E1E38B00063CAD2 /* CXPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXPictureViewController.h; sourceTree = "<group>"; };
+		653CF2221E1E38B00063CAD2 /* CXPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXPictureViewController.m; sourceTree = "<group>"; };
+		653CF2231E1E38B00063CAD2 /* CXPictureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CXPictureViewController.xib; sourceTree = "<group>"; };
 		65C3509E1E19E49300A84399 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		65C350A01E19E58900A84399 /* UIView+CXExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CXExtension.h"; sourceTree = "<group>"; };
 		65C350A11E19E58900A84399 /* UIView+CXExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CXExtension.m"; sourceTree = "<group>"; };
@@ -446,6 +451,9 @@
 		65C351141E1B42E500A84399 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				653CF2211E1E38B00063CAD2 /* CXPictureViewController.h */,
+				653CF2221E1E38B00063CAD2 /* CXPictureViewController.m */,
+				653CF2231E1E38B00063CAD2 /* CXPictureViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -627,6 +635,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				653CF2251E1E38B00063CAD2 /* CXPictureViewController.xib in Resources */,
 				65C351011E1A866E00A84399 /* CXBottomView.xib in Resources */,
 				65C350A71E19E5F600A84399 /* CXHomeViewController.xib in Resources */,
 				65C351691E1B872B00A84399 /* article.css in Resources */,
@@ -716,6 +725,7 @@
 				652F5BEF1E19E36B00D3783C /* AppDelegate.m in Sources */,
 				65C351B21E1C040200A84399 /* CXLoadingAnimation.m in Sources */,
 				652F5BF01E19E36B00D3783C /* main.m in Sources */,
+				653CF2241E1E38B00063CAD2 /* CXPictureViewController.m in Sources */,
 				65C350B21E1A452B00A84399 /* CXUserDefaults.m in Sources */,
 				65C3510D1E1B42A200A84399 /* CXArticleViewController.m in Sources */,
 				65C350AD1E1A0D6C00A84399 /* NSCalendar+CXExtension.m in Sources */,

@@ -21,8 +21,8 @@ static NSString * articleItemidKey = @"articleItemidKey";
 @property (nonatomic, weak) CXLoadingAnimation *animationView;
 //本地文章数据
 @property (nonatomic, strong) NSDictionary *randomData;
-/** 网络是否正常 */
-@property (nonatomic, assign, getter=isNetNormal) BOOL netNormal;
+/** 网页是否加载完成 */
+@property (nonatomic, assign, getter=isLoadComplete) BOOL loadComplete;
 @end
 
 @implementation CXArticleViewController
@@ -39,10 +39,10 @@ static NSString * articleItemidKey = @"articleItemidKey";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    //如果本地缓存为空并且网络正常，才有加载动画
-    if (!self.randomData && self.isNetNormal == YES) {
+    if (self.isLoadComplete == NO) {
         [self setupLoadAnimationToView];
     }
+    
 }
 /*
  * 设置加载动画
@@ -92,7 +92,6 @@ static NSString * articleItemidKey = @"articleItemidKey";
         //网络请求
         NSInteger pageIndex = arc4random_uniform(27);//0-26
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-        
         NSString *urlStr = [NSString stringWithFormat:@"http://www.finndy.com/api.php?pagesize=20&pageindex=%ld&datatype=json&sortby=desc&token=1.0_7iiSVVWVgqpyHHHiSVVU766085fd", pageIndex];
         [manager GET:urlStr parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             //        [responseObject writeToFile:@"/Users/chenxiao/Desktop/article.plist" atomically:YES];
@@ -106,17 +105,20 @@ static NSString * articleItemidKey = @"articleItemidKey";
             NSString *filePath = [CachesPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", random[@"itemid"]]];
             [random writeToFile:filePath atomically:YES];
             [CXUserDefaults setObject:random[@"itemid"] forKey:articleItemidKey];
-            self.netNormal = YES;
             //拼接HTML
             [self setupHtmlWithDictionary:random];
-            //移除加载动画
-            [self.animationView removeFromSuperview];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             CXLog(@"%@", error);
-            self.netNormal = NO;
             [SVProgressHUD showErrorWithStatus:@"似乎已断开与网络的链接..."];
             //移除加载动画
-            [self.animationView removeFromSuperview];
+            if (self.animationView) {
+                [self.animationView removeFromSuperview];
+            } else {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.animationView removeFromSuperview];
+                });
+            }
+            
         }];
     }
 }
@@ -170,6 +172,12 @@ static NSString * articleItemidKey = @"articleItemidKey";
         SEL selector = NSSelectorFromString(method);
         [self performSelector:selector];
     }
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    self.loadComplete = YES;
+    //移除加载动画
+    [self.animationView removeFromSuperview];
 }
 #pragma mark - 处理webView的点击与滑动
 /*
