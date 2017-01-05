@@ -16,8 +16,12 @@
 
 
 #define CachesPath NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject
+/** 保存的今天日期 */
 #define todayDateStrKey @"todayDateStrKey"
-#define oldDateStrKey @"oldDateStrKey"
+/** 文章上次更新的日期 */
+#define lastArticleUpdateKey @"lastArticleUpdateKey"
+/** 诗上次更新的日期 */
+#define lastPoemUpdateKey @"lastPoemUpdateKey"
 /*
  * 屏幕
  */

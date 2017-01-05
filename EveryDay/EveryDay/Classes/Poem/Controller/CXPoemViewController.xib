@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CXPoemViewController">
+            <connections>
+                <outlet property="bottomToolBar" destination="PdU-G1-R9e" id="fig-8b-UnF"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="webView" destination="TbF-vw-I4Y" id="bpZ-MC-blj"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TbF-vw-I4Y">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </webView>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PdU-G1-R9e">
+                    <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                    <items>
+                        <barButtonItem image="returnBtn" id="9gc-NC-omD" userLabel="返回">
+                            <connections>
+                                <action selector="back" destination="-1" id="zSY-Wf-R9r"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="N0C-dO-9wt"/>
+                        <barButtonItem image="collect" id="V3a-wV-vPY" userLabel="收藏">
+                            <connections>
+                                <action selector="collect:" destination="-1" id="zPC-RT-vDD"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem image="share" id="fmc-J1-leu" userLabel="分享">
+                            <connections>
+                                <action selector="share" destination="-1" id="nkN-Qz-WBG"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="PdU-G1-R9e" secondAttribute="bottom" id="Iq7-Jl-vut"/>
+                <constraint firstAttribute="bottom" secondItem="TbF-vw-I4Y" secondAttribute="bottom" id="Oa0-36-U5x"/>
+                <constraint firstAttribute="trailing" secondItem="PdU-G1-R9e" secondAttribute="trailing" id="rfJ-Xp-g9f"/>
+                <constraint firstItem="PdU-G1-R9e" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yi9-mw-5HY"/>
+                <constraint firstItem="TbF-vw-I4Y" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="z27-y4-s2Q"/>
+                <constraint firstItem="TbF-vw-I4Y" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zMk-QB-uft"/>
+                <constraint firstAttribute="trailing" secondItem="TbF-vw-I4Y" secondAttribute="trailing" id="zje-VT-V4F"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="collect" width="32" height="32"/>
+        <image name="returnBtn" width="32" height="32"/>
+        <image name="share" width="32" height="32"/>
+    </resources>
+</document>

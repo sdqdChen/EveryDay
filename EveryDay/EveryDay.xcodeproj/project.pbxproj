@@ -16,6 +16,10 @@
 		653CF20C1E1DD4E10063CAD2 /* CXNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 653CF20B1E1DD4E10063CAD2 /* CXNavigationController.m */; };
 		653CF20F1E1DD9A90063CAD2 /* UIBarButtonItem+CXBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 653CF20E1E1DD9A90063CAD2 /* UIBarButtonItem+CXBarButtonItem.m */; };
 		653CF2121E1DDF220063CAD2 /* CXConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 653CF2111E1DDF220063CAD2 /* CXConst.m */; };
+		653CF21A1E1DE11C0063CAD2 /* CXPoemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 653CF2181E1DE11C0063CAD2 /* CXPoemViewController.m */; };
+		653CF21B1E1DE11C0063CAD2 /* CXPoemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 653CF2191E1DE11C0063CAD2 /* CXPoemViewController.xib */; };
+		653CF21F1E1DE42C0063CAD2 /* poem.css in Resources */ = {isa = PBXBuildFile; fileRef = 653CF21D1E1DE42C0063CAD2 /* poem.css */; };
+		653CF2201E1DE42C0063CAD2 /* poem.js in Resources */ = {isa = PBXBuildFile; fileRef = 653CF21E1E1DE42C0063CAD2 /* poem.js */; };
 		65C350A21E19E58900A84399 /* UIView+CXExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C350A11E19E58900A84399 /* UIView+CXExtension.m */; };
 		65C350A61E19E5F600A84399 /* CXHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C350A41E19E5F600A84399 /* CXHomeViewController.m */; };
 		65C350A71E19E5F600A84399 /* CXHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C350A51E19E5F600A84399 /* CXHomeViewController.xib */; };
@@ -27,8 +31,8 @@
 		65C351011E1A866E00A84399 /* CXBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C350FE1E1A866E00A84399 /* CXBottomView.xib */; };
 		65C3510D1E1B42A200A84399 /* CXArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C3510B1E1B42A200A84399 /* CXArticleViewController.m */; };
 		65C3510E1E1B42A200A84399 /* CXArticleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C3510C1E1B42A200A84399 /* CXArticleViewController.xib */; };
-		65C351691E1B872B00A84399 /* index.css in Resources */ = {isa = PBXBuildFile; fileRef = 65C351671E1B872B00A84399 /* index.css */; };
-		65C3516A1E1B872B00A84399 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = 65C351681E1B872B00A84399 /* index.js */; };
+		65C351691E1B872B00A84399 /* article.css in Resources */ = {isa = PBXBuildFile; fileRef = 65C351671E1B872B00A84399 /* article.css */; };
+		65C3516A1E1B872B00A84399 /* article.js in Resources */ = {isa = PBXBuildFile; fileRef = 65C351681E1B872B00A84399 /* article.js */; };
 		65C351B21E1C040200A84399 /* CXLoadingAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C351B11E1C040200A84399 /* CXLoadingAnimation.m */; };
 		65C352041E1CC30200A84399 /* CXNoteLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C352031E1CC30200A84399 /* CXNoteLabel.m */; };
 		847DC762218483F2AADED8CD /* libPods-EveryDay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC47CFCCF2F6F14528BDC31 /* libPods-EveryDay.a */; };
@@ -72,6 +76,11 @@
 		653CF20E1E1DD9A90063CAD2 /* UIBarButtonItem+CXBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+CXBarButtonItem.m"; sourceTree = "<group>"; };
 		653CF2101E1DDF220063CAD2 /* CXConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXConst.h; sourceTree = "<group>"; };
 		653CF2111E1DDF220063CAD2 /* CXConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXConst.m; sourceTree = "<group>"; };
+		653CF2171E1DE11C0063CAD2 /* CXPoemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXPoemViewController.h; sourceTree = "<group>"; };
+		653CF2181E1DE11C0063CAD2 /* CXPoemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXPoemViewController.m; sourceTree = "<group>"; };
+		653CF2191E1DE11C0063CAD2 /* CXPoemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CXPoemViewController.xib; sourceTree = "<group>"; };
+		653CF21D1E1DE42C0063CAD2 /* poem.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = poem.css; sourceTree = "<group>"; };
+		653CF21E1E1DE42C0063CAD2 /* poem.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = poem.js; sourceTree = "<group>"; };
 		65C3509E1E19E49300A84399 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		65C350A01E19E58900A84399 /* UIView+CXExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CXExtension.h"; sourceTree = "<group>"; };
 		65C350A11E19E58900A84399 /* UIView+CXExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CXExtension.m"; sourceTree = "<group>"; };
@@ -92,8 +101,8 @@
 		65C3510A1E1B42A200A84399 /* CXArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXArticleViewController.h; sourceTree = "<group>"; };
 		65C3510B1E1B42A200A84399 /* CXArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXArticleViewController.m; sourceTree = "<group>"; };
 		65C3510C1E1B42A200A84399 /* CXArticleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CXArticleViewController.xib; sourceTree = "<group>"; };
-		65C351671E1B872B00A84399 /* index.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = index.css; sourceTree = "<group>"; };
-		65C351681E1B872B00A84399 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+		65C351671E1B872B00A84399 /* article.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = article.css; sourceTree = "<group>"; };
+		65C351681E1B872B00A84399 /* article.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = article.js; sourceTree = "<group>"; };
 		65C351B01E1C040200A84399 /* CXLoadingAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXLoadingAnimation.h; sourceTree = "<group>"; };
 		65C351B11E1C040200A84399 /* CXLoadingAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXLoadingAnimation.m; sourceTree = "<group>"; };
 		65C352021E1CC30200A84399 /* CXNoteLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXNoteLabel.h; sourceTree = "<group>"; };
@@ -199,11 +208,12 @@
 		652F5BEA1E19E36B00D3783C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				653CF2081E1DD4C80063CAD2 /* Main */,
 				65C350AE1E1A451B00A84399 /* Tool */,
+				653CF2081E1DD4C80063CAD2 /* Main */,
 				65C3509A1E19E44200A84399 /* Home */,
 				65C351061E1B426800A84399 /* Article */,
 				65C351171E1B42EA00A84399 /* Poem */,
+				653CF2131E1DE0D20063CAD2 /* Music */,
 				65C351131E1B42E500A84399 /* Picture */,
 				65C3510F1E1B42DC00A84399 /* Mine */,
 				652F5BEB1E19E36B00D3783C /* Other */,
@@ -240,6 +250,46 @@
 				653CF20B1E1DD4E10063CAD2 /* CXNavigationController.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		653CF2131E1DE0D20063CAD2 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				653CF2141E1DE0D20063CAD2 /* Controller */,
+				653CF2151E1DE0D20063CAD2 /* Model */,
+				653CF2161E1DE0D20063CAD2 /* View */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
+		653CF2141E1DE0D20063CAD2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		653CF2151E1DE0D20063CAD2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		653CF2161E1DE0D20063CAD2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		653CF21C1E1DE4230063CAD2 /* HTML */ = {
+			isa = PBXGroup;
+			children = (
+				653CF21D1E1DE42C0063CAD2 /* poem.css */,
+				653CF21E1E1DE42C0063CAD2 /* poem.js */,
+			);
+			path = HTML;
 			sourceTree = "<group>";
 		};
 		65C3509A1E19E44200A84399 /* Home */ = {
@@ -417,6 +467,7 @@
 		65C351171E1B42EA00A84399 /* Poem */ = {
 			isa = PBXGroup;
 			children = (
+				653CF21C1E1DE4230063CAD2 /* HTML */,
 				65C351181E1B42EA00A84399 /* Controller */,
 				65C351191E1B42EA00A84399 /* Model */,
 				65C3511A1E1B42EA00A84399 /* View */,
@@ -427,6 +478,9 @@
 		65C351181E1B42EA00A84399 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				653CF2171E1DE11C0063CAD2 /* CXPoemViewController.h */,
+				653CF2181E1DE11C0063CAD2 /* CXPoemViewController.m */,
+				653CF2191E1DE11C0063CAD2 /* CXPoemViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -448,8 +502,8 @@
 		65C351661E1B86F700A84399 /* HTML */ = {
 			isa = PBXGroup;
 			children = (
-				65C351671E1B872B00A84399 /* index.css */,
-				65C351681E1B872B00A84399 /* index.js */,
+				65C351671E1B872B00A84399 /* article.css */,
+				65C351681E1B872B00A84399 /* article.js */,
 			);
 			path = HTML;
 			sourceTree = "<group>";
@@ -575,11 +629,14 @@
 			files = (
 				65C351011E1A866E00A84399 /* CXBottomView.xib in Resources */,
 				65C350A71E19E5F600A84399 /* CXHomeViewController.xib in Resources */,
-				65C351691E1B872B00A84399 /* index.css in Resources */,
+				65C351691E1B872B00A84399 /* article.css in Resources */,
 				65C3510E1E1B42A200A84399 /* CXArticleViewController.xib in Resources */,
-				65C3516A1E1B872B00A84399 /* index.js in Resources */,
+				653CF21B1E1DE11C0063CAD2 /* CXPoemViewController.xib in Resources */,
+				653CF2201E1DE42C0063CAD2 /* poem.js in Resources */,
+				65C3516A1E1B872B00A84399 /* article.js in Resources */,
 				652F5BC71E19E0EC00D3783C /* LaunchScreen.storyboard in Resources */,
 				652F5BC41E19E0EC00D3783C /* Assets.xcassets in Resources */,
+				653CF21F1E1DE42C0063CAD2 /* poem.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +721,7 @@
 				65C350AD1E1A0D6C00A84399 /* NSCalendar+CXExtension.m in Sources */,
 				65C352041E1CC30200A84399 /* CXNoteLabel.m in Sources */,
 				653CF2121E1DDF220063CAD2 /* CXConst.m in Sources */,
+				653CF21A1E1DE11C0063CAD2 /* CXPoemViewController.m in Sources */,
 				65C351001E1A866E00A84399 /* CXBottomView.m in Sources */,
 				653CF20F1E1DD9A90063CAD2 /* UIBarButtonItem+CXBarButtonItem.m in Sources */,
 				65C350FF1E1A866E00A84399 /* CXBottomButton.m in Sources */,

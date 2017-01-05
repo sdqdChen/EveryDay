@@ -1,19 +1,19 @@
 //
-//  CXArticleViewController.m
+//  CXPoemViewController.m
 //  EveryDay
 //
-//  Created by 陈晓 on 2017/1/3.
+//  Created by 陈晓 on 2017/1/5.
 //  Copyright © 2017年 陈晓. All rights reserved.
 //
 
-#import "CXArticleViewController.h"
+#import "CXPoemViewController.h"
 #import <AFNetworking.h>
 #import <SVProgressHUD.h>
 #import "CXLoadingAnimation.h"
 
-static NSString * articleItemidKey = @"articleItemidKey";
+static NSString * poemItemidKey = @"poemItemidKey";
 
-@interface CXArticleViewController () <UIWebViewDelegate>
+@interface CXPoemViewController () <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (nonatomic, assign,getter=isHideStatus) BOOL hideStatus;
 @property (weak, nonatomic) IBOutlet UIToolbar *bottomToolBar;
@@ -25,16 +25,14 @@ static NSString * articleItemidKey = @"articleItemidKey";
 @property (nonatomic, assign, getter=isNetNormal) BOOL netNormal;
 @end
 
-@implementation CXArticleViewController
+@implementation CXPoemViewController
 #pragma mark - 初始化
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //加载文章内容
-    [self loadArticleData];
+    //加载诗的内容
+    [self loadPoemData];
     self.webView.delegate = self;
-    //状态栏状态
     self.hideStatus = [UIApplication sharedApplication].statusBarHidden;
-    //    CXLog(@"%@", NSHomeDirectory());
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -60,15 +58,16 @@ static NSString * articleItemidKey = @"articleItemidKey";
  */
 - (BOOL)isShouldUpdate
 {
-    NSString *lastUpdateDateStr = [CXUserDefaults readObjectForKey:lastArticleUpdateKey];
-    [CXUserDefaults setObject:lastUpdateDateStr forKey:lastArticleUpdateKey];
+    NSString *lastUpdateDateStr = [CXUserDefaults readObjectForKey:lastPoemUpdateKey];
+    [CXUserDefaults setObject:lastUpdateDateStr forKey:lastPoemUpdateKey];
     //今天
     NSDate *date = [NSDate date];
     NSCalendar *cal = [NSCalendar currentCalendar];
     NSDateComponents *cmps = [cal components:NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
     //把日期保存起来，为了判断是否刷新文章
     NSString *todayDateStr = [NSString stringWithFormat:@"%ld月%ld日", cmps.month, cmps.day];
-    [CXUserDefaults setObject:todayDateStr forKey:lastArticleUpdateKey];
+    CXLog(@"lastUpdateDateStr%@--todayDateStr%@", lastUpdateDateStr, todayDateStr);
+    [CXUserDefaults setObject:todayDateStr forKey:lastPoemUpdateKey];
     if ([lastUpdateDateStr isEqualToString:todayDateStr]) { //同一天
         return NO;
     } else {
@@ -76,36 +75,37 @@ static NSString * articleItemidKey = @"articleItemidKey";
     }
 }
 /*
- * 加载文章内容
+ * 加载诗的内容
  */
-- (void)loadArticleData
+- (void)loadPoemData
 {
     BOOL update = [self isShouldUpdate];
     //先从缓存中取数据
-    NSString *filePath = [CachesPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", [CXUserDefaults readObjectForKey:articleItemidKey]]];
+    NSString *filePath = [CachesPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", [CXUserDefaults readObjectForKey:poemItemidKey]]];
     self.randomData = [NSDictionary dictionaryWithContentsOfFile:filePath];
     if (self.randomData && !update) {
         //如果本地有数据，并且是同一天，就从本地加载数据
         //拼接HTML
         [self setupHtmlWithDictionary:self.randomData];
-    } else if (!self.randomData || update) { //如果本地没有数据或者不是同一天，就从网络加载
+    } else if (!self.randomData || update) {
         //网络请求
-        NSInteger pageIndex = arc4random_uniform(27);//0-26
+        NSInteger pageIndex = arc4random_uniform(16);//0-15
+        CXLog(@"pageIndex--%ld", pageIndex);
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-        
-        NSString *urlStr = [NSString stringWithFormat:@"http://www.finndy.com/api.php?pagesize=20&pageindex=%ld&datatype=json&sortby=desc&token=1.0_7iiSVVWVgqpyHHHiSVVU766085fd", pageIndex];
-        [manager GET:urlStr parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            //        [responseObject writeToFile:@"/Users/chenxiao/Desktop/article.plist" atomically:YES];
-            //文章的数组
+        NSString *poemUrl = [NSString stringWithFormat:@"http:www.finndy.com/api.php?pagesize=20&pageindex=%ld&datatype=json&sortby=desc&token=1.0_7xiSVVWgqVvxxHNJqPXV1d18505e", pageIndex];
+        [manager GET:poemUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSArray *datalistArray = responseObject[@"datalist"];
+            //获取随机文章
             NSUInteger count = datalistArray.count;
+            CXLog(@"count--%ld", count);
             NSInteger randomNum = arc4random() % count;
-            NSDictionary *random = datalistArray[randomNum];//后面改成随机的
-            //把字典保存到本地(根据itemid)
+            CXLog(@"randomNum--%ld", randomNum);
+            NSDictionary *random = datalistArray[randomNum];
             self.randomData = random;
+            //把字典保存到本地(根据itemid)
             NSString *filePath = [CachesPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", random[@"itemid"]]];
             [random writeToFile:filePath atomically:YES];
-            [CXUserDefaults setObject:random[@"itemid"] forKey:articleItemidKey];
+            [CXUserDefaults setObject:random[@"itemid"] forKey:poemItemidKey];
             self.netNormal = YES;
             //拼接HTML
             [self setupHtmlWithDictionary:random];
@@ -125,30 +125,34 @@ static NSString * articleItemidKey = @"articleItemidKey";
  */
 - (void)setupHtmlWithDictionary:(NSDictionary *)random
 {
-    //文章内容
-    NSString *mes1 = [NSString stringWithFormat:@"<div id=content>%@</div>", random[@"message"]];
-    //文章标题
-    NSString *subject = random[@"subject"];
-    //把标题中的日期去掉
-    NSArray *arr = [self getAStringOfChineseCharacters:subject];
-    NSMutableString *newTitle = [NSMutableString string];
-    for (NSString *str in arr) {
-        [newTitle appendString:str];
-    }
-    //创建题目标签
-    NSString *titleHtml = [NSString stringWithFormat:@"<div id=mainTitle>%@</div>", newTitle];
+    //内容标签
+    NSString *mes = random[@"message"];
+    //去掉空格
+    NSString *newMes = [mes stringByReplacingOccurrencesOfString:@"<p>　　" withString:@"<p>"];
+    
+    NSString *mes1 = [NSString stringWithFormat:@"<div id=content>%@</div>", newMes];
+    //标题标签
+    //把标题中的《》去掉
+    NSString *newTitle1 = [random[@"subject"] stringByReplacingOccurrencesOfString:@"《" withString:@""];
+    NSString *newTitle2 = [newTitle1 stringByReplacingOccurrencesOfString:@"》" withString:@""];
+    NSString *titleHtml = [NSString stringWithFormat:@"<div id=mainTitle>%@</div>", newTitle2];
+    //作者标签
+    NSString *authorHtml = [NSString stringWithFormat:@"<div id=author>%@</div>", random[@"extfield1"]];
+    
     //加载cssURL路径
-    NSURL *cssUrl = [[NSBundle mainBundle] URLForResource:@"article.css" withExtension:nil];
+    NSURL *cssUrl = [[NSBundle mainBundle] URLForResource:@"poem.css" withExtension:nil];
     //引入css，创建link标签
     NSString *cssLink = [NSString stringWithFormat:@"<link href=%@ rel=stylesheet>", cssUrl];
     //加载js路径
-    NSURL *jsUrl = [[NSBundle mainBundle] URLForResource:@"article.js" withExtension:nil];
+    NSURL *jsUrl = [[NSBundle mainBundle] URLForResource:@"poem.js" withExtension:nil];
     //引入js
     NSString *jsHtml = [NSString stringWithFormat:@"<script src=%@></script>", jsUrl];
+    
     //结尾：（完）标签
     NSString *end = [NSString stringWithFormat:@"<div id=end>（完）</div>"];
+    
     //拼接<总内容>标签
-    NSString *html = [NSString stringWithFormat:@"<html><head>%@</head><body><div id=all>%@%@%@%@</div></body></html>", cssLink, titleHtml, mes1,end, jsHtml];
+    NSString *html = [NSString stringWithFormat:@"<html><head>%@</head><body><div id=all>%@%@%@%@%@</div></body></html>", cssLink, titleHtml, authorHtml, mes1, end, jsHtml];
     [self.webView loadHTMLString:html baseURL:nil];
 }
 #pragma mark - webView代理方法
@@ -209,26 +213,6 @@ static NSString * articleItemidKey = @"articleItemidKey";
         }
     }];
 }
-#pragma mark - 监听事件
-/*
- * 收藏
- */
-- (IBAction)collect:(UIBarButtonItem *)sender {
-    
-}
-
-/*
- * 分享
- */
-- (IBAction)share{
-    
-}
-/*
- * 返回
- */
-- (IBAction)back{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 /*
  * 设置状态栏
  */
@@ -236,27 +220,24 @@ static NSString * articleItemidKey = @"articleItemidKey";
 {
     return self.hideStatus;
 }
+#pragma mark - 监听事件
 /*
- * 取出字符串中的汉字
+ * 返回
  */
-- (NSArray *)getAStringOfChineseCharacters:(NSString *)string
-{
-    if (string == nil || [string isEqual:@""])
-    {
-        return nil;
-    }
-    NSMutableArray *arr = [[NSMutableArray alloc]init];
-    
-    for (int i=0; i<string.length; i++)
-    {
-        NSRange range = NSMakeRange(i, 1);
-        NSString *subStr = [string substringWithRange:range];
-        const char *c = [subStr UTF8String];
-        if (strlen(c)==3)
-        {
-            [arr addObject:subStr];
-        }
-    }
-    return arr;
+- (IBAction)back{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
+/*
+ * 收藏
+ */
+- (IBAction)collect:(id)sender {
+    
+}
+/*
+ * 分享
+ */
+- (IBAction)share{
+    
+}
+
 @end

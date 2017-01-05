@@ -1,0 +1,32 @@
+body{
+    font-family: "Heiti SC";
+}
+p{
+    text-align: center;
+    font-size: 17px;
+}
+/*标题*/
+#mainTitle{
+    font-size: 30px;
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 10px;
+    font-weight: 450;
+    padding-bottom: 10px;
+    border-bottom: 1px solid darkgray;
+}
+/*作者*/
+#author{
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+/*第一个p标签*/
+/*#content p:first-child{*/
+/*    font-size: 0;*/
+/*}*/
+/*结尾：（完）*/
+#end{
+    text-align: center;
+    color: lightgray;
+}

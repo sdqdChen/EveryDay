@@ -60,6 +60,7 @@ static NSString *pathKey = @"filePath";
 #pragma mark - 初始化
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     //添加导航栏按钮
     [self setupNavButton];
     //设置scrollView
@@ -81,8 +82,8 @@ static NSString *pathKey = @"filePath";
     [super viewDidLayoutSubviews];
     self.indicatorView.center = self.view.center;
     self.notInternet.center = self.view.center;
-    self.bgView.frame = CGRectMake(0, -CXNavigationBarMaxY, CXScreenW, CXScreenH);
-    self.scrollView.frame = CGRectMake(0, -CXNavigationBarMaxY, CXScreenW, CXScreenH);
+    self.scrollView.frame = CGRectMake(0, 0, CXScreenW, CXScreenH);
+    self.scrollView.contentSize = CGSizeMake(CXScreenW, CXScreenH);
 }
 #pragma mark - 设置子控件
 /*
@@ -104,7 +105,6 @@ static NSString *pathKey = @"filePath";
 {
     self.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];
     self.scrollView.mj_header.automaticallyChangeAlpha = YES;
-    self.scrollView.contentSize = CGSizeMake(CXScreenW, CXScreenH);
     self.scrollView.showsVerticalScrollIndicator = NO;
 }
 /*
@@ -165,8 +165,8 @@ static NSString *pathKey = @"filePath";
 - (void)setupDateLabel
 {
     //先把之前保存的日期取出来，变成旧的日期
-    NSString *oldDateStr = [CXUserDefaults readObjectForKey:todayDateStrKey];
-    [CXUserDefaults setObject:oldDateStr forKey:oldDateStrKey];
+//    NSString *oldDateStr = [CXUserDefaults readObjectForKey:todayDateStrKey];
+//    [CXUserDefaults setObject:oldDateStr forKey:oldDateStrKey];
     //今天
     NSDate *date = [NSDate date];
     NSCalendar *cal = [NSCalendar currentCalendar];
@@ -178,8 +178,8 @@ static NSString *pathKey = @"filePath";
     self.dayLabel.text = [NSString stringWithFormat:@"%ld", cmps.day];
     self.dayLabel.font = [UIFont fontWithName:@"Hiragino Sans" size:40];
     //把日期保存起来，为了判断是否刷新文章
-    NSString *todayDateStr = [NSString stringWithFormat:@"%ld月%ld日", cmps.month, cmps.day];
-    [CXUserDefaults setObject:todayDateStr forKey:todayDateStrKey];
+//    NSString *todayDateStr = [NSString stringWithFormat:@"%ld月%ld日", cmps.month, cmps.day];
+//    [CXUserDefaults setObject:todayDateStr forKey:todayDateStrKey];
 }
 /*
  * 设置问候语
@@ -198,6 +198,7 @@ static NSString *pathKey = @"filePath";
         self.helloLabel.text = @"Good night";
     }
     self.helloLabel.font = [UIFont fontWithName:@"Futura" size:20];
+    [self.scrollView.mj_header endRefreshing];
 }
 #pragma mark - 获取网络数据
 - (void)loadData

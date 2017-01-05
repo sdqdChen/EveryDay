@@ -10,6 +10,7 @@
 #import "CXBottomButton.h"
 #import "CXArticleViewController.h"
 #import "CXHomeViewController.h"
+#import "CXPoemViewController.h"
 
 typedef NS_OPTIONS(NSUInteger, CXButonType) {
     CXArtileButton = 1,
@@ -125,7 +126,10 @@ static CGFloat buttonAnimation = 0.7;
         UIViewController *home = [UIApplication sharedApplication].keyWindow.rootViewController;
         [home presentViewController:articleVc animated:YES completion:nil];
     } else if (button.tag == CXPoemButton) {
-        CXLog(@"诗");
+        CXPoemViewController *poemVc = [[CXPoemViewController alloc] init];
+        poemVc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        UIViewController *home = [UIApplication sharedApplication].keyWindow.rootViewController;
+        [home presentViewController:poemVc animated:YES completion:nil];
     } else if (button.tag == CXMusicButton) {
         CXLog(@"音乐");
     } else if (button.tag == CXPictureButton) {
