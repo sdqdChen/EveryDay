@@ -234,7 +234,7 @@ static NSString * poemItemidKey = @"poemItemidKey";
  * 收藏
  */
 - (IBAction)collect:(id)sender {
-    
+    CXLog(@"shoucang");
 }
 /*
  * 分享
