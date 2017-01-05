@@ -66,7 +66,6 @@ static NSString * poemItemidKey = @"poemItemidKey";
     NSDateComponents *cmps = [cal components:NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
     //把日期保存起来，为了判断是否刷新文章
     NSString *todayDateStr = [NSString stringWithFormat:@"%ld月%ld日", cmps.month, cmps.day];
-    CXLog(@"lastUpdateDateStr%@--todayDateStr%@", lastUpdateDateStr, todayDateStr);
     [CXUserDefaults setObject:todayDateStr forKey:lastPoemUpdateKey];
     if ([lastUpdateDateStr isEqualToString:todayDateStr]) { //同一天
         return NO;
@@ -89,17 +88,14 @@ static NSString * poemItemidKey = @"poemItemidKey";
         [self setupHtmlWithDictionary:self.randomData];
     } else if (!self.randomData || update) {
         //网络请求
-        NSInteger pageIndex = arc4random_uniform(16);//0-15
-        CXLog(@"pageIndex--%ld", pageIndex);
+        NSInteger pageIndex = arc4random_uniform(53);//0-52页
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-        NSString *poemUrl = [NSString stringWithFormat:@"http:www.finndy.com/api.php?pagesize=20&pageindex=%ld&datatype=json&sortby=desc&token=1.0_7xiSVVWgqVvxxHNJqPXV1d18505e", pageIndex];
+        NSString *poemUrl = [NSString stringWithFormat:@"http://www.finndy.com/api.php?pagesize=20&pageindex=%ld&datatype=json&sortby=desc&token=1.0_7xiSVVWgqVfmHiyVVgjgf7b05672", pageIndex];
         [manager GET:poemUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             NSArray *datalistArray = responseObject[@"datalist"];
             //获取随机文章
             NSUInteger count = datalistArray.count;
-            CXLog(@"count--%ld", count);
             NSInteger randomNum = arc4random() % count;
-            CXLog(@"randomNum--%ld", randomNum);
             NSDictionary *random = datalistArray[randomNum];
             self.randomData = random;
             //把字典保存到本地(根据itemid)
