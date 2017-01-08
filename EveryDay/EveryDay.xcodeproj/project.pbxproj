@@ -37,6 +37,12 @@
 		65C3516A1E1B872B00A84399 /* article.js in Resources */ = {isa = PBXBuildFile; fileRef = 65C351681E1B872B00A84399 /* article.js */; };
 		65C351B21E1C040200A84399 /* CXLoadingAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C351B11E1C040200A84399 /* CXLoadingAnimation.m */; };
 		65C352041E1CC30200A84399 /* CXNoteLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C352031E1CC30200A84399 /* CXNoteLabel.m */; };
+		65FC59E11E21254100B7F3D0 /* CXEnglishMonth.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC59E01E21254100B7F3D0 /* CXEnglishMonth.m */; };
+		65FC59E81E2137D500B7F3D0 /* CXMusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC59E61E2137D500B7F3D0 /* CXMusicViewController.m */; };
+		65FC59E91E2137D500B7F3D0 /* CXMusicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65FC59E71E2137D500B7F3D0 /* CXMusicViewController.xib */; };
+		65FC59EF1E214C2A00B7F3D0 /* CXMusicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC59EE1E214C2A00B7F3D0 /* CXMusicItem.m */; };
+		65FC59F21E2151AE00B7F3D0 /* CXAudioTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC59F11E2151AE00B7F3D0 /* CXAudioTool.m */; };
+		65FC59F51E215CA900B7F3D0 /* CALayer+PauseAimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC59F41E215CA900B7F3D0 /* CALayer+PauseAimate.m */; };
 		847DC762218483F2AADED8CD /* libPods-EveryDay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC47CFCCF2F6F14528BDC31 /* libPods-EveryDay.a */; };
 /* End PBXBuildFile section */
 
@@ -112,6 +118,17 @@
 		65C351B11E1C040200A84399 /* CXLoadingAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXLoadingAnimation.m; sourceTree = "<group>"; };
 		65C352021E1CC30200A84399 /* CXNoteLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXNoteLabel.h; sourceTree = "<group>"; };
 		65C352031E1CC30200A84399 /* CXNoteLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXNoteLabel.m; sourceTree = "<group>"; };
+		65FC59DF1E21254100B7F3D0 /* CXEnglishMonth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXEnglishMonth.h; sourceTree = "<group>"; };
+		65FC59E01E21254100B7F3D0 /* CXEnglishMonth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXEnglishMonth.m; sourceTree = "<group>"; };
+		65FC59E51E2137D500B7F3D0 /* CXMusicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMusicViewController.h; sourceTree = "<group>"; };
+		65FC59E61E2137D500B7F3D0 /* CXMusicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMusicViewController.m; sourceTree = "<group>"; };
+		65FC59E71E2137D500B7F3D0 /* CXMusicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CXMusicViewController.xib; sourceTree = "<group>"; };
+		65FC59ED1E214C2A00B7F3D0 /* CXMusicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMusicItem.h; sourceTree = "<group>"; };
+		65FC59EE1E214C2A00B7F3D0 /* CXMusicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMusicItem.m; sourceTree = "<group>"; };
+		65FC59F01E2151AE00B7F3D0 /* CXAudioTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXAudioTool.h; sourceTree = "<group>"; };
+		65FC59F11E2151AE00B7F3D0 /* CXAudioTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXAudioTool.m; sourceTree = "<group>"; };
+		65FC59F31E215CA900B7F3D0 /* CALayer+PauseAimate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+PauseAimate.h"; sourceTree = "<group>"; };
+		65FC59F41E215CA900B7F3D0 /* CALayer+PauseAimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+PauseAimate.m"; sourceTree = "<group>"; };
 		CEC47CFCCF2F6F14528BDC31 /* libPods-EveryDay.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EveryDay.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7094831A399E410AB192050 /* Pods-EveryDay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EveryDay.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EveryDay/Pods-EveryDay.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -270,6 +287,9 @@
 		653CF2141E1DE0D20063CAD2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				65FC59E51E2137D500B7F3D0 /* CXMusicViewController.h */,
+				65FC59E61E2137D500B7F3D0 /* CXMusicViewController.m */,
+				65FC59E71E2137D500B7F3D0 /* CXMusicViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -277,6 +297,8 @@
 		653CF2151E1DE0D20063CAD2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				65FC59ED1E214C2A00B7F3D0 /* CXMusicItem.h */,
+				65FC59EE1E214C2A00B7F3D0 /* CXMusicItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -343,6 +365,8 @@
 		65C3509F1E19E55B00A84399 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				65FC59F31E215CA900B7F3D0 /* CALayer+PauseAimate.h */,
+				65FC59F41E215CA900B7F3D0 /* CALayer+PauseAimate.m */,
 				653CF20D1E1DD9A90063CAD2 /* UIBarButtonItem+CXBarButtonItem.h */,
 				653CF20E1E1DD9A90063CAD2 /* UIBarButtonItem+CXBarButtonItem.m */,
 				65C350AB1E1A0D6C00A84399 /* NSCalendar+CXExtension.h */,
@@ -356,7 +380,11 @@
 		65C350AE1E1A451B00A84399 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				65FC59F01E2151AE00B7F3D0 /* CXAudioTool.h */,
+				65FC59F11E2151AE00B7F3D0 /* CXAudioTool.m */,
 				65C350AF1E1A451B00A84399 /* CXUserDefaults */,
+				65FC59DF1E21254100B7F3D0 /* CXEnglishMonth.h */,
+				65FC59E01E21254100B7F3D0 /* CXEnglishMonth.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -644,6 +672,7 @@
 				653CF2201E1DE42C0063CAD2 /* poem.js in Resources */,
 				65C3516A1E1B872B00A84399 /* article.js in Resources */,
 				652F5BC71E19E0EC00D3783C /* LaunchScreen.storyboard in Resources */,
+				65FC59E91E2137D500B7F3D0 /* CXMusicViewController.xib in Resources */,
 				652F5BC41E19E0EC00D3783C /* Assets.xcassets in Resources */,
 				653CF21F1E1DE42C0063CAD2 /* poem.css in Resources */,
 			);
@@ -721,19 +750,24 @@
 				65C350AA1E19ED6200A84399 /* CXHomeItem.m in Sources */,
 				653CF20C1E1DD4E10063CAD2 /* CXNavigationController.m in Sources */,
 				65C350A61E19E5F600A84399 /* CXHomeViewController.m in Sources */,
+				65FC59F51E215CA900B7F3D0 /* CALayer+PauseAimate.m in Sources */,
 				65C350A21E19E58900A84399 /* UIView+CXExtension.m in Sources */,
 				652F5BEF1E19E36B00D3783C /* AppDelegate.m in Sources */,
 				65C351B21E1C040200A84399 /* CXLoadingAnimation.m in Sources */,
 				652F5BF01E19E36B00D3783C /* main.m in Sources */,
+				65FC59F21E2151AE00B7F3D0 /* CXAudioTool.m in Sources */,
 				653CF2241E1E38B00063CAD2 /* CXPictureViewController.m in Sources */,
 				65C350B21E1A452B00A84399 /* CXUserDefaults.m in Sources */,
 				65C3510D1E1B42A200A84399 /* CXArticleViewController.m in Sources */,
 				65C350AD1E1A0D6C00A84399 /* NSCalendar+CXExtension.m in Sources */,
+				65FC59EF1E214C2A00B7F3D0 /* CXMusicItem.m in Sources */,
 				65C352041E1CC30200A84399 /* CXNoteLabel.m in Sources */,
+				65FC59E81E2137D500B7F3D0 /* CXMusicViewController.m in Sources */,
 				653CF2121E1DDF220063CAD2 /* CXConst.m in Sources */,
 				653CF21A1E1DE11C0063CAD2 /* CXPoemViewController.m in Sources */,
 				65C351001E1A866E00A84399 /* CXBottomView.m in Sources */,
 				653CF20F1E1DD9A90063CAD2 /* UIBarButtonItem+CXBarButtonItem.m in Sources */,
+				65FC59E11E21254100B7F3D0 /* CXEnglishMonth.m in Sources */,
 				65C350FF1E1A866E00A84399 /* CXBottomButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,21 +16,7 @@
 #import "CXNoteLabel.h"
 #import <MJRefresh.h>
 #import "UIBarButtonItem+CXBarButtonItem.h"
-/** 月份 */
-typedef NS_OPTIONS(NSUInteger, CXMonthKey) {
-    CXJan = 1,
-    CXFeb,
-    CXMar,
-    CXApr,
-    CXMay,
-    CXJun,
-    CXJul,
-    CXAug,
-    CXSep,
-    CXOct,
-    CXNov,
-    CXDec
-};
+#import "CXEnglishMonth.h"
 
 @interface CXHomeViewController ()
 @property (weak, nonatomic) IBOutlet UIView *bgView;
@@ -164,22 +150,14 @@ static NSString *pathKey = @"filePath";
  */
 - (void)setupDateLabel
 {
-    //先把之前保存的日期取出来，变成旧的日期
-//    NSString *oldDateStr = [CXUserDefaults readObjectForKey:todayDateStrKey];
-//    [CXUserDefaults setObject:oldDateStr forKey:oldDateStrKey];
     //今天
     NSDate *date = [NSDate date];
     NSCalendar *cal = [NSCalendar currentCalendar];
     NSDateComponents *cmps = [cal components:NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
     //月份
-    [self monthToEnWith:cmps.month];
-    self.monthLabel.font = [UIFont fontWithName:@"Hiragino Sans" size:20];
+    self.monthLabel.text = [CXEnglishMonth englishMonthWith:cmps.month];
     //天
     self.dayLabel.text = [NSString stringWithFormat:@"%ld", cmps.day];
-    self.dayLabel.font = [UIFont fontWithName:@"Hiragino Sans" size:40];
-    //把日期保存起来，为了判断是否刷新文章
-//    NSString *todayDateStr = [NSString stringWithFormat:@"%ld月%ld日", cmps.month, cmps.day];
-//    [CXUserDefaults setObject:todayDateStr forKey:todayDateStrKey];
 }
 /*
  * 设置问候语
@@ -197,7 +175,6 @@ static NSString *pathKey = @"filePath";
     } else if (hour >= 22 || hour < 6) {
         self.helloLabel.text = @"Good night";
     }
-    self.helloLabel.font = [UIFont fontWithName:@"Futura" size:20];
     [self.scrollView.mj_header endRefreshing];
 }
 #pragma mark - 获取网络数据
@@ -225,25 +202,27 @@ static NSString *pathKey = @"filePath";
  */
 - (void)loadDataFromNet
 {
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
-    [manager GET:@"http://open.iciba.com/dsapi/" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        CXHomeItem *item = [CXHomeItem mj_objectWithKeyValues:responseObject];
-        self.item = item;
-        if (![item.sid isEqualToString:[CXUserDefaults readObjectForKey:pathKey]]) {
-            [self.headImageView sd_setImageWithURL:[NSURL URLWithString:item.picture2]];
-        }
-        [self loadSuccessWithItem:item];
-        //保存模型对象到本地
-        NSString *filePath = [CachesPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.data", item.sid]];
-        [NSKeyedArchiver archiveRootObject:item toFile:filePath];
-        [CXUserDefaults setObject:item.sid forKey:pathKey];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        CXLog(@"%@", error);
-        [SVProgressHUD showErrorWithStatus:@"似乎已断开与网络的链接..."];
-        [self.indicatorView stopAnimating];
-        self.notInternet.hidden = NO;
-        [self.scrollView.mj_header endRefreshing];
-    }];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
+        [manager GET:@"http://open.iciba.com/dsapi/" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            CXHomeItem *item = [CXHomeItem mj_objectWithKeyValues:responseObject];
+            self.item = item;
+            if (![item.sid isEqualToString:[CXUserDefaults readObjectForKey:pathKey]]) {
+                [self.headImageView sd_setImageWithURL:[NSURL URLWithString:item.picture2]];
+            }
+            [self loadSuccessWithItem:item];
+            //保存模型对象到本地
+            NSString *filePath = [CachesPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.data", item.sid]];
+            [NSKeyedArchiver archiveRootObject:item toFile:filePath];
+            [CXUserDefaults setObject:item.sid forKey:pathKey];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            CXLog(@"%@", error);
+            [SVProgressHUD showErrorWithStatus:@"似乎已断开与网络的链接..."];
+            [self.indicatorView stopAnimating];
+            self.notInternet.hidden = NO;
+            [self.scrollView.mj_header endRefreshing];
+        }];
+    });
 }
 /*
  * 成功获取网络数据
@@ -255,51 +234,5 @@ static NSString *pathKey = @"filePath";
     self.tmpView.hidden = YES;
     self.notInternet.hidden = YES;
     [self.scrollView.mj_header endRefreshing];
-}
-/*
- * 月份转英文
- */
-- (void)monthToEnWith:(NSInteger)month
-{
-    switch (month) {
-        case CXJan:
-            self.monthLabel.text = @"Jan.";
-            break;
-        case CXFeb:
-            self.monthLabel.text = @"Feb.";
-            break;
-        case CXMar:
-            self.monthLabel.text = @"Mar.";
-            break;
-        case CXApr:
-            self.monthLabel.text = @"Apr.";
-            break;
-        case CXMay:
-            self.monthLabel.text = @"May.";
-            break;
-        case CXJun:
-            self.monthLabel.text = @"Jun.";
-            break;
-        case CXJul:
-            self.monthLabel.text = @"Jul.";
-            break;
-        case CXAug:
-            self.monthLabel.text = @"Aug.";
-            break;
-        case CXSep:
-            self.monthLabel.text = @"Sep.";
-            break;
-        case CXOct:
-            self.monthLabel.text = @"Oct.";
-            break;
-        case CXNov:
-            self.monthLabel.text = @"Nov.";
-            break;
-        case CXDec:
-            self.monthLabel.text = @"Dec.";
-            break;
-        default:
-            break;
-    }
 }
 @end

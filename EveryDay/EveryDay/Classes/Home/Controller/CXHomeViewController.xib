@@ -36,20 +36,32 @@
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yNb-Ma-BBo" userLabel="headImage">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="333.5"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XVd-9V-Wuc" userLabel="monthLabel">
-                                    <rect key="frame" x="0.0" y="331.5" width="42" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XVd-9V-Wuc" userLabel="monthLabel">
+                                    <rect key="frame" x="0.0" y="353.5" width="50" height="28"/>
+                                    <attributedString key="attributedText">
+                                        <fragment content="Label">
+                                            <attributes>
+                                                <font key="NSFont" size="20" name="PingFangSC-Light"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vd1-ij-ffT" userLabel="helloLabel">
-                                    <rect key="frame" x="166" y="408.5" width="42" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vd1-ij-ffT" userLabel="helloLabel">
+                                    <rect key="frame" x="156" y="408.5" width="62.5" height="35"/>
+                                    <attributedString key="attributedText">
+                                        <fragment content="Label">
+                                            <attributes>
+                                                <font key="NSFont" size="25" name="PingFangSC-Light"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LxQ-7o-wuF" userLabel="noteLabel" customClass="CXNoteLabel">
-                                    <rect key="frame" x="20" y="479.5" width="345" height="145"/>
+                                    <rect key="frame" x="20" y="493.5" width="345" height="145"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="145" id="vWx-Pg-r0L"/>
                                     </constraints>
@@ -58,23 +70,29 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uCE-QX-XfM" userLabel="横线">
-                                    <rect key="frame" x="176" y="433.5" width="22" height="1"/>
-                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <rect key="frame" x="166" y="447.5" width="42.5" height="1"/>
+                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="O6A-5U-bLm"/>
                                     </constraints>
                                 </view>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yinhao" translatesAutoresizingMaskIntoConstraints="NO" id="XLg-7y-Ecu">
-                                    <rect key="frame" x="10" y="461.5" width="17" height="15"/>
+                                    <rect key="frame" x="10" y="475.5" width="17" height="15"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="17" id="bcd-RR-u5m"/>
                                         <constraint firstAttribute="height" constant="15" id="qsi-CV-5l2"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39P-0V-i3K" userLabel="dayLabel">
-                                    <rect key="frame" x="42" y="333.5" width="42" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39P-0V-i3K" userLabel="dayLabel">
+                                    <rect key="frame" x="50" y="333.5" width="98" height="56"/>
+                                    <attributedString key="attributedText">
+                                        <fragment content="Label">
+                                            <attributes>
+                                                <font key="NSFont" size="40" name="PingFangSC-Thin"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -84,6 +102,7 @@
                                 <constraint firstItem="yNb-Ma-BBo" firstAttribute="centerX" secondItem="Vd1-ij-ffT" secondAttribute="centerX" id="CHf-Mz-Okd"/>
                                 <constraint firstItem="LxQ-7o-wuF" firstAttribute="top" secondItem="XLg-7y-Ecu" secondAttribute="bottom" constant="3" id="DCc-6r-SpG"/>
                                 <constraint firstItem="XLg-7y-Ecu" firstAttribute="leading" secondItem="TGk-id-K8J" secondAttribute="leading" constant="10" id="OMv-Bx-NEt"/>
+                                <constraint firstItem="XVd-9V-Wuc" firstAttribute="bottom" secondItem="39P-0V-i3K" secondAttribute="bottom" constant="-8" id="PLa-7a-nyw"/>
                                 <constraint firstItem="uCE-QX-XfM" firstAttribute="top" secondItem="Vd1-ij-ffT" secondAttribute="bottom" constant="4" id="SIX-cf-SxC"/>
                                 <constraint firstItem="yNb-Ma-BBo" firstAttribute="leading" secondItem="XVd-9V-Wuc" secondAttribute="leading" id="agR-hm-5dW"/>
                                 <constraint firstItem="Vd1-ij-ffT" firstAttribute="top" secondItem="yNb-Ma-BBo" secondAttribute="bottom" constant="75" id="arh-OJ-1fR"/>
@@ -92,7 +111,6 @@
                                 <constraint firstItem="uCE-QX-XfM" firstAttribute="trailing" secondItem="Vd1-ij-ffT" secondAttribute="trailing" constant="-10" id="ggT-S6-SdS"/>
                                 <constraint firstAttribute="trailing" secondItem="yNb-Ma-BBo" secondAttribute="trailing" id="n4W-uk-WVk"/>
                                 <constraint firstAttribute="trailing" secondItem="LxQ-7o-wuF" secondAttribute="trailing" constant="10" id="nWf-y3-UeC"/>
-                                <constraint firstItem="XVd-9V-Wuc" firstAttribute="bottom" secondItem="39P-0V-i3K" secondAttribute="bottom" constant="-2" id="qNE-e3-aiO"/>
                                 <constraint firstItem="LxQ-7o-wuF" firstAttribute="leading" secondItem="TGk-id-K8J" secondAttribute="leading" constant="20" id="y5s-S6-EzN"/>
                                 <constraint firstItem="yNb-Ma-BBo" firstAttribute="top" secondItem="TGk-id-K8J" secondAttribute="top" id="ySm-PK-pJI"/>
                                 <constraint firstItem="uCE-QX-XfM" firstAttribute="leading" secondItem="Vd1-ij-ffT" secondAttribute="leading" constant="10" id="yw8-oG-mac"/>

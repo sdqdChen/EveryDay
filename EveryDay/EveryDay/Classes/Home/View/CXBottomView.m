@@ -12,6 +12,7 @@
 #import "CXHomeViewController.h"
 #import "CXPoemViewController.h"
 #import "CXPictureViewController.h"
+#import "CXMusicViewController.h"
 
 typedef NS_OPTIONS(NSUInteger, CXButonType) {
     CXArtileButton = 1,
@@ -126,7 +127,7 @@ static CGFloat buttonAnimation = 0.7;
     } else if (button.tag == CXPoemButton) {
         [self presentNextVc:[[CXPoemViewController alloc] init]];
     } else if (button.tag == CXMusicButton) {
-        CXLog(@"音乐");
+        [self presentNextVc:[[CXMusicViewController alloc] init]];
     } else if (button.tag == CXPictureButton) {
         [self presentNextVc:[[CXPictureViewController alloc] init]];
     }

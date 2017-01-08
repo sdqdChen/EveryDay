@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CXMusicViewController">
+            <connections>
+                <outlet property="albumPicture" destination="bsy-L5-FFW" id="N9F-KG-Uk5"/>
+                <outlet property="lrcLabel" destination="hrb-km-U8S" id="61P-K9-kea"/>
+                <outlet property="singerNameLabel" destination="jrW-JO-FhH" id="KOx-Yi-zag"/>
+                <outlet property="songNameLabel" destination="vUP-Hr-bDQ" id="hmt-0d-eyD"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUP-Hr-bDQ" userLabel="歌曲名">
+                    <rect key="frame" x="0.0" y="358" width="375" height="52"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="52" id="DEf-i2-fYR"/>
+                    </constraints>
+                    <attributedString key="attributedText">
+                        <fragment content="我的女神孙艺珍">
+                            <attributes>
+                                <font key="NSFont" size="18" name="PingFangSC-Light"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jrW-JO-FhH">
+                    <rect key="frame" x="165" y="410" width="45" height="21"/>
+                    <attributedString key="attributedText">
+                        <fragment content="孙艺珍">
+                            <attributes>
+                                <color key="NSColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="15" name="PingFangSC-Light"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="sunyizhen" translatesAutoresizingMaskIntoConstraints="NO" id="bsy-L5-FFW" userLabel="歌手图片">
+                    <rect key="frame" x="48.5" y="50" width="278" height="278"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="bsy-L5-FFW" secondAttribute="height" multiplier="1:1" id="jeT-ha-tbE"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hrb-km-U8S">
+                    <rect key="frame" x="0.0" y="461" width="375" height="24"/>
+                    <attributedString key="attributedText">
+                        <fragment content="这里显示一行歌词">
+                            <attributes>
+                                <font key="NSFont" size="17" name="PingFangSC-Regular"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IqA-cK-V6N" userLabel="播放/暂停按钮">
+                    <rect key="frame" x="153" y="515" width="68" height="68"/>
+                    <state key="normal" image="player_start"/>
+                    <state key="selected" image="player_pause"/>
+                    <connections>
+                        <action selector="playOrPause:" destination="-1" eventType="touchUpInside" id="VuZ-yt-4hU"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMP-Fv-MPd" userLabel="close">
+                    <rect key="frame" x="20" y="615" width="32" height="32"/>
+                    <state key="normal" image="close_black"/>
+                    <connections>
+                        <action selector="return" destination="-1" eventType="touchUpInside" id="dfx-N5-eZn"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hum-aC-B90" userLabel="share">
+                    <rect key="frame" x="323" y="615" width="32" height="32"/>
+                    <state key="normal" image="share"/>
+                    <connections>
+                        <action selector="share" destination="-1" eventType="touchUpInside" id="56P-M8-2iQ"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NSK-TS-FqP" userLabel="collect">
+                    <rect key="frame" x="281" y="615" width="32" height="32"/>
+                    <state key="normal" image="collect"/>
+                    <connections>
+                        <action selector="collect" destination="-1" eventType="touchUpInside" id="RzQ-f0-6Gl"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="IqA-cK-V6N" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="0MO-G3-qTs"/>
+                <constraint firstAttribute="trailing" secondItem="vUP-Hr-bDQ" secondAttribute="trailing" id="0xy-Cz-rwF"/>
+                <constraint firstAttribute="bottom" secondItem="iMP-Fv-MPd" secondAttribute="bottom" constant="20" id="2oi-yZ-BAe"/>
+                <constraint firstItem="hrb-km-U8S" firstAttribute="top" secondItem="jrW-JO-FhH" secondAttribute="bottom" constant="30" id="3xm-jg-GdT"/>
+                <constraint firstAttribute="trailing" secondItem="hrb-km-U8S" secondAttribute="trailing" id="78x-5v-49E"/>
+                <constraint firstItem="jrW-JO-FhH" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9kS-dV-q9S"/>
+                <constraint firstItem="vUP-Hr-bDQ" firstAttribute="top" secondItem="bsy-L5-FFW" secondAttribute="bottom" constant="30" id="CA5-Kh-n84"/>
+                <constraint firstItem="bsy-L5-FFW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="O4S-ZA-riE"/>
+                <constraint firstItem="hrb-km-U8S" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="SBO-NY-In7"/>
+                <constraint firstItem="vUP-Hr-bDQ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Z7G-3N-YtT"/>
+                <constraint firstAttribute="bottom" secondItem="hum-aC-B90" secondAttribute="bottom" constant="20" id="dGR-Ln-vZU"/>
+                <constraint firstAttribute="trailing" secondItem="hum-aC-B90" secondAttribute="trailing" constant="20" id="eJC-lL-hPv"/>
+                <constraint firstItem="vUP-Hr-bDQ" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="50" id="eij-6p-xsP"/>
+                <constraint firstItem="jrW-JO-FhH" firstAttribute="top" secondItem="vUP-Hr-bDQ" secondAttribute="bottom" id="fmf-Pm-QNv"/>
+                <constraint firstAttribute="bottom" secondItem="NSK-TS-FqP" secondAttribute="bottom" constant="20" id="irq-Oz-FSf"/>
+                <constraint firstItem="vUP-Hr-bDQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ljq-0p-GKA"/>
+                <constraint firstItem="hum-aC-B90" firstAttribute="leading" secondItem="NSK-TS-FqP" secondAttribute="trailing" constant="10" id="pxE-xK-hpG"/>
+                <constraint firstItem="IqA-cK-V6N" firstAttribute="top" secondItem="hrb-km-U8S" secondAttribute="bottom" constant="30" id="q3z-xt-9k6"/>
+                <constraint firstItem="bsy-L5-FFW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="szF-Zm-tTn"/>
+                <constraint firstItem="iMP-Fv-MPd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="xk4-Wf-b7n"/>
+            </constraints>
+            <point key="canvasLocation" x="35.5" y="54.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="close_black" width="32" height="32"/>
+        <image name="collect" width="32" height="32"/>
+        <image name="player_pause" width="68" height="68"/>
+        <image name="player_start" width="68" height="68"/>
+        <image name="share" width="32" height="32"/>
+        <image name="sunyizhen" width="434" height="436"/>
+    </resources>
+</document>

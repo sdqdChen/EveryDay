@@ -13,3 +13,6 @@ UIKIT_EXTERN NSString * const CXEditPersonalInfoNotification;
 UIKIT_EXTERN NSString * const CXLoginOutNotification;
 //头像下载完成的通知
 UIKIT_EXTERN NSString * const CXIconDownloadNotification;
+
+//平方字体
+UIKIT_EXTERN NSString * const CXPingFangLight;

@@ -13,3 +13,6 @@ NSString * const CXEditPersonalInfoNotification = @"CXEditPersonalInfoNotificati
 NSString * const CXLoginOutNotification = @"CXLoginOutNotification";
 //头像下载完成的通知
 NSString * const CXIconDownloadNotification = @"CXIconDownloadNotification";
+
+//平方字体
+NSString * const CXPingFangLight = @"PingFangSC-Light";
