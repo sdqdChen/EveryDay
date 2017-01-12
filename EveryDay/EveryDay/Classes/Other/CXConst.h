@@ -5,6 +5,8 @@ UIKIT_EXTERN CGFloat const CXStatusBarH;
 /** 导航栏的最大Y值 */
 UIKIT_EXTERN CGFloat const CXNavigationBarMaxY;
 
+//后台进入前台的通知
+UIKIT_EXTERN NSString * const CXAppWillEnterForegroundNotification;
 //登录成功的通知
 UIKIT_EXTERN NSString * const CXLoginSuccessNotification;
 //编辑个人信息的通知

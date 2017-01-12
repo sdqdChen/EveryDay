@@ -26,8 +26,8 @@ typedef NS_OPTIONS(NSUInteger, CXButonType) {
 @property (nonatomic, strong) NSMutableArray *items;
 @end
 //底部按钮宽高
-static CGFloat buttonW = 44;
-static CGFloat buttonH = 44;
+static CGFloat buttonW = 33;
+static CGFloat buttonH = 33;
 //底部按钮弹出动画时间
 static CGFloat buttonAnimation = 0.7;
 
@@ -71,7 +71,8 @@ static CGFloat buttonAnimation = 0.7;
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    CGRect btnBounds = CGRectMake(0, 0, buttonW, buttonH);
+    self.bottomButton.frame = CGRectMake(20, 1, buttonW * KRATE, buttonW * KRATE);
+    CGRect btnBounds = CGRectMake(0, 0, buttonW * KRATE, buttonH * KRATE);
     for (CXBottomButton *btn in self.items) {
         btn.bounds = btnBounds;
         btn.center = self.bottomButton.center;
@@ -83,9 +84,9 @@ static CGFloat buttonAnimation = 0.7;
  */
 - (IBAction)bottomButtonClick:(UIButton *)sender {
     //表示按钮的transform属性是否发生改变
-    BOOL show = CGAffineTransformIsIdentity(self.bottomButton.transform);
+//    BOOL show = CGAffineTransformIsIdentity(self.bottomButton.transform);
     [UIView animateWithDuration:buttonAnimation animations:^{
-        if (show) {
+        if (!sender.selected) {
             sender.selected = YES;
             //代表transform未发生改变
             self.bottomButton.transform = CGAffineTransformMakeRotation(M_PI * 2);
@@ -94,11 +95,10 @@ static CGFloat buttonAnimation = 0.7;
             sender.selected = NO;
         }
     }];
-    CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
-    CGFloat margin = (screenW - buttonW * 5) / 4 + buttonW - 10;
+    CGFloat margin = ((CXScreenW - buttonW * KRATE * 5) - 20) / 5;
     for (CXBottomButton *btn in self.items) {
-        if (show) {
-            CGFloat btnX = self.bottomButton.center.x + (btn.tag) * margin;
+        if (sender.selected) {
+            CGFloat btnX = self.bottomButton.center.x + (margin + buttonW * KRATE) * btn.tag;
             CGFloat btnY = self.bottomButton.center.y;
             [UIView animateWithDuration:buttonAnimation animations:^{
                 btn.center = CGPointMake(btnX, btnY);

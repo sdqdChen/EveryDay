@@ -5,6 +5,8 @@ CGFloat const CXStatusBarH = 20;
 /** 导航栏的最大Y值 */
 CGFloat const CXNavigationBarMaxY = 64;
 
+//后台进入前台的通知
+NSString * const CXAppWillEnterForegroundNotification = @"CXAppWillEnterForegroundNotification";
 //登录成功的通知
 NSString * const CXLoginSuccessNotification = @"CXLoginSuccessNotification";
 //编辑个人信息的通知

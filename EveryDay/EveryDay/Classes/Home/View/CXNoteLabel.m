@@ -12,7 +12,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    self.font = [UIFont fontWithName:@"PingFangSC-Light" size:17];
+    self.font = [UIFont fontWithName:@"PingFangSC-Light" size:15 * KRATE];
 }
 - (instancetype)initWithFrame:(CGRect)frame
 {

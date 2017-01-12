@@ -62,6 +62,8 @@ static NSString *pathKey = @"filePath";
     //设置问候语
     [self setupHelloLabel];
     //    CXLog(@"%@", NSHomeDirectory());
+    //应用从后台进入前台就会刷新首页
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:CXAppWillEnterForegroundNotification object:nil];
 }
 - (void)viewDidLayoutSubviews
 {
@@ -70,6 +72,14 @@ static NSString *pathKey = @"filePath";
     self.notInternet.center = self.view.center;
     self.scrollView.frame = CGRectMake(0, 0, CXScreenW, CXScreenH);
     self.scrollView.contentSize = CGSizeMake(CXScreenW, CXScreenH);
+    //设置字体大小
+    self.helloLabel.font = [UIFont fontWithName:CXPingFangLight size:22 * KRATE];
+    self.dayLabel.font = [UIFont fontWithName:CXPingFangLight size:34 * KRATE];
+    self.monthLabel.font = [UIFont fontWithName:CXPingFangLight size:18 * KRATE];
+}
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:CXAppWillEnterForegroundNotification object:nil];
 }
 #pragma mark - 设置子控件
 /*
@@ -139,7 +149,7 @@ static NSString *pathKey = @"filePath";
 {
     CXBottomView *bottomView = [CXBottomView bottomView];
     CGFloat bottomW = CXScreenW;
-    CGFloat bottomH = 44;
+    CGFloat bottomH = 33 * KRATE;
     CGFloat bottomY = CXScreenH - bottomH - 20;
     bottomView.frame = CGRectMake(0, bottomY, bottomW, bottomH);
     [self.view addSubview:bottomView];
@@ -202,27 +212,25 @@ static NSString *pathKey = @"filePath";
  */
 - (void)loadDataFromNet
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
-        [manager GET:@"http://open.iciba.com/dsapi/" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            CXHomeItem *item = [CXHomeItem mj_objectWithKeyValues:responseObject];
-            self.item = item;
-            if (![item.sid isEqualToString:[CXUserDefaults readObjectForKey:pathKey]]) {
-                [self.headImageView sd_setImageWithURL:[NSURL URLWithString:item.picture2]];
-            }
-            [self loadSuccessWithItem:item];
-            //保存模型对象到本地
-            NSString *filePath = [CachesPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.data", item.sid]];
-            [NSKeyedArchiver archiveRootObject:item toFile:filePath];
-            [CXUserDefaults setObject:item.sid forKey:pathKey];
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            CXLog(@"%@", error);
-            [SVProgressHUD showErrorWithStatus:@"似乎已断开与网络的链接..."];
-            [self.indicatorView stopAnimating];
-            self.notInternet.hidden = NO;
-            [self.scrollView.mj_header endRefreshing];
-        }];
-    });
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
+    [manager GET:@"http://open.iciba.com/dsapi/" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        CXHomeItem *item = [CXHomeItem mj_objectWithKeyValues:responseObject];
+        self.item = item;
+        if (![item.sid isEqualToString:[CXUserDefaults readObjectForKey:pathKey]]) {
+            [self.headImageView sd_setImageWithURL:[NSURL URLWithString:item.picture2]];
+        }
+        [self loadSuccessWithItem:item];
+        //保存模型对象到本地
+        NSString *filePath = [CachesPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.data", item.sid]];
+        [NSKeyedArchiver archiveRootObject:item toFile:filePath];
+        [CXUserDefaults setObject:item.sid forKey:pathKey];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        CXLog(@"%@", error);
+        [SVProgressHUD showErrorWithStatus:@"似乎已断开与网络的链接..."];
+        [self.indicatorView stopAnimating];
+        self.notInternet.hidden = NO;
+        [self.scrollView.mj_header endRefreshing];
+    }];
 }
 /*
  * 成功获取网络数据

@@ -27,6 +27,7 @@
  */
 #define CXScreenH [UIScreen mainScreen].bounds.size.height
 #define CXScreenW [UIScreen mainScreen].bounds.size.width
+#define KRATE (CXScreenW != 414 ? 1 : 1.2)
 
 /**
  * 颜色

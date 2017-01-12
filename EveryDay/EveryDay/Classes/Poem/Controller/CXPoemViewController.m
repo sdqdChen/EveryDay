@@ -40,7 +40,6 @@ static NSString * poemItemidKey = @"poemItemidKey";
     if (self.isLoadComplete == NO) {
         [self setupLoadAnimationToView];
     }
-    
 }
 /*
  * 设置加载动画
@@ -51,6 +50,7 @@ static NSString * poemItemidKey = @"poemItemidKey";
     animationView.frame = CGRectMake(0, 0, CXScreenW, CXScreenH);
     [self.view addSubview:animationView];
     self.animationView = animationView;
+    [self.view bringSubviewToFront:self.bottomToolBar];
 }
 #pragma mark - 获取数据
 /*

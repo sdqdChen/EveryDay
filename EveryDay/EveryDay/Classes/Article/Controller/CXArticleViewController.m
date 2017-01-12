@@ -42,7 +42,6 @@ static NSString * articleItemidKey = @"articleItemidKey";
     if (self.isLoadComplete == NO) {
         [self setupLoadAnimationToView];
     }
-    
 }
 /*
  * 设置加载动画
@@ -53,6 +52,7 @@ static NSString * articleItemidKey = @"articleItemidKey";
     animationView.frame = CGRectMake(0, 0, CXScreenW, CXScreenH);
     [self.view addSubview:animationView];
     self.animationView = animationView;
+    [self.view bringSubviewToFront:self.bottomToolBar];
 }
 #pragma mark - 获取数据
 /*
@@ -67,7 +67,7 @@ static NSString * articleItemidKey = @"articleItemidKey";
     NSCalendar *cal = [NSCalendar currentCalendar];
     NSDateComponents *cmps = [cal components:NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
     //把日期保存起来，为了判断是否刷新文章
-    NSString *todayDateStr = [NSString stringWithFormat:@"%ld月%ld日", cmps.month, cmps.day];
+    NSString *todayDateStr = [NSString stringWithFormat:@"%ld月%ld日", (long)cmps.month, (long)cmps.day];
     [CXUserDefaults setObject:todayDateStr forKey:lastArticleUpdateKey];
     if ([lastUpdateDateStr isEqualToString:todayDateStr]) { //同一天
         return NO;
@@ -92,7 +92,7 @@ static NSString * articleItemidKey = @"articleItemidKey";
         //网络请求
         NSInteger pageIndex = arc4random_uniform(27);//0-26
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-        NSString *urlStr = [NSString stringWithFormat:@"http://www.finndy.com/api.php?pagesize=20&pageindex=%ld&datatype=json&sortby=desc&token=1.0_7iiSVVWVgqpyHHHiSVVU766085fd", pageIndex];
+        NSString *urlStr = [NSString stringWithFormat:@"http://www.finndy.com/api.php?pagesize=20&pageindex=%ld&datatype=json&sortby=desc&token=1.0_7iiSVVWVgqpyHHHiSVVU766085fd", (long)pageIndex];
         [manager GET:urlStr parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             //        [responseObject writeToFile:@"/Users/chenxiao/Desktop/article.plist" atomically:YES];
             //文章的数组

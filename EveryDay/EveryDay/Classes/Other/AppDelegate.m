@@ -43,16 +43,7 @@
  * 应用从后台到前台
  */
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    //旧的日期
-//    NSString *oldDateStr = [CXUserDefaults readObjectForKey:todayDateStrKey];
-//    [CXUserDefaults setObject:oldDateStr forKey:oldDateStrKey];
-//    //当天
-//    NSDate *date = [NSDate date];
-//    NSCalendar *cal = [NSCalendar currentCalendar];
-//    NSDateComponents *cmps = [cal components:NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
-//    //把日期保存起来，为了判断是否刷新文章
-//    NSString *todayDateStr = [NSString stringWithFormat:@"%ld月%ld日", cmps.month, cmps.day];
-//    [CXUserDefaults setObject:todayDateStr forKey:todayDateStrKey];
+    [[NSNotificationCenter defaultCenter] postNotificationName:CXAppWillEnterForegroundNotification object:nil];
 }
 
 
