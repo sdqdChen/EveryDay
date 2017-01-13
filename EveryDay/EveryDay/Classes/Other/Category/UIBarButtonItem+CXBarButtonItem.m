@@ -33,7 +33,6 @@
     [view addSubview:button];
     return [[UIBarButtonItem alloc] initWithCustomView:view];
 }
-/*
 + (UIBarButtonItem *)backItemWithImage:(UIImage *)image highImage:(UIImage *)highImage target:(id)target action:(SEL)action title:(NSString *)title
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -47,5 +46,4 @@
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     return [[UIBarButtonItem alloc] initWithCustomView:button];
 }
-*/
 @end

@@ -17,6 +17,7 @@
 #import <MJRefresh.h>
 #import "UIBarButtonItem+CXBarButtonItem.h"
 #import "CXEnglishMonth.h"
+#import "CXMineViewController.h"
 
 @interface CXHomeViewController ()
 @property (weak, nonatomic) IBOutlet UIView *bgView;
@@ -95,7 +96,9 @@ static NSString *pathKey = @"filePath";
  */
 - (void)mineButtonClick
 {
-    CXLog(@"我的界面");
+    CXMineViewController *mineVc = [[CXMineViewController alloc] init];
+    
+    [self.navigationController pushViewController:mineVc animated:YES];
 }
 - (void)setupScrollView
 {
@@ -149,7 +152,7 @@ static NSString *pathKey = @"filePath";
 {
     CXBottomView *bottomView = [CXBottomView bottomView];
     CGFloat bottomW = CXScreenW;
-    CGFloat bottomH = 33 * KRATE;
+    CGFloat bottomH = 36 * KRATE;
     CGFloat bottomY = CXScreenH - bottomH - 20;
     bottomView.frame = CGRectMake(0, bottomY, bottomW, bottomH);
     [self.view addSubview:bottomView];

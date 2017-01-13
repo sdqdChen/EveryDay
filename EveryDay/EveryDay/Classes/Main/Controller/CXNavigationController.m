@@ -7,8 +7,9 @@
 //
 
 #import "CXNavigationController.h"
+#import "UIBarButtonItem+CXBarButtonItem.h"
 
-@interface CXNavigationController ()
+@interface CXNavigationController () <UIGestureRecognizerDelegate>
 
 @end
 
@@ -23,13 +24,26 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self.interactivePopGestureRecognizer.delegate action:@selector(handleNavigationTransition:)];
+    [self.view addGestureRecognizer:pan];
+    pan.delegate = self;
+    self.interactivePopGestureRecognizer.enabled = YES;
 }
-/*
- * 设置状态栏为白色
- */
-- (UIStatusBarStyle)preferredStatusBarStyle
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    return UIStatusBarStyleLightContent;
+    if (self.viewControllers.count > 0) {
+        //统一设置返回按钮
+        viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem backItemWithImage:[UIImage imageNamed:@"returnBtn"] highImage:nil target:self action:@selector(back) title:@""];
+    }
+    [super pushViewController:viewController animated:animated];
+}
+- (void)back
+{
+    [self popViewControllerAnimated:YES];
+}
+#pragma mark - UIGestureRecognizerDelegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    return self.viewControllers.count > 1;
 }
 @end

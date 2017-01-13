@@ -4,6 +4,10 @@
 CGFloat const CXStatusBarH = 20;
 /** 导航栏的最大Y值 */
 CGFloat const CXNavigationBarMaxY = 64;
+/** 分割线的宽度 */
+CGFloat const CXseparatorViewW = 90;
+/** 统一的间距 */
+CGFloat const CXMargin = 10;
 
 //后台进入前台的通知
 NSString * const CXAppWillEnterForegroundNotification = @"CXAppWillEnterForegroundNotification";

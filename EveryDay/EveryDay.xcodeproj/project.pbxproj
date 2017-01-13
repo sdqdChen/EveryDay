@@ -41,6 +41,18 @@
 		65C3516A1E1B872B00A84399 /* article.js in Resources */ = {isa = PBXBuildFile; fileRef = 65C351681E1B872B00A84399 /* article.js */; };
 		65C351B21E1C040200A84399 /* CXLoadingAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C351B11E1C040200A84399 /* CXLoadingAnimation.m */; };
 		65C352041E1CC30200A84399 /* CXNoteLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C352031E1CC30200A84399 /* CXNoteLabel.m */; };
+		65DBFF961E27DD96005D4364 /* CXMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DBFF951E27DD96005D4364 /* CXMineViewController.m */; };
+		65DBFF991E2869D5005D4364 /* CXHeadLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DBFF981E2869D5005D4364 /* CXHeadLoginView.m */; };
+		65DBFF9C1E2869F6005D4364 /* CXLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DBFF9B1E2869F6005D4364 /* CXLoginButton.m */; };
+		65DBFF9F1E28A053005D4364 /* CXMineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DBFF9E1E28A053005D4364 /* CXMineCell.m */; };
+		65DBFFA71E28BB9F005D4364 /* CXLoginRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DBFFA51E28BB9F005D4364 /* CXLoginRegisterViewController.m */; };
+		65DBFFA81E28BB9F005D4364 /* CXLoginRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65DBFFA61E28BB9F005D4364 /* CXLoginRegisterViewController.xib */; };
+		65DBFFAB1E28C0FA005D4364 /* CXPhoneNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DBFFAA1E28C0FA005D4364 /* CXPhoneNumberView.m */; };
+		65DBFFAD1E28C109005D4364 /* CXPhoneNumberView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65DBFFAC1E28C109005D4364 /* CXPhoneNumberView.xib */; };
+		65DBFFB01E28C4AD005D4364 /* CXNumberTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DBFFAF1E28C4AD005D4364 /* CXNumberTextField.m */; };
+		65DBFFB41E28C4EB005D4364 /* CXVerificationCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DBFFB21E28C4EB005D4364 /* CXVerificationCodeView.m */; };
+		65DBFFB51E28C4EB005D4364 /* CXVerificationCodeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65DBFFB31E28C4EB005D4364 /* CXVerificationCodeView.xib */; };
+		65DBFFB81E28C73D005D4364 /* UITextField+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DBFFB71E28C73D005D4364 /* UITextField+Placeholder.m */; };
 		65FC59E11E21254100B7F3D0 /* CXEnglishMonth.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC59E01E21254100B7F3D0 /* CXEnglishMonth.m */; };
 		65FC59E81E2137D500B7F3D0 /* CXMusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC59E61E2137D500B7F3D0 /* CXMusicViewController.m */; };
 		65FC59E91E2137D500B7F3D0 /* CXMusicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65FC59E71E2137D500B7F3D0 /* CXMusicViewController.xib */; };
@@ -129,6 +141,27 @@
 		65C351B11E1C040200A84399 /* CXLoadingAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXLoadingAnimation.m; sourceTree = "<group>"; };
 		65C352021E1CC30200A84399 /* CXNoteLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXNoteLabel.h; sourceTree = "<group>"; };
 		65C352031E1CC30200A84399 /* CXNoteLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXNoteLabel.m; sourceTree = "<group>"; };
+		65DBFF941E27DD96005D4364 /* CXMineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMineViewController.h; sourceTree = "<group>"; };
+		65DBFF951E27DD96005D4364 /* CXMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMineViewController.m; sourceTree = "<group>"; };
+		65DBFF971E2869D5005D4364 /* CXHeadLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXHeadLoginView.h; sourceTree = "<group>"; };
+		65DBFF981E2869D5005D4364 /* CXHeadLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXHeadLoginView.m; sourceTree = "<group>"; };
+		65DBFF9A1E2869F6005D4364 /* CXLoginButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXLoginButton.h; sourceTree = "<group>"; };
+		65DBFF9B1E2869F6005D4364 /* CXLoginButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXLoginButton.m; sourceTree = "<group>"; };
+		65DBFF9D1E28A053005D4364 /* CXMineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMineCell.h; sourceTree = "<group>"; };
+		65DBFF9E1E28A053005D4364 /* CXMineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMineCell.m; sourceTree = "<group>"; };
+		65DBFFA41E28BB9F005D4364 /* CXLoginRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXLoginRegisterViewController.h; sourceTree = "<group>"; };
+		65DBFFA51E28BB9F005D4364 /* CXLoginRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXLoginRegisterViewController.m; sourceTree = "<group>"; };
+		65DBFFA61E28BB9F005D4364 /* CXLoginRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CXLoginRegisterViewController.xib; sourceTree = "<group>"; };
+		65DBFFA91E28C0FA005D4364 /* CXPhoneNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXPhoneNumberView.h; sourceTree = "<group>"; };
+		65DBFFAA1E28C0FA005D4364 /* CXPhoneNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXPhoneNumberView.m; sourceTree = "<group>"; };
+		65DBFFAC1E28C109005D4364 /* CXPhoneNumberView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CXPhoneNumberView.xib; sourceTree = "<group>"; };
+		65DBFFAE1E28C4AD005D4364 /* CXNumberTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXNumberTextField.h; sourceTree = "<group>"; };
+		65DBFFAF1E28C4AD005D4364 /* CXNumberTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXNumberTextField.m; sourceTree = "<group>"; };
+		65DBFFB11E28C4EB005D4364 /* CXVerificationCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXVerificationCodeView.h; sourceTree = "<group>"; };
+		65DBFFB21E28C4EB005D4364 /* CXVerificationCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXVerificationCodeView.m; sourceTree = "<group>"; };
+		65DBFFB31E28C4EB005D4364 /* CXVerificationCodeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CXVerificationCodeView.xib; sourceTree = "<group>"; };
+		65DBFFB61E28C73D005D4364 /* UITextField+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Placeholder.h"; sourceTree = "<group>"; };
+		65DBFFB71E28C73D005D4364 /* UITextField+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Placeholder.m"; sourceTree = "<group>"; };
 		65FC59DF1E21254100B7F3D0 /* CXEnglishMonth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXEnglishMonth.h; sourceTree = "<group>"; };
 		65FC59E01E21254100B7F3D0 /* CXEnglishMonth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXEnglishMonth.m; sourceTree = "<group>"; };
 		65FC59E51E2137D500B7F3D0 /* CXMusicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMusicViewController.h; sourceTree = "<group>"; };
@@ -256,6 +289,7 @@
 				653CF2131E1DE0D20063CAD2 /* Music */,
 				65C351131E1B42E500A84399 /* Picture */,
 				65C3510F1E1B42DC00A84399 /* Mine */,
+				65DBFFA01E28B233005D4364 /* LoginRegister */,
 				652F5BEB1E19E36B00D3783C /* Other */,
 			);
 			path = Classes;
@@ -387,6 +421,8 @@
 		65C3509F1E19E55B00A84399 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				65DBFFB61E28C73D005D4364 /* UITextField+Placeholder.h */,
+				65DBFFB71E28C73D005D4364 /* UITextField+Placeholder.m */,
 				65FC59F31E215CA900B7F3D0 /* CALayer+PauseAimate.h */,
 				65FC59F41E215CA900B7F3D0 /* CALayer+PauseAimate.m */,
 				653CF20D1E1DD9A90063CAD2 /* UIBarButtonItem+CXBarButtonItem.h */,
@@ -463,6 +499,8 @@
 		65C351101E1B42DC00A84399 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				65DBFF941E27DD96005D4364 /* CXMineViewController.h */,
+				65DBFF951E27DD96005D4364 /* CXMineViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -477,6 +515,12 @@
 		65C351121E1B42DC00A84399 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				65DBFF971E2869D5005D4364 /* CXHeadLoginView.h */,
+				65DBFF981E2869D5005D4364 /* CXHeadLoginView.m */,
+				65DBFF9A1E2869F6005D4364 /* CXLoginButton.h */,
+				65DBFF9B1E2869F6005D4364 /* CXLoginButton.m */,
+				65DBFF9D1E28A053005D4364 /* CXMineCell.h */,
+				65DBFF9E1E28A053005D4364 /* CXMineCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -557,6 +601,48 @@
 				65C351681E1B872B00A84399 /* article.js */,
 			);
 			path = HTML;
+			sourceTree = "<group>";
+		};
+		65DBFFA01E28B233005D4364 /* LoginRegister */ = {
+			isa = PBXGroup;
+			children = (
+				65DBFFA11E28B233005D4364 /* Controller */,
+				65DBFFA21E28B233005D4364 /* Model */,
+				65DBFFA31E28B233005D4364 /* View */,
+			);
+			path = LoginRegister;
+			sourceTree = "<group>";
+		};
+		65DBFFA11E28B233005D4364 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				65DBFFA41E28BB9F005D4364 /* CXLoginRegisterViewController.h */,
+				65DBFFA51E28BB9F005D4364 /* CXLoginRegisterViewController.m */,
+				65DBFFA61E28BB9F005D4364 /* CXLoginRegisterViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		65DBFFA21E28B233005D4364 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		65DBFFA31E28B233005D4364 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				65DBFFAE1E28C4AD005D4364 /* CXNumberTextField.h */,
+				65DBFFAF1E28C4AD005D4364 /* CXNumberTextField.m */,
+				65DBFFA91E28C0FA005D4364 /* CXPhoneNumberView.h */,
+				65DBFFAA1E28C0FA005D4364 /* CXPhoneNumberView.m */,
+				65DBFFAC1E28C109005D4364 /* CXPhoneNumberView.xib */,
+				65DBFFB11E28C4EB005D4364 /* CXVerificationCodeView.h */,
+				65DBFFB21E28C4EB005D4364 /* CXVerificationCodeView.m */,
+				65DBFFB31E28C4EB005D4364 /* CXVerificationCodeView.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		C4CC73C2B94DD36FEF1ABF8C /* Frameworks */ = {
@@ -680,13 +766,16 @@
 			files = (
 				653CF2251E1E38B00063CAD2 /* CXPictureViewController.xib in Resources */,
 				65C351011E1A866E00A84399 /* CXBottomView.xib in Resources */,
+				65DBFFB51E28C4EB005D4364 /* CXVerificationCodeView.xib in Resources */,
 				65C350A71E19E5F600A84399 /* CXHomeViewController.xib in Resources */,
 				65C351691E1B872B00A84399 /* article.css in Resources */,
 				65C3510E1E1B42A200A84399 /* CXArticleViewController.xib in Resources */,
+				65DBFFAD1E28C109005D4364 /* CXPhoneNumberView.xib in Resources */,
 				653CF21B1E1DE11C0063CAD2 /* CXPoemViewController.xib in Resources */,
 				653CF2201E1DE42C0063CAD2 /* poem.js in Resources */,
 				65C3516A1E1B872B00A84399 /* article.js in Resources */,
 				652F5BC71E19E0EC00D3783C /* LaunchScreen.storyboard in Resources */,
+				65DBFFA81E28BB9F005D4364 /* CXLoginRegisterViewController.xib in Resources */,
 				65FC59E91E2137D500B7F3D0 /* CXMusicViewController.xib in Resources */,
 				652F5BC41E19E0EC00D3783C /* Assets.xcassets in Resources */,
 				653CF21F1E1DE42C0063CAD2 /* poem.css in Resources */,
@@ -763,13 +852,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				65C350AA1E19ED6200A84399 /* CXHomeItem.m in Sources */,
+				65DBFFAB1E28C0FA005D4364 /* CXPhoneNumberView.m in Sources */,
 				653CF20C1E1DD4E10063CAD2 /* CXNavigationController.m in Sources */,
 				65C350A61E19E5F600A84399 /* CXHomeViewController.m in Sources */,
 				65FC59F51E215CA900B7F3D0 /* CALayer+PauseAimate.m in Sources */,
+				65DBFFB41E28C4EB005D4364 /* CXVerificationCodeView.m in Sources */,
 				65C350A21E19E58900A84399 /* UIView+CXExtension.m in Sources */,
 				650E97E61E24D4F300DF127B /* CXCircleView.m in Sources */,
+				65DBFF9C1E2869F6005D4364 /* CXLoginButton.m in Sources */,
+				65DBFF991E2869D5005D4364 /* CXHeadLoginView.m in Sources */,
 				652F5BEF1E19E36B00D3783C /* AppDelegate.m in Sources */,
 				65C351B21E1C040200A84399 /* CXLoadingAnimation.m in Sources */,
+				65DBFFA71E28BB9F005D4364 /* CXLoginRegisterViewController.m in Sources */,
 				650E97DC1E2498A200DF127B /* NSString+HTML.m in Sources */,
 				652F5BF01E19E36B00D3783C /* main.m in Sources */,
 				653CF2241E1E38B00063CAD2 /* CXPictureViewController.m in Sources */,
@@ -778,11 +872,15 @@
 				65C350AD1E1A0D6C00A84399 /* NSCalendar+CXExtension.m in Sources */,
 				650E97E31E249B5500DF127B /* CXUserDefaults.m in Sources */,
 				65FC59EF1E214C2A00B7F3D0 /* CXMusicItem.m in Sources */,
+				65DBFFB81E28C73D005D4364 /* UITextField+Placeholder.m in Sources */,
 				65C352041E1CC30200A84399 /* CXNoteLabel.m in Sources */,
 				65FC59E81E2137D500B7F3D0 /* CXMusicViewController.m in Sources */,
+				65DBFF9F1E28A053005D4364 /* CXMineCell.m in Sources */,
 				653CF2121E1DDF220063CAD2 /* CXConst.m in Sources */,
 				653CF21A1E1DE11C0063CAD2 /* CXPoemViewController.m in Sources */,
+				65DBFF961E27DD96005D4364 /* CXMineViewController.m in Sources */,
 				65C351001E1A866E00A84399 /* CXBottomView.m in Sources */,
+				65DBFFB01E28C4AD005D4364 /* CXNumberTextField.m in Sources */,
 				653CF20F1E1DD9A90063CAD2 /* UIBarButtonItem+CXBarButtonItem.m in Sources */,
 				65FC59E11E21254100B7F3D0 /* CXEnglishMonth.m in Sources */,
 				650E97A51E23DF5E00DF127B /* CXLrcTool.m in Sources */,

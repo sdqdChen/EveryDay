@@ -26,8 +26,8 @@ typedef NS_OPTIONS(NSUInteger, CXButonType) {
 @property (nonatomic, strong) NSMutableArray *items;
 @end
 //底部按钮宽高
-static CGFloat buttonW = 33;
-static CGFloat buttonH = 33;
+static CGFloat buttonW = 36;
+static CGFloat buttonH = 36;
 //底部按钮弹出动画时间
 static CGFloat buttonAnimation = 0.7;
 

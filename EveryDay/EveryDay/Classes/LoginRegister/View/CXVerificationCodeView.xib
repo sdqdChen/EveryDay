@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CXVerificationCodeView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="132"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2DE-E7-lf8">
+                    <rect key="frame" x="150" y="98" width="74" height="34"/>
+                    <state key="normal" title="重新获取">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="obtainAgainButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="meE-mv-sF3"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="njz-KN-zHO" userLabel="验证码View">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="93"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="njz-KN-zHO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Nl1-6K-9Xv"/>
+                <constraint firstItem="2DE-E7-lf8" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="S9Z-bj-My8"/>
+                <constraint firstAttribute="bottom" secondItem="2DE-E7-lf8" secondAttribute="bottom" id="fF6-ga-g4d"/>
+                <constraint firstItem="2DE-E7-lf8" firstAttribute="top" secondItem="njz-KN-zHO" secondAttribute="bottom" constant="5" id="hbV-tG-SiU"/>
+                <constraint firstItem="njz-KN-zHO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="qzs-za-m6R"/>
+                <constraint firstAttribute="trailing" secondItem="njz-KN-zHO" secondAttribute="trailing" id="zAV-Cd-Hmx"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="inputView" destination="njz-KN-zHO" id="970-BR-haH"/>
+                <outlet property="obtainAgainButton" destination="2DE-E7-lf8" id="foA-lp-7DS"/>
+            </connections>
+            <point key="canvasLocation" x="13.5" y="-40"/>
+        </view>
+    </objects>
+</document>

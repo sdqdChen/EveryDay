@@ -14,7 +14,6 @@
 #import "CXUserDefaults.h"
 #import "CXConst.h"
 
-
 #define CachesPath NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject
 /** 保存的今天日期 */
 #define todayDateStrKey @"todayDateStrKey"
@@ -22,6 +21,10 @@
 #define lastArticleUpdateKey @"lastArticleUpdateKey"
 /** 诗上次更新的日期 */
 #define lastPoemUpdateKey @"lastPoemUpdateKey"
+/** 登录成功 */
+#define LoginSuccess @"loginSuccess"
+/** 手机号 */
+#define NumberKey @"number"
 /*
  * 屏幕
  */
