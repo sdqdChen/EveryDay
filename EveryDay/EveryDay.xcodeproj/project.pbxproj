@@ -41,6 +41,13 @@
 		65C3516A1E1B872B00A84399 /* article.js in Resources */ = {isa = PBXBuildFile; fileRef = 65C351681E1B872B00A84399 /* article.js */; };
 		65C351B21E1C040200A84399 /* CXLoadingAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C351B11E1C040200A84399 /* CXLoadingAnimation.m */; };
 		65C352041E1CC30200A84399 /* CXNoteLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C352031E1CC30200A84399 /* CXNoteLabel.m */; };
+		65DB00261E29B1BA005D4364 /* MaxLeap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65DB00251E29B1BA005D4364 /* MaxLeap.framework */; };
+		65DB00281E29B1ED005D4364 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65DB00271E29B1ED005D4364 /* MobileCoreServices.framework */; };
+		65DB002A1E29B1F5005D4364 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65DB00291E29B1F5005D4364 /* CoreTelephony.framework */; };
+		65DB002C1E29B1FD005D4364 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65DB002B1E29B1FD005D4364 /* SystemConfiguration.framework */; };
+		65DB002E1E29B205005D4364 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65DB002D1E29B205005D4364 /* libsqlite3.tbd */; };
+		65DB00301E29B20E005D4364 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65DB002F1E29B20E005D4364 /* libz.tbd */; };
+		65DB00331E2A1962005D4364 /* CXAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DB00321E2A1962005D4364 /* CXAlertController.m */; };
 		65DBFF961E27DD96005D4364 /* CXMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DBFF951E27DD96005D4364 /* CXMineViewController.m */; };
 		65DBFF991E2869D5005D4364 /* CXHeadLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DBFF981E2869D5005D4364 /* CXHeadLoginView.m */; };
 		65DBFF9C1E2869F6005D4364 /* CXLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DBFF9B1E2869F6005D4364 /* CXLoginButton.m */; };
@@ -141,6 +148,14 @@
 		65C351B11E1C040200A84399 /* CXLoadingAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXLoadingAnimation.m; sourceTree = "<group>"; };
 		65C352021E1CC30200A84399 /* CXNoteLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXNoteLabel.h; sourceTree = "<group>"; };
 		65C352031E1CC30200A84399 /* CXNoteLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXNoteLabel.m; sourceTree = "<group>"; };
+		65DB00251E29B1BA005D4364 /* MaxLeap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MaxLeap.framework; sourceTree = "<group>"; };
+		65DB00271E29B1ED005D4364 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		65DB00291E29B1F5005D4364 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		65DB002B1E29B1FD005D4364 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		65DB002D1E29B205005D4364 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		65DB002F1E29B20E005D4364 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		65DB00311E2A1962005D4364 /* CXAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXAlertController.h; sourceTree = "<group>"; };
+		65DB00321E2A1962005D4364 /* CXAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXAlertController.m; sourceTree = "<group>"; };
 		65DBFF941E27DD96005D4364 /* CXMineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMineViewController.h; sourceTree = "<group>"; };
 		65DBFF951E27DD96005D4364 /* CXMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMineViewController.m; sourceTree = "<group>"; };
 		65DBFF971E2869D5005D4364 /* CXHeadLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXHeadLoginView.h; sourceTree = "<group>"; };
@@ -180,7 +195,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65DB00301E29B20E005D4364 /* libz.tbd in Frameworks */,
+				65DB002E1E29B205005D4364 /* libsqlite3.tbd in Frameworks */,
+				65DB002C1E29B1FD005D4364 /* SystemConfiguration.framework in Frameworks */,
+				65DB002A1E29B1F5005D4364 /* CoreTelephony.framework in Frameworks */,
+				65DB00281E29B1ED005D4364 /* MobileCoreServices.framework in Frameworks */,
 				847DC762218483F2AADED8CD /* libPods-EveryDay.a in Frameworks */,
+				65DB00261E29B1BA005D4364 /* MaxLeap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +302,7 @@
 		652F5BEA1E19E36B00D3783C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				65DB00231E29B18E005D4364 /* Third */,
 				65C350AE1E1A451B00A84399 /* Tool */,
 				653CF2081E1DD4C80063CAD2 /* Main */,
 				65C3509A1E19E44200A84399 /* Home */,
@@ -445,6 +467,8 @@
 				65FC59E01E21254100B7F3D0 /* CXEnglishMonth.m */,
 				650E97A31E23DF5E00DF127B /* CXLrcTool.h */,
 				650E97A41E23DF5E00DF127B /* CXLrcTool.m */,
+				65DB00311E2A1962005D4364 /* CXAlertController.h */,
+				65DB00321E2A1962005D4364 /* CXAlertController.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -603,6 +627,22 @@
 			path = HTML;
 			sourceTree = "<group>";
 		};
+		65DB00231E29B18E005D4364 /* Third */ = {
+			isa = PBXGroup;
+			children = (
+				65DB00241E29B18E005D4364 /* MaxLeap */,
+			);
+			path = Third;
+			sourceTree = "<group>";
+		};
+		65DB00241E29B18E005D4364 /* MaxLeap */ = {
+			isa = PBXGroup;
+			children = (
+				65DB00251E29B1BA005D4364 /* MaxLeap.framework */,
+			);
+			path = MaxLeap;
+			sourceTree = "<group>";
+		};
 		65DBFFA01E28B233005D4364 /* LoginRegister */ = {
 			isa = PBXGroup;
 			children = (
@@ -648,6 +688,11 @@
 		C4CC73C2B94DD36FEF1ABF8C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65DB002F1E29B20E005D4364 /* libz.tbd */,
+				65DB002D1E29B205005D4364 /* libsqlite3.tbd */,
+				65DB002B1E29B1FD005D4364 /* SystemConfiguration.framework */,
+				65DB00291E29B1F5005D4364 /* CoreTelephony.framework */,
+				65DB00271E29B1ED005D4364 /* MobileCoreServices.framework */,
 				CEC47CFCCF2F6F14528BDC31 /* libPods-EveryDay.a */,
 			);
 			name = Frameworks;
@@ -868,6 +913,7 @@
 				652F5BF01E19E36B00D3783C /* main.m in Sources */,
 				653CF2241E1E38B00063CAD2 /* CXPictureViewController.m in Sources */,
 				650E97C21E23EC1100DF127B /* CXLrcItem.m in Sources */,
+				65DB00331E2A1962005D4364 /* CXAlertController.m in Sources */,
 				65C3510D1E1B42A200A84399 /* CXArticleViewController.m in Sources */,
 				65C350AD1E1A0D6C00A84399 /* NSCalendar+CXExtension.m in Sources */,
 				650E97E31E249B5500DF127B /* CXUserDefaults.m in Sources */,
@@ -1026,6 +1072,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 4SM8VUNX34;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EveryDay/Classes/Third/MaxLeap",
+				);
 				GCC_PREFIX_HEADER = EveryDay/Classes/Other/PrefixHeader.pch;
 				INFOPLIST_FILE = EveryDay/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
@@ -1042,6 +1092,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 4SM8VUNX34;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EveryDay/Classes/Third/MaxLeap",
+				);
 				GCC_PREFIX_HEADER = EveryDay/Classes/Other/PrefixHeader.pch;
 				INFOPLIST_FILE = EveryDay/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;

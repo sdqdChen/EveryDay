@@ -8,6 +8,7 @@
 
 #import "CXLoginRegisterViewController.h"
 #import "CXPhoneNumberView.h"
+#import "CXUserDefaults.h"
 
 @interface CXLoginRegisterViewController ()
 /** 中间的view */
@@ -23,9 +24,7 @@
     [super viewDidLoad];
     CXPhoneNumberView *numberView = [CXPhoneNumberView loadPhoneNumFromXib];
     [self.switchView addSubview:numberView];
-    //监听键盘弹出
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchViewMoveUp:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchViewMoveDown:) name:UIKeyboardWillHideNotification object:nil];
+    [self addNotification];
 }
 - (void)viewDidLayoutSubviews
 {
@@ -34,14 +33,30 @@
     self.numberView = numberView;
     numberView.frame = self.switchView.bounds;
 }
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    if ([CXUserDefaults readBoolForKey:LoginSuccess]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:CXLoginSuccessNotification object:nil];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"invalidateTimer" object:nil];
+    }
+}
 /*
  * 点击屏幕，键盘退出
  */
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:0.35 animations:^{
         [self.view endEditing:YES];
     }];
+}
+#pragma mark - 通知
+- (void)addNotification
+{
+    //监听键盘弹出
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchViewMoveUp:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchViewMoveDown:) name:UIKeyboardWillHideNotification object:nil];
 }
 /*
  * 移除通知
@@ -73,6 +88,9 @@
         self.middleView.transform = CGAffineTransformIdentity;
     }];
 }
+/*
+ * 退出
+ */
 - (IBAction)close {
     [self.view endEditing:YES];
     [self dismissViewControllerAnimated:YES completion:nil];

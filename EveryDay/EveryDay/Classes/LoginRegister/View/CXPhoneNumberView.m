@@ -10,6 +10,8 @@
 #import "CXUserDefaults.h"
 #import "UITextField+Placeholder.h"
 #import "CXVerificationCodeView.h"
+#import <MaxLeap/MaxLeap.h>
+#import <WSProgressHUD.h>
 
 @interface CXPhoneNumberView ()
 /** 输入手机号的文本框 */
@@ -91,6 +93,7 @@
         if (self.verificationCodeButton.hidden) {
             [self.codeView.firstTextField becomeFirstResponder];
             self.clearButton.hidden = YES;
+            self.codeView.phoneNumber = textField.text;
         }
         //存储手机号
         [CXUserDefaults setObject:textField.text forKey:NumberKey];
@@ -115,19 +118,43 @@
 - (void)getVerificationCode:(UIButton *)button
 {
     //1. 添加验证码view
-    [UIView animateWithDuration:0.3 animations:^{
-        self.verificationCodeButton.hidden = YES;
-        self.seperatorView.hidden = YES;
+//    [UIView animateWithDuration:0.3 animations:^{
+//        self.verificationCodeButton.hidden = YES;
+//        self.seperatorView.hidden = YES;
+//    }];
+//    CXVerificationCodeView *codeView = [CXVerificationCodeView loadVerificationCodeView];
+//    self.codeView = codeView;
+//    codeView.phoneNumber = self.numberTextField.text;
+//    [self addSubview:codeView];
+//    //2. 第一响应者
+//    [codeView.firstTextField becomeFirstResponder];
+//    //3. 隐藏clearButton
+//    self.clearButton.hidden = YES;
+    [MLUser requestLoginSmsCodeWithPhoneNumber:self.numberTextField.text block:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            //1. 添加验证码view
+            [UIView animateWithDuration:0.3 animations:^{
+                self.verificationCodeButton.hidden = YES;
+                self.seperatorView.hidden = YES;
+            }];
+            CXVerificationCodeView *codeView = [CXVerificationCodeView loadVerificationCodeView];
+            self.codeView = codeView;
+            codeView.phoneNumber = self.numberTextField.text;
+            [self addSubview:codeView];
+            //2. 第一响应者
+            [codeView.firstTextField becomeFirstResponder];
+            //3. 隐藏clearButton
+            self.clearButton.hidden = YES;
+        } else {
+            if (error.code == 1) {
+                [WSProgressHUD showImage:nil status:@"请输入正确的手机号!"];
+            } else if (error.code == 503) {
+                [WSProgressHUD showImage:nil status:@"发送频繁，请稍后再试!"];
+            } else {
+                [WSProgressHUD showImage:nil status:@"发送失败，请稍后再试!"];
+            }
+        }
     }];
-    CXVerificationCodeView *codeView = [CXVerificationCodeView loadVerificationCodeView];
-    self.codeView = codeView;
-    codeView.phoneNumber = self.numberTextField.text;
-    [self addSubview:codeView];
-    //2. 第一响应者
-    [codeView.firstTextField becomeFirstResponder];
-    //3. 隐藏clearButton
-    self.clearButton.hidden = YES;
-    //4. 获取验证码
 }
 #pragma mark - 布局子控件
 - (void)layoutSubviews

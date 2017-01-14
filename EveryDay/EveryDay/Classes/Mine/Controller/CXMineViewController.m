@@ -10,6 +10,8 @@
 #import "CXHeadLoginView.h"
 #import <Masonry.h>
 #import "CXMineCell.h"
+#import <MaxLeap/MaxLeap.h>
+#import "CXAlertController.h"
 
 typedef NS_ENUM(NSInteger, CellRow) {
     kMyCollection = 0,
@@ -20,9 +22,11 @@ typedef NS_ENUM(NSInteger, CellRow) {
 @interface CXMineViewController ()
 @property (nonatomic, strong) CXHeadLoginView *headerView;
 @property (nonatomic, strong) NSArray *cellItems;
+@property (nonatomic, strong) UILabel *logoutLabel;
 @end
 
 @implementation CXMineViewController
+#pragma mark - 懒加载
 - (NSArray *)cellItems
 {
     if (!_cellItems) {
@@ -30,12 +34,53 @@ typedef NS_ENUM(NSInteger, CellRow) {
     }
     return _cellItems;
 }
+- (CXHeadLoginView *)headerView
+{
+    if (!_headerView) {
+        _headerView = [[CXHeadLoginView alloc] init];
+        _headerView.frame = CGRectMake(0, 0, CXScreenW, CXScreenW);
+    }
+    return _headerView;
+}
+- (UILabel *)logoutLabel
+{
+    if (!_logoutLabel) {
+        _logoutLabel = [[UILabel alloc] init];
+        _logoutLabel.text = @"退出登录";
+        _logoutLabel.userInteractionEnabled = YES;
+        if ([CXUserDefaults readBoolForKey:LoginSuccess]) {
+            _logoutLabel.hidden = NO;
+        } else {
+            _logoutLabel.hidden = YES;
+        }
+        _logoutLabel.font = [UIFont fontWithName:CXPingFangLight size:17];
+        _logoutLabel.textColor = [UIColor lightGrayColor];
+        [_logoutLabel sizeToFit];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(logoutClick)];
+        [_logoutLabel addGestureRecognizer:tap];
+    }
+    return _logoutLabel;
+}
 #pragma mark - 初始化
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupTableView];
     //设置headerView
-    [self setupHeaderView];
+    self.tableView.tableHeaderView = self.headerView;
+    //设置footerView
+    [self.tableView addSubview:self.logoutLabel];
+    //监听登录成功的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:CXLoginSuccessNotification object:nil];
+    MLUser *currentUser = [MLUser currentUser];
+    if (currentUser) {
+        if ([MLAnonymousUtils isLinkedWithUser:currentUser]) {
+            CXLog(@"匿名登录");
+        } else {
+            CXLog(@"登录");
+        }
+    } else {
+        CXLog(@"未登录");
+    }
 }
 - (void)setupTableView
 {
@@ -43,12 +88,17 @@ typedef NS_ENUM(NSInteger, CellRow) {
     self.tableView.rowHeight = 70;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
-- (void)setupHeaderView
+- (void)viewDidLayoutSubviews
 {
-    CXHeadLoginView *headerView = [[CXHeadLoginView alloc] init];
-    headerView.frame = CGRectMake(0, 0, CXScreenW, CXScreenW);
-    self.tableView.tableHeaderView = headerView;
-    self.headerView = headerView;
+    [super viewDidLayoutSubviews];
+    [self.logoutLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.tableView);
+        make.bottom.mas_equalTo(self.tableView).offset(CXScreenH - 10);
+    }];
+}
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:CXLoginSuccessNotification object:nil];
 }
 #pragma mark - tableView数据源
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -77,5 +127,25 @@ typedef NS_ENUM(NSInteger, CellRow) {
         default:
             break;
     }
+}
+#pragma mark - 监听事件
+/*
+ * 登录成功
+ */
+- (void)loginSuccess
+{
+    self.logoutLabel.hidden = NO;
+}
+/*
+ * 退出登录
+ */
+- (void)logoutClick
+{
+    [CXAlertController alertSureAndCancelWithTitle:@"退出登录?" sureHandler:^(UIAlertAction *action) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:CXLoginOutNotification object:nil];
+        [CXUserDefaults setBool:NO forKey:LoginSuccess];
+        [MLUser logOut];
+        self.logoutLabel.hidden = YES;
+    } cancelHandler:nil viewController:self];
 }
 @end

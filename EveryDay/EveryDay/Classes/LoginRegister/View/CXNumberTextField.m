@@ -38,13 +38,13 @@
 //但是数字固定死了
 - (CGRect)editingRectForBounds:(CGRect)bounds
 {
-    CGRect insert = CGRectMake(21, bounds.origin.y, bounds.size.width, bounds.size.height);
+    CGRect insert = CGRectMake(17, bounds.origin.y, bounds.size.width, bounds.size.height);
     return insert;
 }
 //修改文本展示区域
 -(CGRect)textRectForBounds:(CGRect)bounds
 {
-    CGRect insert = CGRectMake(18, bounds.origin.y, bounds.size.width, bounds.size.height);
+    CGRect insert = CGRectMake(12, bounds.origin.y, bounds.size.width, bounds.size.height);
     return insert;
 }
 @end
