@@ -18,6 +18,7 @@
 #import "UIBarButtonItem+CXBarButtonItem.h"
 #import "CXEnglishMonth.h"
 #import "CXMineViewController.h"
+#import <MaxLeap/MaxLeap.h>
 
 @interface CXHomeViewController ()
 @property (weak, nonatomic) IBOutlet UIView *bgView;
@@ -39,6 +40,7 @@
 @property (nonatomic, weak) UIActivityIndicatorView *indicatorView;
 @property (nonatomic, weak) UIView *tmpView;
 @property (nonatomic, weak) UIImageView *notInternet;
+@property (nonatomic, strong) CXHomeItem *cacheItem;
 @end
 
 static NSString *pathKey = @"filePath";
@@ -62,7 +64,6 @@ static NSString *pathKey = @"filePath";
     [self setupDateLabel];
     //设置问候语
     [self setupHelloLabel];
-    //    CXLog(@"%@", NSHomeDirectory());
     //应用从后台进入前台就会刷新首页
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:CXAppWillEnterForegroundNotification object:nil];
 }
@@ -205,6 +206,7 @@ static NSString *pathKey = @"filePath";
 {
     NSString *path = [CachesPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.data", [CXUserDefaults readObjectForKey:pathKey]]];
     CXHomeItem *item = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+    self.cacheItem = item;
     if (item) {
         [self.headImageView sd_setImageWithURL:[NSURL URLWithString:item.picture2]];
         [self loadSuccessWithItem:item];
@@ -219,7 +221,7 @@ static NSString *pathKey = @"filePath";
     [manager GET:@"http://open.iciba.com/dsapi/" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         CXHomeItem *item = [CXHomeItem mj_objectWithKeyValues:responseObject];
         self.item = item;
-        if (![item.sid isEqualToString:[CXUserDefaults readObjectForKey:pathKey]]) {
+        if (![item.sid isEqualToString:[CXUserDefaults readObjectForKey:pathKey]] || self.cacheItem == nil) {
             [self.headImageView sd_setImageWithURL:[NSURL URLWithString:item.picture2]];
         }
         [self loadSuccessWithItem:item];

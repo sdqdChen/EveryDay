@@ -12,6 +12,7 @@
 #import "CXLoadingAnimation.h"
 
 static NSString * poemItemidKey = @"poemItemidKey";
+static NSString * poemNumberKey = @"poemNumberKey";
 
 @interface CXPoemViewController () <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -86,37 +87,48 @@ static NSString * poemItemidKey = @"poemItemidKey";
         //如果本地有数据，并且是同一天，就从本地加载数据
         //拼接HTML
         [self setupHtmlWithDictionary:self.randomData];
-    } else if (!self.randomData || update) {
+    } else if (update) {//如果不是同一天，就从网络随机加载
         //网络请求
-        NSInteger pageIndex = arc4random_uniform(53);//0-52页
-        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-        NSString *poemUrl = [NSString stringWithFormat:@"http://www.finndy.com/api.php?pagesize=20&pageindex=%ld&datatype=json&sortby=desc&token=1.0_7xiSVVWgqVfmHiyVVgjgf7b05672", pageIndex];
-        [manager GET:poemUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            NSArray *datalistArray = responseObject[@"datalist"];
-            //获取随机文章
-            NSUInteger count = datalistArray.count;
-            NSInteger randomNum = arc4random() % count;
-            NSDictionary *random = datalistArray[randomNum];
-            self.randomData = random;
-            //把字典保存到本地(根据itemid)
-            NSString *filePath = [CachesPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", random[@"itemid"]]];
-            [random writeToFile:filePath atomically:YES];
-            [CXUserDefaults setObject:random[@"itemid"] forKey:poemItemidKey];
-            //拼接HTML
-            [self setupHtmlWithDictionary:random];
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            CXLog(@"%@", error);
-            [SVProgressHUD showErrorWithStatus:@"似乎已断开与网络的链接..."];
-            //移除加载动画
-            if (self.animationView) {
-                [self.animationView removeFromSuperview];
-            } else {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self.animationView removeFromSuperview];
-                });
-            }
-        }];
+        [self loadDataWithPageIndex:arc4random_uniform(52) randomNum:arc4random_uniform(20)];
+    } else if (!self.randomData && !update) { //如果本地没有数据，但是是同一天，从网络加载当天的数据
+        NSString *articleNumber = [CXUserDefaults readObjectForKey:poemNumberKey];
+        NSArray *array = [articleNumber componentsSeparatedByString:@":"];
+        NSString *pageIndex = array[0];
+        NSString *randomNum = array[1];
+        [self loadDataWithPageIndex:[pageIndex integerValue] randomNum:[randomNum integerValue]];
     }
+}
+- (void)loadDataWithPageIndex:(NSInteger)pageIndex randomNum:(NSInteger)randomNum
+{
+    //网络请求
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSString *poemUrl = [NSString stringWithFormat:@"http://www.finndy.com/api.php?pagesize=20&pageindex=%ld&datatype=json&sortby=desc&token=1.0_7xiSVVWgqVfmHiyVVgjgf7b05672", pageIndex];
+    [manager GET:poemUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSArray *datalistArray = responseObject[@"datalist"];
+        //获取随机文章
+        NSDictionary *random = datalistArray[randomNum];
+        self.randomData = random;
+        //把字典保存到本地(根据itemid)
+        NSString *filePath = [CachesPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", random[@"itemid"]]];
+        [random writeToFile:filePath atomically:YES];
+        [CXUserDefaults setObject:random[@"itemid"] forKey:poemItemidKey];
+        //拼接HTML
+        [self setupHtmlWithDictionary:random];
+        //把哪一页哪一篇文章记录下来
+        NSString *articleNumber = [NSString stringWithFormat:@"%ld:%ld", pageIndex, randomNum];
+        [CXUserDefaults setObject:articleNumber forKey:poemNumberKey];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        CXLog(@"%@", error);
+        [SVProgressHUD showErrorWithStatus:@"似乎已断开与网络的链接..."];
+        //移除加载动画
+        if (self.animationView) {
+            [self.animationView removeFromSuperview];
+        } else {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.animationView removeFromSuperview];
+            });
+        }
+    }];
 }
 /*
  * 拼接HTML

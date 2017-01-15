@@ -61,6 +61,7 @@
 		65DBFFB41E28C4EB005D4364 /* CXVerificationCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DBFFB21E28C4EB005D4364 /* CXVerificationCodeView.m */; };
 		65DBFFB51E28C4EB005D4364 /* CXVerificationCodeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65DBFFB31E28C4EB005D4364 /* CXVerificationCodeView.xib */; };
 		65DBFFB81E28C73D005D4364 /* UITextField+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DBFFB71E28C73D005D4364 /* UITextField+Placeholder.m */; };
+		65E1469E1E2BADFD00356ECB /* CXFileTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E1469D1E2BADFD00356ECB /* CXFileTool.m */; };
 		65FC59E11E21254100B7F3D0 /* CXEnglishMonth.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC59E01E21254100B7F3D0 /* CXEnglishMonth.m */; };
 		65FC59E81E2137D500B7F3D0 /* CXMusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FC59E61E2137D500B7F3D0 /* CXMusicViewController.m */; };
 		65FC59E91E2137D500B7F3D0 /* CXMusicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65FC59E71E2137D500B7F3D0 /* CXMusicViewController.xib */; };
@@ -180,6 +181,8 @@
 		65DBFFB31E28C4EB005D4364 /* CXVerificationCodeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CXVerificationCodeView.xib; sourceTree = "<group>"; };
 		65DBFFB61E28C73D005D4364 /* UITextField+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Placeholder.h"; sourceTree = "<group>"; };
 		65DBFFB71E28C73D005D4364 /* UITextField+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Placeholder.m"; sourceTree = "<group>"; };
+		65E1469C1E2BADFD00356ECB /* CXFileTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXFileTool.h; sourceTree = "<group>"; };
+		65E1469D1E2BADFD00356ECB /* CXFileTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXFileTool.m; sourceTree = "<group>"; };
 		65FC59DF1E21254100B7F3D0 /* CXEnglishMonth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXEnglishMonth.h; sourceTree = "<group>"; };
 		65FC59E01E21254100B7F3D0 /* CXEnglishMonth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXEnglishMonth.m; sourceTree = "<group>"; };
 		65FC59E51E2137D500B7F3D0 /* CXMusicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMusicViewController.h; sourceTree = "<group>"; };
@@ -474,6 +477,8 @@
 				650E97A41E23DF5E00DF127B /* CXLrcTool.m */,
 				65DB00311E2A1962005D4364 /* CXAlertController.h */,
 				65DB00321E2A1962005D4364 /* CXAlertController.m */,
+				65E1469C1E2BADFD00356ECB /* CXFileTool.h */,
+				65E1469D1E2BADFD00356ECB /* CXFileTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -922,6 +927,7 @@
 				65DB00331E2A1962005D4364 /* CXAlertController.m in Sources */,
 				65C3510D1E1B42A200A84399 /* CXArticleViewController.m in Sources */,
 				65C350AD1E1A0D6C00A84399 /* NSCalendar+CXExtension.m in Sources */,
+				65E1469E1E2BADFD00356ECB /* CXFileTool.m in Sources */,
 				650E97E31E249B5500DF127B /* CXUserDefaults.m in Sources */,
 				65FC59EF1E214C2A00B7F3D0 /* CXMusicItem.m in Sources */,
 				65DBFFB81E28C73D005D4364 /* UITextField+Placeholder.m in Sources */,

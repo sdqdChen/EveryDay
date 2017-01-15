@@ -12,6 +12,8 @@
 #import "CXMineCell.h"
 #import <MaxLeap/MaxLeap.h>
 #import "CXAlertController.h"
+#import "CXFileTool.h"
+#import <SVProgressHUD.h>
 
 typedef NS_ENUM(NSInteger, CellRow) {
     kMyCollection = 0,
@@ -22,7 +24,11 @@ typedef NS_ENUM(NSInteger, CellRow) {
 @interface CXMineViewController ()
 @property (nonatomic, strong) CXHeadLoginView *headerView;
 @property (nonatomic, strong) NSArray *cellItems;
+/** 退出登录文本 */
 @property (nonatomic, strong) UILabel *logoutLabel;
+/** 缓存大小 */
+@property (nonatomic, assign) NSInteger cacheSize;
+@property (nonatomic, copy) NSString *cacheText;
 @end
 
 @implementation CXMineViewController
@@ -70,12 +76,19 @@ typedef NS_ENUM(NSInteger, CellRow) {
     //设置footerView
     [self.tableView addSubview:self.logoutLabel];
     //监听登录成功的通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:CXLoginSuccessNotification object:nil];
+    [self addNotification];
+    //计算缓存
+    [CXFileTool getFileSize:CachesPath completion:^(NSInteger cacheSize) {
+        _cacheSize = cacheSize;
+        CXLog(@"%ld", cacheSize);
+    }];
+    CXLog(@"%@", NSHomeDirectory());
 }
 - (void)setupTableView
 {
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.rowHeight = 70;
+    self.tableView.scrollEnabled = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 - (void)viewDidLayoutSubviews
@@ -85,6 +98,11 @@ typedef NS_ENUM(NSInteger, CellRow) {
         make.centerX.mas_equalTo(self.tableView);
         make.bottom.mas_equalTo(self.tableView).offset(CXScreenH - 10);
     }];
+}
+#pragma mark - 通知
+- (void)addNotification
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:CXLoginSuccessNotification object:nil];
 }
 - (void)dealloc
 {
@@ -109,7 +127,7 @@ typedef NS_ENUM(NSInteger, CellRow) {
             CXLog(@"我的收藏");
             break;
         case kClearCache:
-            CXLog(@"清除缓存");
+            [self setupClearCache];
             break;
         case kRecommand:
             CXLog(@"意见反馈");
@@ -138,4 +156,44 @@ typedef NS_ENUM(NSInteger, CellRow) {
         self.logoutLabel.hidden = YES;
     } cancelHandler:nil viewController:self];
 }
+#pragma mark - 清除缓存
+- (void)setupClearCache
+{
+    [CXAlertController alertSureAndCancelWithTitle:[NSString stringWithFormat:@"缓存大小(%@)", [self resolveNumber]] message:@"确定清除?" sureHandler:^(UIAlertAction *action) {
+        [self clearCache];
+    } cancelHandler:nil viewController:self];
+}
+/*
+ * 清除缓存
+ */
+- (void)clearCache
+{
+    [CXFileTool removeDirectoryPath:CachesPath completion:^{
+        [SVProgressHUD showSuccessWithStatus:@"清除缓存成功"];
+        self.cacheSize = 0;
+        [self.tableView reloadData];
+    }];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [SVProgressHUD dismiss];
+    });
+}
+/*
+ * 处理缓存数字显示
+ */
+- (NSString *)resolveNumber
+{
+    NSString *sizeStr = self.cacheText;
+    NSInteger cacheSize = self.cacheSize;
+    if (cacheSize / 1000 / 1000 > 0) { // MB
+        sizeStr = [NSString stringWithFormat:@"%.1fMB", cacheSize / 1000.0 / 1000.0];
+    } else if (cacheSize / 1000 > 0) { // KB
+        sizeStr = [NSString stringWithFormat:@"%.1fKB",  cacheSize / 1000.0];
+    } else if (cacheSize > 0) { // B
+        sizeStr = [NSString stringWithFormat:@"%.ldB",  cacheSize];
+    } else if (cacheSize == 0) {
+        sizeStr = @"空";
+    }
+    return sizeStr;
+}
+
 @end

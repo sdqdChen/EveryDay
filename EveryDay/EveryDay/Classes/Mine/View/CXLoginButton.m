@@ -55,13 +55,7 @@
     if (self = [super initWithFrame:frame]) {
         //根据是否登录设置不同图片
         if ([CXUserDefaults readBoolForKey:LoginSuccess]) { //已经登录
-            //先从本地缓存中取
-            UIImage *avator = [self readImageFromCache];
-            if (avator) {
-                [self setBackgroundImage:avator forState:UIControlStateNormal];
-            } else { //本地缓存没有就从服务器取
-                [self readImageFromServer];
-            }
+            [self readImageFromServer];
         } else { //未登录
             [self setBackgroundImage:[UIImage imageNamed:@"loginButton"] forState:UIControlStateNormal];
         }
@@ -113,13 +107,7 @@
  */
 - (void)loginSuccess
 {
-    //先从本地缓存中取
-    UIImage *avator = [self readImageFromCache];
-    if (avator) {
-        [self setBackgroundImage:avator forState:UIControlStateNormal];
-    } else { //本地缓存没有就从服务器取
-        [self readImageFromServer];
-    }
+    [self readImageFromServer];
 }
 /*
  * 退出登录
@@ -234,23 +222,13 @@
     //更改头像
     [self setBackgroundImage:newImage forState:UIControlStateNormal];
     NSData *imageData = UIImageJPEGRepresentation(newImage, 0.5);
-    //保存头像到本地
-    [self saveToCacheWithData:imageData];
-    //保存头像到服务器
+    //保存头像到服务器(MLFile也会缓存到本地)
     [self saveToServerWithData:imageData];
     //退出
     [self.pickVc dismissViewControllerAnimated:YES completion:nil];
     [self.pickVc popViewControllerAnimated:YES];
 }
 #pragma mark - 保存和读取头像
-/*
- * 保存头像到本地
- */
-- (void)saveToCacheWithData:(NSData *)data
-{
-    NSString *filePath = [CachesPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", self.currentUser.objectId]];
-    [data writeToFile:filePath atomically:YES];
-}
 /*
  * 保存修改后的头像到服务器
  */
@@ -265,15 +243,6 @@
             CXLog(@"成功");
         }
     }];
-}
-/*
- * 从本地读取头像
- */
-- (UIImage *)readImageFromCache
-{
-    NSString *filePath = [CachesPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", self.currentUser.objectId]];
-    NSData *data = [NSData dataWithContentsOfFile:filePath];
-    return [UIImage imageWithData:data];
 }
 /*
  * 从服务器读取头像
