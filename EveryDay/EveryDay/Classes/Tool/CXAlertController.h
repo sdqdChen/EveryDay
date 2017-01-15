@@ -12,5 +12,9 @@
 /*
  * 只有确定和退出
  */
-+ (void)alertSureAndCancelWithTitle:(NSString *)title sureHandler:(void (^)(UIAlertAction *action))sureHandler cancelHandler:(void (^)(UIAlertAction *action))cancelHandler viewController:(UIViewController *)vc;
++ (void)alertSureAndCancelWithTitle:(NSString *)title message:(NSString *)message sureHandler:(void (^)(UIAlertAction *action))sureHandler cancelHandler:(void (^)(UIAlertAction *action))cancelHandler viewController:(UIViewController *)vc;
+/*
+ * 修改头像
+ */
++ (void)alertForEditAvatorWithCameraHandler:(void (^)(UIAlertAction *action))cameraHandler photoHandler:(void (^)(UIAlertAction *action))photoHandler viewController:(UIViewController *)vc;
 @end

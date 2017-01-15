@@ -9,6 +9,8 @@
 #import "CXMineCell.h"
 #import <Masonry.h>
 
+static CGFloat const labelFont = 19;
+
 @interface CXMineCell ()
 //分割线
 @property (nonatomic, strong) UIView *separatorView;
@@ -38,7 +40,7 @@
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.textLabel.textAlignment = NSTextAlignmentCenter;
-        self.textLabel.font = [UIFont fontWithName:CXPingFangLight size:23];
+        self.textLabel.font = [UIFont fontWithName:CXPingFangLight size:labelFont * KRATE];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self addSubview:self.separatorView];
     }
@@ -48,7 +50,7 @@
 {
     [super layoutSubviews];
     [self.separatorView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(CXseparatorViewW, 1));
+        make.size.mas_equalTo(CGSizeMake(separatorW, 1));
         make.centerX.mas_equalTo(self);
         make.bottom.offset(0);
     }];

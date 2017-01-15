@@ -11,6 +11,7 @@
 #import <Masonry.h>
 #import <MaxLeap/MaxLeap.h>
 #import "CXUserDefaults.h"
+#import "CXMineCell.h"
 
 
 @interface CXHeadLoginView ()
@@ -91,10 +92,11 @@
     //登录按钮
     [self.loginButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(self);
+        make.size.mas_equalTo(CGSizeMake(loginButtonW * KRATE, loginButtonW * KRATE));
     }];
     //分割线
     [self.separatorView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(CXseparatorViewW, 1));
+        make.size.mas_equalTo(CGSizeMake(separatorW, 1));
         make.centerX.mas_equalTo(self);
         make.bottom.offset(0);
     }];

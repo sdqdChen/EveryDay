@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+static CGFloat const loginButtonW = 100;
+
 @interface CXLoginButton : UIButton
 
 @end

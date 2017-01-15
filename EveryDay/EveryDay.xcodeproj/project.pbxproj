@@ -48,6 +48,7 @@
 		65DB002E1E29B205005D4364 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65DB002D1E29B205005D4364 /* libsqlite3.tbd */; };
 		65DB00301E29B20E005D4364 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65DB002F1E29B20E005D4364 /* libz.tbd */; };
 		65DB00331E2A1962005D4364 /* CXAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DB00321E2A1962005D4364 /* CXAlertController.m */; };
+		65DB00361E2B10DE005D4364 /* UIImage+CXImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DB00351E2B10DE005D4364 /* UIImage+CXImage.m */; };
 		65DBFF961E27DD96005D4364 /* CXMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DBFF951E27DD96005D4364 /* CXMineViewController.m */; };
 		65DBFF991E2869D5005D4364 /* CXHeadLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DBFF981E2869D5005D4364 /* CXHeadLoginView.m */; };
 		65DBFF9C1E2869F6005D4364 /* CXLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DBFF9B1E2869F6005D4364 /* CXLoginButton.m */; };
@@ -156,6 +157,8 @@
 		65DB002F1E29B20E005D4364 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		65DB00311E2A1962005D4364 /* CXAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXAlertController.h; sourceTree = "<group>"; };
 		65DB00321E2A1962005D4364 /* CXAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXAlertController.m; sourceTree = "<group>"; };
+		65DB00341E2B10DE005D4364 /* UIImage+CXImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CXImage.h"; sourceTree = "<group>"; };
+		65DB00351E2B10DE005D4364 /* UIImage+CXImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CXImage.m"; sourceTree = "<group>"; };
 		65DBFF941E27DD96005D4364 /* CXMineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMineViewController.h; sourceTree = "<group>"; };
 		65DBFF951E27DD96005D4364 /* CXMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMineViewController.m; sourceTree = "<group>"; };
 		65DBFF971E2869D5005D4364 /* CXHeadLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXHeadLoginView.h; sourceTree = "<group>"; };
@@ -443,6 +446,8 @@
 		65C3509F1E19E55B00A84399 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				65DB00341E2B10DE005D4364 /* UIImage+CXImage.h */,
+				65DB00351E2B10DE005D4364 /* UIImage+CXImage.m */,
 				65DBFFB61E28C73D005D4364 /* UITextField+Placeholder.h */,
 				65DBFFB71E28C73D005D4364 /* UITextField+Placeholder.m */,
 				65FC59F31E215CA900B7F3D0 /* CALayer+PauseAimate.h */,
@@ -906,6 +911,7 @@
 				650E97E61E24D4F300DF127B /* CXCircleView.m in Sources */,
 				65DBFF9C1E2869F6005D4364 /* CXLoginButton.m in Sources */,
 				65DBFF991E2869D5005D4364 /* CXHeadLoginView.m in Sources */,
+				65DB00361E2B10DE005D4364 /* UIImage+CXImage.m in Sources */,
 				652F5BEF1E19E36B00D3783C /* AppDelegate.m in Sources */,
 				65C351B21E1C040200A84399 /* CXLoadingAnimation.m in Sources */,
 				65DBFFA71E28BB9F005D4364 /* CXLoginRegisterViewController.m in Sources */,

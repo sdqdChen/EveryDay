@@ -4,8 +4,6 @@
 UIKIT_EXTERN CGFloat const CXStatusBarH;
 /** 导航栏的最大Y值 */
 UIKIT_EXTERN CGFloat const CXNavigationBarMaxY;
-/** 分割线的宽度 */
-UIKIT_EXTERN CGFloat const CXseparatorViewW;
 /** 统一的间距 */
 UIKIT_EXTERN CGFloat const CXMargin;
 

@@ -53,7 +53,7 @@ typedef NS_ENUM(NSInteger, CellRow) {
         } else {
             _logoutLabel.hidden = YES;
         }
-        _logoutLabel.font = [UIFont fontWithName:CXPingFangLight size:17];
+        _logoutLabel.font = [UIFont fontWithName:CXPingFangLight size:15 * KRATE];
         _logoutLabel.textColor = [UIColor lightGrayColor];
         [_logoutLabel sizeToFit];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(logoutClick)];
@@ -71,16 +71,6 @@ typedef NS_ENUM(NSInteger, CellRow) {
     [self.tableView addSubview:self.logoutLabel];
     //监听登录成功的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:CXLoginSuccessNotification object:nil];
-    MLUser *currentUser = [MLUser currentUser];
-    if (currentUser) {
-        if ([MLAnonymousUtils isLinkedWithUser:currentUser]) {
-            CXLog(@"匿名登录");
-        } else {
-            CXLog(@"登录");
-        }
-    } else {
-        CXLog(@"未登录");
-    }
 }
 - (void)setupTableView
 {
@@ -141,7 +131,7 @@ typedef NS_ENUM(NSInteger, CellRow) {
  */
 - (void)logoutClick
 {
-    [CXAlertController alertSureAndCancelWithTitle:@"退出登录?" sureHandler:^(UIAlertAction *action) {
+    [CXAlertController alertSureAndCancelWithTitle:@"退出登录?" message:nil sureHandler:^(UIAlertAction *action) {
         [[NSNotificationCenter defaultCenter] postNotificationName:CXLoginOutNotification object:nil];
         [CXUserDefaults setBool:NO forKey:LoginSuccess];
         [MLUser logOut];
