@@ -9,7 +9,7 @@
 #import "CXMineCell.h"
 #import <Masonry.h>
 
-static CGFloat const labelFont = 19;
+static CGFloat const labelFont = 17;
 
 @interface CXMineCell ()
 //分割线

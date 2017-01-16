@@ -45,7 +45,7 @@
 - (CXNavigationController *)nav
 {
     if (!_nav) {
-        _nav = (CXNavigationController *)self.window.rootViewController;
+        _nav = (CXNavigationController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     }
     return _nav;
 }

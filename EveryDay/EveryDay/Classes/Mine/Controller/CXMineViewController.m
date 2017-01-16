@@ -14,11 +14,14 @@
 #import "CXAlertController.h"
 #import "CXFileTool.h"
 #import <SVProgressHUD.h>
+#import <MaxIssues/MaxIssues.h>
+
 
 typedef NS_ENUM(NSInteger, CellRow) {
     kMyCollection = 0,
     kClearCache,
-    kRecommand
+    kRecommand,
+    kGrade
 };
 
 @interface CXMineViewController ()
@@ -36,7 +39,7 @@ typedef NS_ENUM(NSInteger, CellRow) {
 - (NSArray *)cellItems
 {
     if (!_cellItems) {
-        _cellItems = @[@"我的收藏", @"清除缓存", @"意见反馈"];
+        _cellItems = @[@"我的收藏", @"清除缓存", @"意见反馈", @"给我评分"];
     }
     return _cellItems;
 }
@@ -80,14 +83,12 @@ typedef NS_ENUM(NSInteger, CellRow) {
     //计算缓存
     [CXFileTool getFileSize:CachesPath completion:^(NSInteger cacheSize) {
         _cacheSize = cacheSize;
-        CXLog(@"%ld", cacheSize);
     }];
-    CXLog(@"%@", NSHomeDirectory());
 }
 - (void)setupTableView
 {
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.tableView.rowHeight = 70;
+    self.tableView.rowHeight = 60;
     self.tableView.scrollEnabled = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
@@ -130,8 +131,12 @@ typedef NS_ENUM(NSInteger, CellRow) {
             [self setupClearCache];
             break;
         case kRecommand:
-            CXLog(@"意见反馈");
+            [self setupRecommand];
             break;
+        case kGrade:
+            CXLog(@"给我评分");
+            break;
+            
         default:
             break;
     }
@@ -195,5 +200,11 @@ typedef NS_ENUM(NSInteger, CellRow) {
     }
     return sizeStr;
 }
-
+#pragma mark - 意见反馈
+- (void)setupRecommand
+{
+    HCConversationViewController *issuesViewController = [[HCConversationViewController alloc] init];
+    UINavigationController *navCtrl = [[UINavigationController alloc] initWithRootViewController:issuesViewController];
+    [self presentViewController:navCtrl animated:YES completion:nil];
+}
 @end

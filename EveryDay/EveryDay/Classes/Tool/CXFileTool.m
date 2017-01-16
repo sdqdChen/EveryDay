@@ -46,7 +46,7 @@
         // 抛异常
         // name:异常名称
         // reason:报错原因
-        NSException *excp = [NSException exceptionWithName:@"pathError" reason:@"笨蛋 需要传入的是文件夹路径,并且路径要存在" userInfo:nil];
+        NSException *excp = [NSException exceptionWithName:@"pathError" reason:@"需要传入的是文件夹路径,并且路径要存在" userInfo:nil];
         [excp raise];
     }
     //计算文件夹尺寸过程异步执行

@@ -27,6 +27,10 @@
 		653CF2201E1DE42C0063CAD2 /* poem.js in Resources */ = {isa = PBXBuildFile; fileRef = 653CF21E1E1DE42C0063CAD2 /* poem.js */; };
 		653CF2241E1E38B00063CAD2 /* CXPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 653CF2221E1E38B00063CAD2 /* CXPictureViewController.m */; };
 		653CF2251E1E38B00063CAD2 /* CXPictureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 653CF2231E1E38B00063CAD2 /* CXPictureViewController.xib */; };
+		65AFD28E1E2C7B6A0035B40A /* MaxIssues.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AFD2891E2C7B6A0035B40A /* MaxIssues.framework */; };
+		65AFD28F1E2C7B6A0035B40A /* MLIssuesImages.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 65AFD28B1E2C7B6A0035B40A /* MLIssuesImages.bundle */; };
+		65AFD2901E2C7B6A0035B40A /* MLIssuesLocalizable.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 65AFD28C1E2C7B6A0035B40A /* MLIssuesLocalizable.bundle */; };
+		65AFD2911E2C7B6A0035B40A /* MLIssuesThemes.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 65AFD28D1E2C7B6A0035B40A /* MLIssuesThemes.bundle */; };
 		65C350A21E19E58900A84399 /* UIView+CXExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C350A11E19E58900A84399 /* UIView+CXExtension.m */; };
 		65C350A61E19E5F600A84399 /* CXHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C350A41E19E5F600A84399 /* CXHomeViewController.m */; };
 		65C350A71E19E5F600A84399 /* CXHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C350A51E19E5F600A84399 /* CXHomeViewController.xib */; };
@@ -126,6 +130,10 @@
 		653CF2211E1E38B00063CAD2 /* CXPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXPictureViewController.h; sourceTree = "<group>"; };
 		653CF2221E1E38B00063CAD2 /* CXPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXPictureViewController.m; sourceTree = "<group>"; };
 		653CF2231E1E38B00063CAD2 /* CXPictureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CXPictureViewController.xib; sourceTree = "<group>"; };
+		65AFD2891E2C7B6A0035B40A /* MaxIssues.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MaxIssues.framework; sourceTree = "<group>"; };
+		65AFD28B1E2C7B6A0035B40A /* MLIssuesImages.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MLIssuesImages.bundle; sourceTree = "<group>"; };
+		65AFD28C1E2C7B6A0035B40A /* MLIssuesLocalizable.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MLIssuesLocalizable.bundle; sourceTree = "<group>"; };
+		65AFD28D1E2C7B6A0035B40A /* MLIssuesThemes.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MLIssuesThemes.bundle; sourceTree = "<group>"; };
 		65C3509E1E19E49300A84399 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		65C350A01E19E58900A84399 /* UIView+CXExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CXExtension.h"; sourceTree = "<group>"; };
 		65C350A11E19E58900A84399 /* UIView+CXExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CXExtension.m"; sourceTree = "<group>"; };
@@ -202,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65DB00301E29B20E005D4364 /* libz.tbd in Frameworks */,
+				65AFD28E1E2C7B6A0035B40A /* MaxIssues.framework in Frameworks */,
 				65DB002E1E29B205005D4364 /* libsqlite3.tbd in Frameworks */,
 				65DB002C1E29B1FD005D4364 /* SystemConfiguration.framework in Frameworks */,
 				65DB002A1E29B1F5005D4364 /* CoreTelephony.framework in Frameworks */,
@@ -401,6 +410,25 @@
 				653CF21E1E1DE42C0063CAD2 /* poem.js */,
 			);
 			path = HTML;
+			sourceTree = "<group>";
+		};
+		65AFD2881E2C7B6A0035B40A /* MaxIssues.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				65AFD2891E2C7B6A0035B40A /* MaxIssues.framework */,
+				65AFD28A1E2C7B6A0035B40A /* Resources */,
+			);
+			path = MaxIssues.embeddedframework;
+			sourceTree = "<group>";
+		};
+		65AFD28A1E2C7B6A0035B40A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				65AFD28B1E2C7B6A0035B40A /* MLIssuesImages.bundle */,
+				65AFD28C1E2C7B6A0035B40A /* MLIssuesLocalizable.bundle */,
+				65AFD28D1E2C7B6A0035B40A /* MLIssuesThemes.bundle */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		65C3509A1E19E44200A84399 /* Home */ = {
@@ -640,6 +668,7 @@
 		65DB00231E29B18E005D4364 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				65AFD2881E2C7B6A0035B40A /* MaxIssues.embeddedframework */,
 				65DB00241E29B18E005D4364 /* MaxLeap */,
 			);
 			path = Third;
@@ -825,8 +854,11 @@
 				65C350A71E19E5F600A84399 /* CXHomeViewController.xib in Resources */,
 				65C351691E1B872B00A84399 /* article.css in Resources */,
 				65C3510E1E1B42A200A84399 /* CXArticleViewController.xib in Resources */,
+				65AFD2911E2C7B6A0035B40A /* MLIssuesThemes.bundle in Resources */,
 				65DBFFAD1E28C109005D4364 /* CXPhoneNumberView.xib in Resources */,
 				653CF21B1E1DE11C0063CAD2 /* CXPoemViewController.xib in Resources */,
+				65AFD2901E2C7B6A0035B40A /* MLIssuesLocalizable.bundle in Resources */,
+				65AFD28F1E2C7B6A0035B40A /* MLIssuesImages.bundle in Resources */,
 				653CF2201E1DE42C0063CAD2 /* poem.js in Resources */,
 				65C3516A1E1B872B00A84399 /* article.js in Resources */,
 				652F5BC71E19E0EC00D3783C /* LaunchScreen.storyboard in Resources */,
@@ -1087,6 +1119,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EveryDay/Classes/Third/MaxLeap",
+					"$(PROJECT_DIR)/EveryDay/Classes/Third/MaxIssues.embeddedframework",
 				);
 				GCC_PREFIX_HEADER = EveryDay/Classes/Other/PrefixHeader.pch;
 				INFOPLIST_FILE = EveryDay/Info.plist;
@@ -1107,6 +1140,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EveryDay/Classes/Third/MaxLeap",
+					"$(PROJECT_DIR)/EveryDay/Classes/Third/MaxIssues.embeddedframework",
 				);
 				GCC_PREFIX_HEADER = EveryDay/Classes/Other/PrefixHeader.pch;
 				INFOPLIST_FILE = EveryDay/Info.plist;
