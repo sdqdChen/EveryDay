@@ -121,7 +121,7 @@
     }];
     //分割线
     [self.separatorView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(separatorW, 1));
+        make.size.mas_equalTo(CGSizeMake(separatorW * KRATE, 1));
         make.centerX.mas_equalTo(self);
         make.bottom.offset(0);
     }];

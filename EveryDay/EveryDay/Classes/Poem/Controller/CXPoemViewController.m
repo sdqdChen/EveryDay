@@ -10,6 +10,7 @@
 #import <AFNetworking.h>
 #import <SVProgressHUD.h>
 #import "CXLoadingAnimation.h"
+#import <MaxLeap/MaxLeap.h>
 
 static NSString * poemItemidKey = @"poemItemidKey";
 static NSString * poemNumberKey = @"poemNumberKey";
@@ -17,16 +18,45 @@ static NSString * poemNumberKey = @"poemNumberKey";
 @interface CXPoemViewController () <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (nonatomic, assign,getter=isHideStatus) BOOL hideStatus;
-@property (weak, nonatomic) IBOutlet UIToolbar *bottomToolBar;
-//加载动画
-@property (nonatomic, weak) CXLoadingAnimation *animationView;
-//本地文章数据
+/** 加载动画 */
+@property (nonatomic, strong) CXLoadingAnimation *animationView;
+/** 本地文章数据 */
 @property (nonatomic, strong) NSDictionary *randomData;
 /** 网页是否加载完成 */
 @property (nonatomic, assign, getter=isLoadComplete) BOOL loadComplete;
+/** 底部条 */
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+/** 收藏按钮 */
+@property (weak, nonatomic) IBOutlet UIButton *collectButton;
+/** 当前用户 */
+@property (nonatomic, strong) MLUser *user;
+/** 诗的标题 */
+@property (nonatomic, copy) NSString *poemTitle;
+/** 诗的作者 */
+@property (nonatomic, copy) NSString *author;
+/** 整首诗 */
+@property (nonatomic, copy) NSString *content;
+/** 诗的ID */
+@property (nonatomic, copy) NSString *itemid;
 @end
 
 @implementation CXPoemViewController
+#pragma mark - 懒加载
+- (MLUser *)user
+{
+    if (!_user) {
+        _user = [MLUser currentUser];
+    }
+    return _user;
+}
+- (CXLoadingAnimation *)animationView
+{
+    if (!_animationView) {
+        _animationView = [[CXLoadingAnimation alloc] init];
+        _animationView.frame = CGRectMake(0, 0, CXScreenW, CXScreenH);
+    }
+    return _animationView;
+}
 #pragma mark - 初始化
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,6 +64,7 @@ static NSString * poemNumberKey = @"poemNumberKey";
     [self loadPoemData];
     self.webView.delegate = self;
     self.hideStatus = [UIApplication sharedApplication].statusBarHidden;
+    [self.view bringSubviewToFront:self.bottomView];
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -47,11 +78,8 @@ static NSString * poemNumberKey = @"poemNumberKey";
  */
 - (void)setupLoadAnimationToView
 {
-    CXLoadingAnimation *animationView = [[CXLoadingAnimation alloc] init];
-    animationView.frame = CGRectMake(0, 0, CXScreenW, CXScreenH);
-    [self.view addSubview:animationView];
-    self.animationView = animationView;
-    [self.view bringSubviewToFront:self.bottomToolBar];
+    [self.view addSubview:self.animationView];
+    [self.view bringSubviewToFront:self.bottomView];
 }
 #pragma mark - 获取数据
 /*
@@ -87,6 +115,8 @@ static NSString * poemNumberKey = @"poemNumberKey";
         //如果本地有数据，并且是同一天，就从本地加载数据
         //拼接HTML
         [self setupHtmlWithDictionary:self.randomData];
+        //判断该文章是否已经被收藏
+        [self isCollectedOrNot];
     } else if (update) {//如果不是同一天，就从网络随机加载
         //网络请求
         [self loadDataWithPageIndex:arc4random_uniform(52) randomNum:arc4random_uniform(20)];
@@ -117,6 +147,8 @@ static NSString * poemNumberKey = @"poemNumberKey";
         //把哪一页哪一篇文章记录下来
         NSString *articleNumber = [NSString stringWithFormat:@"%ld:%ld", pageIndex, randomNum];
         [CXUserDefaults setObject:articleNumber forKey:poemNumberKey];
+        //判断该文章是否已经被收藏
+        [self isCollectedOrNot];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         CXLog(@"%@", error);
         [SVProgressHUD showErrorWithStatus:@"似乎已断开与网络的链接..."];
@@ -137,14 +169,8 @@ static NSString * poemNumberKey = @"poemNumberKey";
 {
     //内容标签
     NSString *mes = random[@"message"];
-    //去掉空格
-    NSString *newMes = [mes stringByReplacingOccurrencesOfString:@"<p>　　" withString:@"<p>"];
-    NSString *mes1 = [NSString stringWithFormat:@"<div id=content>%@</div>", newMes];
     //标题标签
-    //把标题中的《》去掉
-    NSString *newTitle1 = [random[@"subject"] stringByReplacingOccurrencesOfString:@"《" withString:@""];
-    NSString *newTitle2 = [newTitle1 stringByReplacingOccurrencesOfString:@"》" withString:@""];
-    NSString *titleHtml = [NSString stringWithFormat:@"<div id=mainTitle>%@</div>", newTitle2];
+    NSString *titleHtml = [NSString stringWithFormat:@"<div id=mainTitle>%@</div>", random[@"subject"]];
     //作者标签
     NSString *authorHtml = [NSString stringWithFormat:@"<div id=author>%@</div>", random[@"extfield1"]];
     
@@ -161,8 +187,13 @@ static NSString * poemNumberKey = @"poemNumberKey";
     NSString *end = [NSString stringWithFormat:@"<div id=end>（完）</div>"];
     
     //拼接<总内容>标签
-    NSString *html = [NSString stringWithFormat:@"<html><head>%@</head><body><div id=all>%@%@%@%@%@</div></body></html>", cssLink, titleHtml, authorHtml, mes1, end, jsHtml];
+    NSString *html = [NSString stringWithFormat:@"<html><head>%@</head><body><div id=all>%@%@%@%@%@</div></body></html>", cssLink, titleHtml, authorHtml, mes, end, jsHtml];
     [self.webView loadHTMLString:html baseURL:nil];
+    //为了保存诗的相关信息
+    self.itemid = random[@"itemid"];
+    self.poemTitle = random[@"subject"];
+    self.author = random[@"extfield1"];
+    self.content = mes;
 }
 #pragma mark - webView代理方法
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -199,7 +230,7 @@ static NSString * poemNumberKey = @"poemNumberKey";
     [UIView animateWithDuration:0.25 animations:^{
         self.hideStatus = YES;
         [self setNeedsStatusBarAppearanceUpdate];
-        self.bottomToolBar.cx_y = CXScreenH;
+        self.bottomView.cx_y = CXScreenH;
     }];
 }
 /*
@@ -210,7 +241,7 @@ static NSString * poemNumberKey = @"poemNumberKey";
     [UIView animateWithDuration:0.25 animations:^{
         self.hideStatus = NO;
         [self setNeedsStatusBarAppearanceUpdate];
-        self.bottomToolBar.cx_y = CXScreenH - self.bottomToolBar.cx_height;
+        self.bottomView.cx_y = CXScreenH - self.bottomView.cx_height;
     }];
 }
 /*
@@ -222,9 +253,9 @@ static NSString * poemNumberKey = @"poemNumberKey";
         self.hideStatus = !self.hideStatus;
         [self setNeedsStatusBarAppearanceUpdate];//调用该方法后系统会调用prefersStatusBarHidden方法
         if (self.hideStatus) {
-            self.bottomToolBar.cx_y = CXScreenH;
+            self.bottomView.cx_y = CXScreenH;
         } else {
-            self.bottomToolBar.cx_y = CXScreenH - self.bottomToolBar.cx_height;
+            self.bottomView.cx_y = CXScreenH - self.bottomView.cx_height;
         }
     }];
 }
@@ -235,22 +266,79 @@ static NSString * poemNumberKey = @"poemNumberKey";
 {
     return self.hideStatus;
 }
-#pragma mark - 监听事件
-/*
- * 返回
- */
+#pragma mark - 返回
 - (IBAction)back{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-/*
- * 收藏
- */
-- (IBAction)collect:(id)sender {
-    CXLog(@"shoucang");
+#pragma mark - 收藏
+- (IBAction)collect:(UIButton *)button {
+    if (!button.selected) {
+        [self addCollectionWithButton:button];
+    } else {
+        [self cancelCollectionWithButton:button];
+    }
 }
 /*
- * 分享
+ * 添加收藏
  */
+- (void)addCollectionWithButton:(UIButton *)button
+{
+    NSDictionary *articleDic = @{@"author" : self.author,
+                                 @"title" : self.poemTitle,
+                                 @"content" : self.content,
+                                 @"type" : @"诗歌",
+                                 @"itemid" : self.itemid};
+    NSMutableArray *array = self.user[@"collection"];
+    [array addObject:articleDic];
+    [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error) {
+            [SVProgressHUD showErrorWithStatus:@"收藏失败，请稍后再试"];
+        } else {
+            [SVProgressHUD showSuccessWithStatus:@"收藏成功"];
+            button.selected = YES;
+        }
+    }];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [SVProgressHUD dismiss];
+    });
+}
+/*
+ * 取消收藏
+ */
+- (void)cancelCollectionWithButton:(UIButton *)button
+{
+    NSMutableArray *array = self.user[@"collection"];
+    for (NSDictionary *dic in array) {
+        if ([dic[@"itemid"] isEqualToString:self.itemid]) {
+            [array removeObject:dic];
+        }
+    }
+    [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error) {
+            [SVProgressHUD showErrorWithStatus:@"取消失败，请稍后再试"];
+        } else {
+            [SVProgressHUD showSuccessWithStatus:@"已取消收藏"];
+            button.selected = NO;
+        }
+    }];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [SVProgressHUD dismiss];
+    });
+}
+/*
+ * 该文章是否被收藏
+ */
+- (void)isCollectedOrNot
+{
+    NSMutableArray *array = self.user[@"collection"];
+    for (NSDictionary *dic in array) {
+        if ([dic[@"itemid"] isEqualToString:self.itemid]) {
+            //如果有一样的id，说明已经添加过
+            self.collectButton.selected = YES;
+        }
+    }
+}
+#pragma mark - 分享
 - (IBAction)share{
     
 }

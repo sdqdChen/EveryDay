@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-static CGFloat const separatorW = 90;
+static CGFloat const separatorW = 75;
 
 @interface CXMineCell : UITableViewCell
 + (instancetype)cellWithTableView:(UITableView *)tableView;

@@ -8,6 +8,8 @@
 
 #import "CXNavigationController.h"
 #import "UIBarButtonItem+CXBarButtonItem.h"
+#import "CXMyCollectionViewController.h"
+#import "CXHomeViewController.h"
 
 @interface CXNavigationController () <UIGestureRecognizerDelegate>
 
@@ -35,6 +37,9 @@
         //统一设置返回按钮
         viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem backItemWithImage:[UIImage imageNamed:@"returnBtn"] highImage:nil target:self action:@selector(back) title:@""];
     }
+    if ([viewController isKindOfClass:[CXMyCollectionViewController class]]) {
+        viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem backItemWithImage:[UIImage imageNamed:@"returnBtnWhite"] highImage:nil target:self action:@selector(back) title:@""];
+    }
     [super pushViewController:viewController animated:animated];
 }
 - (void)back
@@ -45,5 +50,16 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     return self.viewControllers.count > 1;
+}
+/*
+ * 设置状态栏颜色
+ */
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    if ([self.topViewController isKindOfClass:[CXMyCollectionViewController class]] || [self.topViewController isKindOfClass:[CXHomeViewController class]]) {
+        return UIStatusBarStyleLightContent;
+    } else {
+        return UIStatusBarStyleDefault;
+    }
 }
 @end

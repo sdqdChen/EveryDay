@@ -15,6 +15,7 @@
 #import "CXFileTool.h"
 #import <SVProgressHUD.h>
 #import <MaxIssues/MaxIssues.h>
+#import "CXMyCollectionViewController.h"
 
 
 typedef NS_ENUM(NSInteger, CellRow) {
@@ -88,7 +89,7 @@ typedef NS_ENUM(NSInteger, CellRow) {
 - (void)setupTableView
 {
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.tableView.rowHeight = 60;
+    self.tableView.rowHeight = 50 * KRATE;
     self.tableView.scrollEnabled = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
@@ -125,7 +126,7 @@ typedef NS_ENUM(NSInteger, CellRow) {
 {
     switch (indexPath.row) {
         case kMyCollection:
-            CXLog(@"我的收藏");
+            [self myCollection];
             break;
         case kClearCache:
             [self setupClearCache];
@@ -160,6 +161,14 @@ typedef NS_ENUM(NSInteger, CellRow) {
         [MLUser logOut];
         self.logoutLabel.hidden = YES;
     } cancelHandler:nil viewController:self];
+}
+#pragma mark - 我的收藏
+- (void)myCollection
+{
+    CXMyCollectionViewController *collection = [[CXMyCollectionViewController alloc] init];
+        [self.navigationController pushViewController:collection animated:YES];
+//    UINavigationController *navCtrl = [[UINavigationController alloc] initWithRootViewController:collection];
+//    [self presentViewController:navCtrl animated:YES completion:nil];
 }
 #pragma mark - 清除缓存
 - (void)setupClearCache

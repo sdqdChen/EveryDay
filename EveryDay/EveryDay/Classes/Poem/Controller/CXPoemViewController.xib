@@ -11,7 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CXPoemViewController">
             <connections>
-                <outlet property="bottomToolBar" destination="PdU-G1-R9e" id="fig-8b-UnF"/>
+                <outlet property="bottomView" destination="1lj-Ez-v2k" id="egY-pL-qhK"/>
+                <outlet property="collectButton" destination="gWk-rv-CV1" id="PKi-yC-IB4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="webView" destination="TbF-vw-I4Y" id="bpZ-MC-blj"/>
             </connections>
@@ -21,46 +22,74 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1lj-Ez-v2k">
+                    <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWk-rv-CV1" userLabel="收藏按钮">
+                            <rect key="frame" x="291" y="6" width="32" height="32"/>
+                            <state key="normal" image="collect"/>
+                            <state key="selected" image="collect_s"/>
+                            <connections>
+                                <action selector="collect:" destination="-1" eventType="touchUpInside" id="HK0-m8-yHn"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q5h-a5-GkL" userLabel="分享按钮">
+                            <rect key="frame" x="333" y="6" width="32" height="32"/>
+                            <state key="normal" image="share"/>
+                            <connections>
+                                <action selector="share" destination="-1" eventType="touchUpInside" id="ecq-tg-Nen"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nWN-Ge-aAg" userLabel="返回按钮">
+                            <rect key="frame" x="10" y="6" width="32" height="32"/>
+                            <state key="normal" image="returnBtn"/>
+                            <connections>
+                                <action selector="back" destination="-1" eventType="touchUpInside" id="Cks-co-J27"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tmM-Mq-e43">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="3iD-Nh-6Iu"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="tmM-Mq-e43" firstAttribute="leading" secondItem="1lj-Ez-v2k" secondAttribute="leading" id="EI3-ZQ-ZF2"/>
+                        <constraint firstAttribute="trailing" secondItem="Q5h-a5-GkL" secondAttribute="trailing" constant="10" id="HWd-79-uU5"/>
+                        <constraint firstAttribute="height" constant="44" id="SCt-oJ-MHa"/>
+                        <constraint firstItem="Q5h-a5-GkL" firstAttribute="leading" secondItem="gWk-rv-CV1" secondAttribute="trailing" constant="10" id="cBm-Yh-Kus"/>
+                        <constraint firstAttribute="trailing" secondItem="tmM-Mq-e43" secondAttribute="trailing" id="cFF-ua-5tF"/>
+                        <constraint firstItem="tmM-Mq-e43" firstAttribute="top" secondItem="1lj-Ez-v2k" secondAttribute="top" id="eOu-ZE-Hwb"/>
+                        <constraint firstItem="Q5h-a5-GkL" firstAttribute="centerY" secondItem="1lj-Ez-v2k" secondAttribute="centerY" id="kGb-zS-m6Z"/>
+                        <constraint firstItem="gWk-rv-CV1" firstAttribute="centerY" secondItem="1lj-Ez-v2k" secondAttribute="centerY" id="tkh-YI-E07"/>
+                        <constraint firstItem="nWN-Ge-aAg" firstAttribute="leading" secondItem="1lj-Ez-v2k" secondAttribute="leading" constant="10" id="to7-35-qel"/>
+                        <constraint firstItem="nWN-Ge-aAg" firstAttribute="centerY" secondItem="1lj-Ez-v2k" secondAttribute="centerY" id="wFY-ct-EBI"/>
+                    </constraints>
+                </view>
                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TbF-vw-I4Y">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </webView>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PdU-G1-R9e">
-                    <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                    <items>
-                        <barButtonItem image="returnBtn" id="9gc-NC-omD" userLabel="返回">
-                            <connections>
-                                <action selector="back" destination="-1" id="zSY-Wf-R9r"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="N0C-dO-9wt"/>
-                        <barButtonItem image="collect" id="V3a-wV-vPY" userLabel="收藏">
-                            <connections>
-                                <action selector="collect:" destination="-1" id="zPC-RT-vDD"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem image="share" id="fmc-J1-leu" userLabel="分享">
-                            <connections>
-                                <action selector="share" destination="-1" id="nkN-Qz-WBG"/>
-                            </connections>
-                        </barButtonItem>
-                    </items>
-                </toolbar>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="PdU-G1-R9e" secondAttribute="bottom" id="Iq7-Jl-vut"/>
+                <constraint firstAttribute="bottom" secondItem="1lj-Ez-v2k" secondAttribute="bottom" id="LOc-iq-cR1"/>
                 <constraint firstAttribute="bottom" secondItem="TbF-vw-I4Y" secondAttribute="bottom" id="Oa0-36-U5x"/>
-                <constraint firstAttribute="trailing" secondItem="PdU-G1-R9e" secondAttribute="trailing" id="rfJ-Xp-g9f"/>
-                <constraint firstItem="PdU-G1-R9e" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yi9-mw-5HY"/>
+                <constraint firstItem="1lj-Ez-v2k" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Px9-PC-ee6"/>
+                <constraint firstAttribute="trailing" secondItem="1lj-Ez-v2k" secondAttribute="trailing" id="nbp-3t-2TU"/>
                 <constraint firstItem="TbF-vw-I4Y" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="z27-y4-s2Q"/>
                 <constraint firstItem="TbF-vw-I4Y" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zMk-QB-uft"/>
                 <constraint firstAttribute="trailing" secondItem="TbF-vw-I4Y" secondAttribute="trailing" id="zje-VT-V4F"/>
             </constraints>
+            <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>
     </objects>
     <resources>
         <image name="collect" width="32" height="32"/>
+        <image name="collect_s" width="32" height="32"/>
         <image name="returnBtn" width="32" height="32"/>
         <image name="share" width="32" height="32"/>
     </resources>

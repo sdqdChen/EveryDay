@@ -10,23 +10,54 @@
 #import <AFNetworking.h>
 #import <SVProgressHUD.h>
 #import "CXLoadingAnimation.h"
+#import <MaxLeap/MaxLeap.h>
 
 static NSString * articleItemidKey = @"articleItemidKey";
 static NSString * articleNumberKey = @"articleNumberKey";
 
 @interface CXArticleViewController () <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
+/** 状态栏隐藏状态 */
 @property (nonatomic, assign,getter=isHideStatus) BOOL hideStatus;
-@property (weak, nonatomic) IBOutlet UIToolbar *bottomToolBar;
-//加载动画
-@property (nonatomic, weak) CXLoadingAnimation *animationView;
-//本地文章数据
+/** 加载动画 */
+@property (nonatomic, strong) CXLoadingAnimation *animationView;
+/** 本地文章数据 */
 @property (nonatomic, strong) NSDictionary *randomData;
 /** 网页是否加载完成 */
 @property (nonatomic, assign, getter=isLoadComplete) BOOL loadComplete;
+/** 底部条 */
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+/** 收藏按钮 */
+@property (weak, nonatomic) IBOutlet UIButton *collectButton;
+/** 文章的标题 */
+@property (nonatomic, copy) NSString *articleTitle;
+/** 文章的作者 */
+@property (nonatomic, copy) NSString *author;
+/** 整篇文章 */
+@property (nonatomic, copy) NSString *content;
+/** 文章ID */
+@property (nonatomic, copy) NSString *itemid;
+/** 当前用户 */
+@property (nonatomic, strong) MLUser *user;
 @end
 
 @implementation CXArticleViewController
+#pragma mark - 懒加载
+- (MLUser *)user
+{
+    if (!_user) {
+        _user = [MLUser currentUser];
+    }
+    return _user;
+}
+- (CXLoadingAnimation *)animationView
+{
+    if (!_animationView) {
+        _animationView = [[CXLoadingAnimation alloc] init];
+        _animationView.frame = CGRectMake(0, 0, CXScreenW, CXScreenH);
+    }
+    return _animationView;
+}
 #pragma mark - 初始化
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,6 +66,7 @@ static NSString * articleNumberKey = @"articleNumberKey";
     self.webView.delegate = self;
     //状态栏状态
     self.hideStatus = [UIApplication sharedApplication].statusBarHidden;
+    [self.view bringSubviewToFront:self.bottomView];
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -48,11 +80,8 @@ static NSString * articleNumberKey = @"articleNumberKey";
  */
 - (void)setupLoadAnimationToView
 {
-    CXLoadingAnimation *animationView = [[CXLoadingAnimation alloc] init];
-    animationView.frame = CGRectMake(0, 0, CXScreenW, CXScreenH);
-    [self.view addSubview:animationView];
-    self.animationView = animationView;
-    [self.view bringSubviewToFront:self.bottomToolBar];
+    [self.view addSubview:self.animationView];
+    [self.view bringSubviewToFront:self.bottomView];
 }
 #pragma mark - 获取数据
 /*
@@ -84,10 +113,11 @@ static NSString * articleNumberKey = @"articleNumberKey";
     //先从缓存中取数据
     NSString *filePath = [CachesPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", [CXUserDefaults readObjectForKey:articleItemidKey]]];
     self.randomData = [NSDictionary dictionaryWithContentsOfFile:filePath];
-    if (self.randomData && !update) {
-        //如果本地有数据，并且是同一天，就从本地加载数据
+    if (self.randomData && !update) { //如果本地有数据，并且是同一天，就从本地加载数据
         //拼接HTML
         [self setupHtmlWithDictionary:self.randomData];
+        //判断该文章是否已经被收藏
+        [self isCollectedOrNot];
     } else if (update) { //如果不是同一天，就从网络随机加载
         //网络请求
         [self loadDataWithPageIndex:arc4random_uniform(26) randomNum:arc4random_uniform(20)];
@@ -104,7 +134,6 @@ static NSString * articleNumberKey = @"articleNumberKey";
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSString *urlStr = [NSString stringWithFormat:@"http://www.finndy.com/api.php?pagesize=20&pageindex=%ld&datatype=json&sortby=desc&token=1.0_7iiSVVWVgqpyHHHiSVVU766085fd", (long)pageIndex];
     [manager GET:urlStr parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        //        [responseObject writeToFile:@"/Users/chenxiao/Desktop/article.plist" atomically:YES];
         //文章的数组
         NSArray *datalistArray = responseObject[@"datalist"];
         NSDictionary *random = datalistArray[randomNum];
@@ -118,6 +147,8 @@ static NSString * articleNumberKey = @"articleNumberKey";
         //把哪一页哪一篇文章记录下来
         NSString *articleNumber = [NSString stringWithFormat:@"%ld:%ld", pageIndex, randomNum];
         [CXUserDefaults setObject:articleNumber forKey:articleNumberKey];
+        //该文章是否被收藏
+        [self isCollectedOrNot];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         CXLog(@"%@", error);
         [SVProgressHUD showErrorWithStatus:@"似乎已断开与网络的链接..."];
@@ -137,8 +168,14 @@ static NSString * articleNumberKey = @"articleNumberKey";
  */
 - (void)setupHtmlWithDictionary:(NSDictionary *)random
 {
+    //文章ID
+    self.itemid = random[@"itemid"];
     //文章内容
     NSString *mes1 = [NSString stringWithFormat:@"<div id=content>%@</div>", random[@"message"]];
+    self.content = random[@"message"];
+    //获取作者名
+    NSString *author = [self getAuthorFromContent:random[@"message"]];
+    self.author = author;
     //文章标题
     NSString *subject = random[@"subject"];
     //把标题中的日期去掉
@@ -147,6 +184,7 @@ static NSString * articleNumberKey = @"articleNumberKey";
     for (NSString *str in arr) {
         [newTitle appendString:str];
     }
+    self.articleTitle = newTitle;
     //创建题目标签
     NSString *titleHtml = [NSString stringWithFormat:@"<div id=mainTitle>%@</div>", newTitle];
     //加载cssURL路径
@@ -198,7 +236,7 @@ static NSString * articleNumberKey = @"articleNumberKey";
     [UIView animateWithDuration:0.25 animations:^{
         self.hideStatus = YES;
         [self setNeedsStatusBarAppearanceUpdate];
-        self.bottomToolBar.cx_y = CXScreenH;
+        self.bottomView.cx_y = CXScreenH;
     }];
 }
 /*
@@ -209,7 +247,7 @@ static NSString * articleNumberKey = @"articleNumberKey";
     [UIView animateWithDuration:0.25 animations:^{
         self.hideStatus = NO;
         [self setNeedsStatusBarAppearanceUpdate];
-        self.bottomToolBar.cx_y = CXScreenH - self.bottomToolBar.cx_height;
+        self.bottomView.cx_y = CXScreenH - self.bottomView.cx_height;
     }];
 }
 /*
@@ -221,32 +259,89 @@ static NSString * articleNumberKey = @"articleNumberKey";
         self.hideStatus = !self.hideStatus;
         [self setNeedsStatusBarAppearanceUpdate];//调用该方法后系统会调用prefersStatusBarHidden方法
         if (self.hideStatus) {
-            self.bottomToolBar.cx_y = CXScreenH;
+            self.bottomView.cx_y = CXScreenH;
         } else {
-            self.bottomToolBar.cx_y = CXScreenH - self.bottomToolBar.cx_height;
+            self.bottomView.cx_y = CXScreenH - self.bottomView.cx_height;
         }
     }];
 }
-#pragma mark - 监听事件
-/*
- * 收藏
- */
-- (IBAction)collect:(UIBarButtonItem *)sender {
-    
-}
-
-/*
- * 分享
- */
-- (IBAction)share{
-    
+#pragma mark - 收藏
+- (IBAction)collect:(UIButton *)button {
+    if (!button.selected) {
+        [self addCollectionWithButton:button];
+    } else {
+        [self cancelCollectionWithButton:button];
+    }
 }
 /*
- * 返回
+ * 添加收藏
  */
-- (IBAction)back{
+- (void)addCollectionWithButton:(UIButton *)button
+{
+    NSDictionary *articleDic = @{@"author" : self.author,
+                                 @"title" : self.articleTitle,
+                                 @"content" : self.content,
+                                 @"type" : @"文章",
+                                 @"itemid" : self.itemid};
+    NSMutableArray *array = self.user[@"collection"];
+    [array addObject:articleDic];
+    [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error) {
+            [SVProgressHUD showErrorWithStatus:@"收藏失败，请稍后再试"];
+        } else {
+            [SVProgressHUD showSuccessWithStatus:@"收藏成功"];
+            button.selected = YES;
+        }
+    }];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [SVProgressHUD dismiss];
+    });
+}
+/*
+ * 取消收藏
+ */
+- (void)cancelCollectionWithButton:(UIButton *)button
+{
+    NSMutableArray *array = self.user[@"collection"];
+    for (NSDictionary *dic in array) {
+        if ([dic[@"itemid"] isEqualToString:self.itemid]) {
+            [array removeObject:dic];
+        }
+    }
+    [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error) {
+            [SVProgressHUD showErrorWithStatus:@"取消失败，请稍后再试"];
+        } else {
+            [SVProgressHUD showSuccessWithStatus:@"已取消收藏"];
+            button.selected = NO;
+        }
+    }];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [SVProgressHUD dismiss];
+    });
+}
+/*
+ * 该文章是否被收藏
+ */
+- (void)isCollectedOrNot
+{
+    NSMutableArray *array = self.user[@"collection"];
+    for (NSDictionary *dic in array) {
+        if ([dic[@"itemid"] isEqualToString:self.itemid]) {
+            //如果有一样的id，说明已经添加过
+            self.collectButton.selected = YES;
+        }
+    }
+}
+#pragma mark - 分享
+- (IBAction)share {
+    
+}
+#pragma mark - 退出
+- (IBAction)back {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+#pragma mark - 其他
 /*
  * 设置状态栏
  */
@@ -276,5 +371,13 @@ static NSString * articleNumberKey = @"articleNumberKey";
         }
     }
     return arr;
+}
+/*
+ * 从文章内容中提取作者
+ */
+- (NSString *)getAuthorFromContent:(NSString *)content
+{
+    NSArray *array = [content componentsSeparatedByString:@"</p>"];
+    return [array[0] substringFromIndex:3];
 }
 @end

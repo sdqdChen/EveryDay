@@ -12,6 +12,13 @@
 		650E97DC1E2498A200DF127B /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 650E97DB1E2498A200DF127B /* NSString+HTML.m */; };
 		650E97E31E249B5500DF127B /* CXUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 650E97E21E249B5500DF127B /* CXUserDefaults.m */; };
 		650E97E61E24D4F300DF127B /* CXCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 650E97E51E24D4F300DF127B /* CXCircleView.m */; };
+		651147951E2E511A00405386 /* CXCollectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 651147941E2E511A00405386 /* CXCollectionItem.m */; };
+		651147991E2E5A1100405386 /* CXCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 651147971E2E5A1100405386 /* CXCollectionCell.m */; };
+		6511479A1E2E5A1100405386 /* CXCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 651147981E2E5A1100405386 /* CXCollectionCell.xib */; };
+		6511479E1E2E656000405386 /* CXMyCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6511479C1E2E656000405386 /* CXMyCollectionViewController.m */; };
+		6511479F1E2E656000405386 /* CXMyCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6511479D1E2E656000405386 /* CXMyCollectionViewController.xib */; };
+		651147A31E2F0FC000405386 /* CXCollectWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 651147A11E2F0FC000405386 /* CXCollectWebViewController.m */; };
+		651147A41E2F0FC000405386 /* CXCollectWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 651147A21E2F0FC000405386 /* CXCollectWebViewController.xib */; };
 		652F5BC41E19E0EC00D3783C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 652F5BC31E19E0EC00D3783C /* Assets.xcassets */; };
 		652F5BC71E19E0EC00D3783C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 652F5BC51E19E0EC00D3783C /* LaunchScreen.storyboard */; };
 		652F5BD21E19E0EC00D3783C /* EveryDayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 652F5BD11E19E0EC00D3783C /* EveryDayTests.m */; };
@@ -103,6 +110,17 @@
 		650E97E21E249B5500DF127B /* CXUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXUserDefaults.m; sourceTree = "<group>"; };
 		650E97E41E24D4F300DF127B /* CXCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXCircleView.h; sourceTree = "<group>"; };
 		650E97E51E24D4F300DF127B /* CXCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXCircleView.m; sourceTree = "<group>"; };
+		651147931E2E511A00405386 /* CXCollectionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXCollectionItem.h; sourceTree = "<group>"; };
+		651147941E2E511A00405386 /* CXCollectionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXCollectionItem.m; sourceTree = "<group>"; };
+		651147961E2E5A1100405386 /* CXCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXCollectionCell.h; sourceTree = "<group>"; };
+		651147971E2E5A1100405386 /* CXCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXCollectionCell.m; sourceTree = "<group>"; };
+		651147981E2E5A1100405386 /* CXCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CXCollectionCell.xib; sourceTree = "<group>"; };
+		6511479B1E2E656000405386 /* CXMyCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMyCollectionViewController.h; sourceTree = "<group>"; };
+		6511479C1E2E656000405386 /* CXMyCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMyCollectionViewController.m; sourceTree = "<group>"; };
+		6511479D1E2E656000405386 /* CXMyCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CXMyCollectionViewController.xib; sourceTree = "<group>"; };
+		651147A01E2F0FC000405386 /* CXCollectWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXCollectWebViewController.h; sourceTree = "<group>"; };
+		651147A11E2F0FC000405386 /* CXCollectWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXCollectWebViewController.m; sourceTree = "<group>"; };
+		651147A21E2F0FC000405386 /* CXCollectWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CXCollectWebViewController.xib; sourceTree = "<group>"; };
 		652F5BB41E19E0EC00D3783C /* EveryDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EveryDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		652F5BC31E19E0EC00D3783C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		652F5BC61E19E0EC00D3783C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -327,6 +345,7 @@
 				65C351131E1B42E500A84399 /* Picture */,
 				65C3510F1E1B42DC00A84399 /* Mine */,
 				65DBFFA01E28B233005D4364 /* LoginRegister */,
+				65C2A7CB1E2DF80F0072E973 /* MyCollection */,
 				652F5BEB1E19E36B00D3783C /* Other */,
 			);
 			path = Classes;
@@ -429,6 +448,48 @@
 				65AFD28D1E2C7B6A0035B40A /* MLIssuesThemes.bundle */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		65C2A7CB1E2DF80F0072E973 /* MyCollection */ = {
+			isa = PBXGroup;
+			children = (
+				65C2A7CC1E2DF80F0072E973 /* Controller */,
+				65C2A7CD1E2DF80F0072E973 /* Model */,
+				65C2A7CE1E2DF80F0072E973 /* View */,
+			);
+			path = MyCollection;
+			sourceTree = "<group>";
+		};
+		65C2A7CC1E2DF80F0072E973 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6511479B1E2E656000405386 /* CXMyCollectionViewController.h */,
+				6511479C1E2E656000405386 /* CXMyCollectionViewController.m */,
+				6511479D1E2E656000405386 /* CXMyCollectionViewController.xib */,
+				651147A01E2F0FC000405386 /* CXCollectWebViewController.h */,
+				651147A11E2F0FC000405386 /* CXCollectWebViewController.m */,
+				651147A21E2F0FC000405386 /* CXCollectWebViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		65C2A7CD1E2DF80F0072E973 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				651147931E2E511A00405386 /* CXCollectionItem.h */,
+				651147941E2E511A00405386 /* CXCollectionItem.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		65C2A7CE1E2DF80F0072E973 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				651147961E2E5A1100405386 /* CXCollectionCell.h */,
+				651147971E2E5A1100405386 /* CXCollectionCell.m */,
+				651147981E2E5A1100405386 /* CXCollectionCell.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		65C3509A1E19E44200A84399 /* Home */ = {
@@ -850,6 +911,7 @@
 			files = (
 				653CF2251E1E38B00063CAD2 /* CXPictureViewController.xib in Resources */,
 				65C351011E1A866E00A84399 /* CXBottomView.xib in Resources */,
+				6511479F1E2E656000405386 /* CXMyCollectionViewController.xib in Resources */,
 				65DBFFB51E28C4EB005D4364 /* CXVerificationCodeView.xib in Resources */,
 				65C350A71E19E5F600A84399 /* CXHomeViewController.xib in Resources */,
 				65C351691E1B872B00A84399 /* article.css in Resources */,
@@ -859,11 +921,13 @@
 				653CF21B1E1DE11C0063CAD2 /* CXPoemViewController.xib in Resources */,
 				65AFD2901E2C7B6A0035B40A /* MLIssuesLocalizable.bundle in Resources */,
 				65AFD28F1E2C7B6A0035B40A /* MLIssuesImages.bundle in Resources */,
+				6511479A1E2E5A1100405386 /* CXCollectionCell.xib in Resources */,
 				653CF2201E1DE42C0063CAD2 /* poem.js in Resources */,
 				65C3516A1E1B872B00A84399 /* article.js in Resources */,
 				652F5BC71E19E0EC00D3783C /* LaunchScreen.storyboard in Resources */,
 				65DBFFA81E28BB9F005D4364 /* CXLoginRegisterViewController.xib in Resources */,
 				65FC59E91E2137D500B7F3D0 /* CXMusicViewController.xib in Resources */,
+				651147A41E2F0FC000405386 /* CXCollectWebViewController.xib in Resources */,
 				652F5BC41E19E0EC00D3783C /* Assets.xcassets in Resources */,
 				653CF21F1E1DE42C0063CAD2 /* poem.css in Resources */,
 			);
@@ -949,7 +1013,10 @@
 				65DBFF9C1E2869F6005D4364 /* CXLoginButton.m in Sources */,
 				65DBFF991E2869D5005D4364 /* CXHeadLoginView.m in Sources */,
 				65DB00361E2B10DE005D4364 /* UIImage+CXImage.m in Sources */,
+				651147A31E2F0FC000405386 /* CXCollectWebViewController.m in Sources */,
+				651147991E2E5A1100405386 /* CXCollectionCell.m in Sources */,
 				652F5BEF1E19E36B00D3783C /* AppDelegate.m in Sources */,
+				6511479E1E2E656000405386 /* CXMyCollectionViewController.m in Sources */,
 				65C351B21E1C040200A84399 /* CXLoadingAnimation.m in Sources */,
 				65DBFFA71E28BB9F005D4364 /* CXLoginRegisterViewController.m in Sources */,
 				650E97DC1E2498A200DF127B /* NSString+HTML.m in Sources */,
@@ -969,6 +1036,7 @@
 				653CF2121E1DDF220063CAD2 /* CXConst.m in Sources */,
 				653CF21A1E1DE11C0063CAD2 /* CXPoemViewController.m in Sources */,
 				65DBFF961E27DD96005D4364 /* CXMineViewController.m in Sources */,
+				651147951E2E511A00405386 /* CXCollectionItem.m in Sources */,
 				65C351001E1A866E00A84399 /* CXBottomView.m in Sources */,
 				65DBFFB01E28C4AD005D4364 /* CXNumberTextField.m in Sources */,
 				653CF20F1E1DD9A90063CAD2 /* UIBarButtonItem+CXBarButtonItem.m in Sources */,
