@@ -11,7 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CXArticleViewController">
             <connections>
-                <outlet property="bottomToolBar" destination="BGf-zv-tGd" id="UbT-PK-zfK"/>
+                <outlet property="bottomView" destination="PfH-fO-puy" id="6Rx-VL-gRf"/>
+                <outlet property="collectButton" destination="Izp-DD-mY4" id="U3s-sh-woC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="webView" destination="oh5-IM-LFh" id="lNE-bc-9nP"/>
             </connections>
@@ -21,47 +22,74 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PfH-fO-puy">
+                    <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Izp-DD-mY4" userLabel="收藏按钮">
+                            <rect key="frame" x="291" y="6" width="32" height="32"/>
+                            <state key="normal" image="collect"/>
+                            <state key="selected" image="collect_s"/>
+                            <connections>
+                                <action selector="collect:" destination="-1" eventType="touchUpInside" id="Z7r-9B-GPa"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ChN-jT-x6B" userLabel="分享按钮">
+                            <rect key="frame" x="333" y="6" width="32" height="32"/>
+                            <state key="normal" image="share"/>
+                            <connections>
+                                <action selector="share" destination="-1" eventType="touchUpInside" id="dCX-7L-xCe"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlQ-V5-fFn" userLabel="返回按钮">
+                            <rect key="frame" x="10" y="6" width="32" height="32"/>
+                            <state key="normal" image="returnBtn"/>
+                            <connections>
+                                <action selector="back" destination="-1" eventType="touchUpInside" id="vy6-mn-hIY"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNh-Nh-UGZ">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="VOZ-oG-PKS"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="PlQ-V5-fFn" firstAttribute="leading" secondItem="PfH-fO-puy" secondAttribute="leading" constant="10" id="6P6-gd-4fm"/>
+                        <constraint firstItem="PlQ-V5-fFn" firstAttribute="centerY" secondItem="PfH-fO-puy" secondAttribute="centerY" id="8BU-Jk-i6w"/>
+                        <constraint firstItem="Izp-DD-mY4" firstAttribute="centerY" secondItem="PfH-fO-puy" secondAttribute="centerY" id="Svh-oH-9J7"/>
+                        <constraint firstItem="ChN-jT-x6B" firstAttribute="centerY" secondItem="PfH-fO-puy" secondAttribute="centerY" id="a6V-N5-mC0"/>
+                        <constraint firstAttribute="trailing" secondItem="ChN-jT-x6B" secondAttribute="trailing" constant="10" id="bbb-eg-YFz"/>
+                        <constraint firstAttribute="height" constant="44" id="dR1-og-Als"/>
+                        <constraint firstItem="pNh-Nh-UGZ" firstAttribute="leading" secondItem="PfH-fO-puy" secondAttribute="leading" id="ePv-s2-mCN"/>
+                        <constraint firstAttribute="trailing" secondItem="pNh-Nh-UGZ" secondAttribute="trailing" id="pce-yL-kMQ"/>
+                        <constraint firstItem="pNh-Nh-UGZ" firstAttribute="top" secondItem="PfH-fO-puy" secondAttribute="top" id="uVi-cu-cdJ"/>
+                        <constraint firstItem="ChN-jT-x6B" firstAttribute="leading" secondItem="Izp-DD-mY4" secondAttribute="trailing" constant="10" id="wus-Dv-PLn"/>
+                    </constraints>
+                </view>
                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oh5-IM-LFh">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </webView>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BGf-zv-tGd">
-                    <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                    <items>
-                        <barButtonItem image="returnBtn" id="kx6-No-2wh" userLabel="返回">
-                            <connections>
-                                <action selector="back" destination="-1" id="tMQ-Io-Dvu"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="QbS-4Q-5pl"/>
-                        <barButtonItem image="collect" id="pC3-zn-PaJ" userLabel="收藏">
-                            <connections>
-                                <action selector="collect:" destination="-1" id="Xkl-zf-eWS"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem image="share" id="VYe-AZ-Uig" userLabel="分享">
-                            <connections>
-                                <action selector="share" destination="-1" id="Qci-Nx-muu"/>
-                            </connections>
-                        </barButtonItem>
-                    </items>
-                    <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </toolbar>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="BGf-zv-tGd" secondAttribute="trailing" id="8Tu-k7-0nR"/>
+                <constraint firstItem="PfH-fO-puy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="1sD-lH-KUT"/>
                 <constraint firstAttribute="trailing" secondItem="oh5-IM-LFh" secondAttribute="trailing" id="8wX-W3-caJ"/>
-                <constraint firstItem="BGf-zv-tGd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Oxh-Bd-DHF"/>
+                <constraint firstAttribute="trailing" secondItem="PfH-fO-puy" secondAttribute="trailing" id="W4R-vl-0gd"/>
                 <constraint firstItem="oh5-IM-LFh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="W7x-v2-jXY"/>
-                <constraint firstAttribute="bottom" secondItem="BGf-zv-tGd" secondAttribute="bottom" id="feC-Br-9tz"/>
+                <constraint firstAttribute="bottom" secondItem="PfH-fO-puy" secondAttribute="bottom" id="nom-V3-6b3"/>
                 <constraint firstItem="oh5-IM-LFh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="qek-id-Jcq"/>
                 <constraint firstAttribute="bottom" secondItem="oh5-IM-LFh" secondAttribute="bottom" id="rDa-lo-WyZ"/>
             </constraints>
+            <point key="canvasLocation" x="33.5" y="54.5"/>
         </view>
     </objects>
     <resources>
         <image name="collect" width="32" height="32"/>
+        <image name="collect_s" width="32" height="32"/>
         <image name="returnBtn" width="32" height="32"/>
         <image name="share" width="32" height="32"/>
     </resources>

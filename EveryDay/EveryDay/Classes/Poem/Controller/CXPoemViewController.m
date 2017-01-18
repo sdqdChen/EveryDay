@@ -308,11 +308,12 @@ static NSString * poemNumberKey = @"poemNumberKey";
 - (void)cancelCollectionWithButton:(UIButton *)button
 {
     NSMutableArray *array = self.user[@"collection"];
-    for (NSDictionary *dic in array) {
+    [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSDictionary *dic = (NSDictionary *)obj;
         if ([dic[@"itemid"] isEqualToString:self.itemid]) {
             [array removeObject:dic];
         }
-    }
+    }];
     [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error) {
             [SVProgressHUD showErrorWithStatus:@"取消失败，请稍后再试"];
