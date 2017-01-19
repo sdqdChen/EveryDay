@@ -8,17 +8,30 @@
 
 #import "CXCollectWebViewController.h"
 #import "CXCollectionItem.h"
+#import "CXLoadingAnimation.h"
 
 @interface CXCollectWebViewController () <UIWebViewDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 /** 状态栏隐藏状态 */
 @property (nonatomic, assign,getter=isHideStatus) BOOL hideStatus;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
+/** 加载动画 */
+@property (nonatomic, strong) CXLoadingAnimation *animationView;
+/** 网页是否加载完成 */
+@property (nonatomic, assign, getter=isLoadComplete) BOOL loadComplete;
 
 @end
 
 @implementation CXCollectWebViewController
 
+- (CXLoadingAnimation *)animationView
+{
+    if (!_animationView) {
+        _animationView = [[CXLoadingAnimation alloc] init];
+        _animationView.frame = CGRectMake(0, 0, CXScreenW, CXScreenH);
+    }
+    return _animationView;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.webView.delegate = self;
@@ -31,6 +44,18 @@
     } else {
         [self setupPoemHtml];
     }
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (self.isLoadComplete == NO) {
+        [self setupLoadAnimationToView];
+    }
+}
+- (void)setupLoadAnimationToView
+{
+    [self.view addSubview:self.animationView];
+    [self.view bringSubviewToFront:self.bottomView];
 }
 - (void)viewDidLayoutSubviews
 {
@@ -97,6 +122,12 @@
         SEL selector = NSSelectorFromString(method);
         [self performSelector:selector];
     }
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    self.loadComplete = YES;
+    //移除加载动画
+    [self.animationView removeFromSuperview];
 }
 #pragma mark - 处理webView的滑动
 /*

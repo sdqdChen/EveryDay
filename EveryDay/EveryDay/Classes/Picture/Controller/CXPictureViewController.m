@@ -12,8 +12,9 @@
 #import <UIImageView+WebCache.h>
 #import "CXLoadingAnimation.h"
 #import <SVProgressHUD.h>
+#import <Photos/Photos.h>
 
-static NSString * const categoryUrl = @"http://open.lovebizhi.com/baidu_rom.php";
+static NSString * const imageUrl = @"http://open.lovebizhi.com/baidu_rom.php";
 static NSString * const imageUrlKey = @"imageUrlKey";
 
 @interface CXPictureViewController ()
@@ -23,7 +24,7 @@ static NSString * const imageUrlKey = @"imageUrlKey";
 @property (nonatomic, assign,getter=isHideStatus) BOOL hideStatus;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 //加载动画
-@property (nonatomic, weak) CXLoadingAnimation *animationView;
+@property (nonatomic, strong) CXLoadingAnimation *animationView;
 @end
 
 @implementation CXPictureViewController
@@ -34,6 +35,15 @@ static NSString * const imageUrlKey = @"imageUrlKey";
         _manager = [AFHTTPSessionManager manager];
     }
     return _manager;
+}
+
+- (CXLoadingAnimation *)animationView
+{
+    if (!_animationView) {
+        _animationView = [[CXLoadingAnimation alloc] init];
+        _animationView.frame = CGRectMake(0, 0, CXScreenW, CXScreenH);
+    }
+    return _animationView;
 }
 #pragma mark - 初始化设置
 - (void)viewDidLoad {
@@ -51,57 +61,41 @@ static NSString * const imageUrlKey = @"imageUrlKey";
     }
 }
 /*
- * 设置状态栏为白色
+ * 隐藏状态栏
  */
-- (UIStatusBarStyle)preferredStatusBarStyle
+- (BOOL)prefersStatusBarHidden
 {
-    return UIStatusBarStyleLightContent;
+    return YES;
 }
 /*
  * 设置加载动画
  */
 - (void)setupLoadAnimationToView
 {
-    CXLoadingAnimation *animationView = [[CXLoadingAnimation alloc] init];
-    animationView.frame = CGRectMake(0, 0, CXScreenW, CXScreenH);
-    [self.view addSubview:animationView];
-    self.animationView = animationView;
+    [self.view addSubview:self.animationView];
     [self.view bringSubviewToFront:self.backButton];
 }
 #pragma mark - 获取数据
 - (void)loadPictureCategory
 {
     //先从本地加载
-//    UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:[CXUserDefaults readObjectForKey:imageUrlKey]];
-//    if (image) {
-//        self.imageView.image = image;
-//        //移除加载动画
-//        [self.animationView removeFromSuperview];
-//    }
+    UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:[CXUserDefaults readObjectForKey:imageUrlKey]];
+    if (image) {
+        self.imageView.image = image;
+        //移除加载动画
+        [self.animationView removeFromSuperview];
+    }
     //网络请求
-    [self.manager GET:categoryUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSArray *category = responseObject[@"category"];
-        NSInteger randomIndex = arc4random() % category.count;
-        NSDictionary *item = category[randomIndex];
-        [self loadPictureWith:item[@"url"]];
+    [self.manager GET:imageUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSArray *everyday = responseObject[@"everyday"];
+        NSString *url = everyday[0][@"image"];
+        NSString *newUrl = [url stringByReplacingOccurrencesOfString:@"256,256" withString:[NSString stringWithFormat:@"%.f,%.f", CXScreenW, CXScreenH]];
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:newUrl]];
+        [CXUserDefaults setObject:newUrl forKey:imageUrlKey];
+        [self removeAnimation];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         CXLog(@"%@", error);
         [SVProgressHUD showErrorWithStatus:@"似乎已断开与网络的链接..."];
-        //移除加载动画
-        [self removeAnimation];
-    }];
-}
-- (void)loadPictureWith:(NSString *)url
-{
-    [self.manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSArray *data = responseObject[@"data"];
-        NSInteger randomIndex = arc4random() % data.count;
-        NSDictionary *item = data[randomIndex];
-        [self.imageView sd_setImageWithURL:[NSURL URLWithString:item[@"big"]]];
-        //移除加载动画
-        [self removeAnimation];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", error);
         //移除加载动画
         [self removeAnimation];
     }];
@@ -117,35 +111,38 @@ static NSString * const imageUrlKey = @"imageUrlKey";
     }
 }
 #pragma mark - 监听事件
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    [UIView animateWithDuration:0.25 animations:^{
-        if (!self.hideStatus) {
-            self.backButton.alpha = 0;
-            self.saveButton.alpha = 0;
-        } else {
-            self.backButton.alpha = 1;
-            self.saveButton.alpha = 1;
-        }
-        self.hideStatus = !self.hideStatus;
-        [self setNeedsStatusBarAppearanceUpdate];//调用该方法后系统会调用prefersStatusBarHidden方法
-    }];
-}
-/*
- * 设置状态栏
- */
-- (BOOL)prefersStatusBarHidden
-{
-    return self.hideStatus;
-}
 /*
  * 返回
  */
-- (IBAction)back {
+- (IBAction)back
+{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-- (IBAction)save {
-    
+#pragma mark - 保存图片
+- (IBAction)save
+{
+    UIImageWriteToSavedPhotosAlbum(self.imageView.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+}
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+     if (error) {
+         if (error.code == -3310) {
+             [self remindUserAuthWithTitle:@"相册访问受限" message:@"请前往设置-隐私-照片开启相册访问权限"];
+         } else {
+             [SVProgressHUD showErrorWithStatus:@"保存失败！"];
+         }
+     } else {
+         [SVProgressHUD showSuccessWithStatus:@"保存成功！"];
+     }
+}
+/*
+ * 提醒用户授权
+ */
+- (void)remindUserAuthWithTitle:(NSString *)title message:(NSString *)message
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:sure];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 @end

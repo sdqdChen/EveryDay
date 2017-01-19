@@ -8,7 +8,6 @@
 
 #import "CXNavigationController.h"
 #import "UIBarButtonItem+CXBarButtonItem.h"
-#import "CXMyCollectionViewController.h"
 #import "CXHomeViewController.h"
 
 @interface CXNavigationController () <UIGestureRecognizerDelegate>
@@ -26,19 +25,13 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self.interactivePopGestureRecognizer.delegate action:@selector(handleNavigationTransition:)];
-    [self.view addGestureRecognizer:pan];
-    pan.delegate = self;
-    self.interactivePopGestureRecognizer.enabled = YES;
+    self.interactivePopGestureRecognizer.delegate = self;
 }
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     if (self.viewControllers.count > 0) {
         //统一设置返回按钮
         viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem backItemWithImage:[UIImage imageNamed:@"returnBtn"] highImage:nil target:self action:@selector(back) title:@""];
-    }
-    if ([viewController isKindOfClass:[CXMyCollectionViewController class]]) {
-        viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem backItemWithImage:[UIImage imageNamed:@"returnBtnWhite"] highImage:nil target:self action:@selector(back) title:@""];
     }
     [super pushViewController:viewController animated:animated];
 }
@@ -56,7 +49,7 @@
  */
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    if ([self.topViewController isKindOfClass:[CXMyCollectionViewController class]] || [self.topViewController isKindOfClass:[CXHomeViewController class]]) {
+    if ([self.topViewController isKindOfClass:[CXHomeViewController class]]) {
         return UIStatusBarStyleLightContent;
     } else {
         return UIStatusBarStyleDefault;

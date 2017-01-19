@@ -18,8 +18,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LTc-0a-Tzd" userLabel="分割线">
+                        <rect key="frame" x="15" y="68" width="290" height="1"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="VzZ-Si-cJD"/>
+                        </constraints>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyD-3T-qil" userLabel="标题Label">
-                        <rect key="frame" x="10" y="5" width="310" height="24"/>
+                        <rect key="frame" x="15" y="10" width="305" height="24"/>
                         <attributedString key="attributedText">
                             <fragment content="Label">
                                 <attributes>
@@ -32,9 +39,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jbu-Bn-T4b" userLabel="作者Label">
-                        <rect key="frame" x="10" y="44" width="100" height="20"/>
+                        <rect key="frame" x="15" y="39" width="200" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="xRw-vg-QAF"/>
+                            <constraint firstAttribute="width" constant="200" id="xRw-vg-QAF"/>
                         </constraints>
                         <attributedString key="attributedText">
                             <fragment content="Label">
@@ -46,7 +53,7 @@
                         </attributedString>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZ4-eI-jB3" userLabel="类型Label">
-                        <rect key="frame" x="274" y="25" width="36" height="20"/>
+                        <rect key="frame" x="269" y="25" width="36" height="20"/>
                         <attributedString key="attributedText">
                             <fragment content="Label">
                                 <attributes>
@@ -56,24 +63,17 @@
                             </fragment>
                         </attributedString>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sIc-4p-U2Q">
-                        <rect key="frame" x="10" y="68" width="300" height="1"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="1" id="cvO-l9-ZMW"/>
-                        </constraints>
-                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="EZ4-eI-jB3" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="0Pv-Sj-XHq"/>
-                    <constraint firstAttribute="trailing" secondItem="sIc-4p-U2Q" secondAttribute="trailing" constant="10" id="2Sb-bs-yKG"/>
-                    <constraint firstAttribute="bottom" secondItem="jbu-Bn-T4b" secondAttribute="bottom" constant="5" id="MBz-UK-j03"/>
-                    <constraint firstItem="cyD-3T-qil" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="bJs-D9-jHX"/>
+                    <constraint firstAttribute="bottom" secondItem="jbu-Bn-T4b" secondAttribute="bottom" constant="10" id="MBz-UK-j03"/>
+                    <constraint firstAttribute="trailing" secondItem="LTc-0a-Tzd" secondAttribute="trailing" constant="15" id="NVR-Nm-iwZ"/>
+                    <constraint firstItem="cyD-3T-qil" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="bJs-D9-jHX"/>
                     <constraint firstAttribute="trailing" secondItem="cyD-3T-qil" secondAttribute="trailing" id="fGi-2I-SAZ"/>
-                    <constraint firstItem="sIc-4p-U2Q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="jIV-dD-TcT"/>
-                    <constraint firstAttribute="bottom" secondItem="sIc-4p-U2Q" secondAttribute="bottom" id="lcE-7F-NxB"/>
-                    <constraint firstItem="cyD-3T-qil" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="mzq-f7-F21"/>
-                    <constraint firstAttribute="trailing" secondItem="EZ4-eI-jB3" secondAttribute="trailing" constant="10" id="rSn-Pv-meH"/>
+                    <constraint firstAttribute="bottom" secondItem="LTc-0a-Tzd" secondAttribute="bottom" id="ijB-kR-VsK"/>
+                    <constraint firstItem="cyD-3T-qil" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="mzq-f7-F21"/>
+                    <constraint firstAttribute="trailing" secondItem="EZ4-eI-jB3" secondAttribute="trailing" constant="15" id="rSn-Pv-meH"/>
+                    <constraint firstItem="LTc-0a-Tzd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="y3k-AX-vjC"/>
                     <constraint firstItem="jbu-Bn-T4b" firstAttribute="leading" secondItem="cyD-3T-qil" secondAttribute="leading" id="ydj-KJ-GkK"/>
                 </constraints>
             </tableViewCellContentView>

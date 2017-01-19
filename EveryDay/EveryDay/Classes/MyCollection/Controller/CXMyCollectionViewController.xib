@@ -23,12 +23,19 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OjV-qy-w1e" userLabel="导航栏">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ahJ-f5-QSX" userLabel="分割线">
+                            <rect key="frame" x="0.0" y="63" width="375" height="1"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="9Js-LV-WBs"/>
+                            </constraints>
+                        </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zP-3J-5Wf">
                             <rect key="frame" x="151" y="28" width="73" height="26"/>
                             <attributedString key="attributedText">
                                 <fragment content="我的收藏">
                                     <attributes>
-                                        <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <font key="NSFont" size="18" name="PingFangSC-Regular"/>
                                     </attributes>
                                 </fragment>
@@ -36,19 +43,22 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="ahJ-f5-QSX" firstAttribute="leading" secondItem="OjV-qy-w1e" secondAttribute="leading" id="JD1-6l-4sF"/>
                         <constraint firstAttribute="height" constant="64" id="krI-yZ-ZQH"/>
                         <constraint firstAttribute="bottom" secondItem="7zP-3J-5Wf" secondAttribute="bottom" constant="10" id="ofC-Ee-nkb"/>
+                        <constraint firstAttribute="trailing" secondItem="ahJ-f5-QSX" secondAttribute="trailing" id="rZv-T1-TdX"/>
                         <constraint firstItem="7zP-3J-5Wf" firstAttribute="centerX" secondItem="OjV-qy-w1e" secondAttribute="centerX" id="t5z-Qw-zA2"/>
+                        <constraint firstAttribute="bottom" secondItem="ahJ-f5-QSX" secondAttribute="bottom" id="vom-o1-bSh"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wj4-i7-r27">
                     <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="4lj-ic-wAT"/>
-                        <outlet property="delegate" destination="-1" id="U7j-ph-Bbl"/>
+                        <outlet property="dataSource" destination="-1" id="nLA-t5-2fp"/>
+                        <outlet property="delegate" destination="-1" id="Qg9-Pd-BJP"/>
                     </connections>
                 </tableView>
             </subviews>
@@ -62,6 +72,7 @@
                 <constraint firstAttribute="trailing" secondItem="wj4-i7-r27" secondAttribute="trailing" id="wKg-MK-VpY"/>
                 <constraint firstAttribute="bottom" secondItem="wj4-i7-r27" secondAttribute="bottom" id="yUh-iG-uUY"/>
             </constraints>
+            <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>
     </objects>
 </document>
