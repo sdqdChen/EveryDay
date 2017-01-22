@@ -7,11 +7,10 @@
 //
 
 #import "AppDelegate.h"
-#import "CXHomeViewController.h"
 #import "CXUserDefaults.h"
-#import "CXNavigationController.h"
 #import <MaxLeap/MaxLeap.h>
 #import <UMSocialCore/UMSocialCore.h>
+#import "CXLaunchViewController.h"
 
 @interface AppDelegate ()
 
@@ -32,8 +31,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
-    CXNavigationController *nav = [[CXNavigationController alloc] initWithRootViewController:[[CXHomeViewController alloc] init]];
-    self.window.rootViewController = nav;
+    self.window.rootViewController = [[CXLaunchViewController alloc] init];
     [self.window makeKeyAndVisible];
 }
 - (void)setupMaxLeap

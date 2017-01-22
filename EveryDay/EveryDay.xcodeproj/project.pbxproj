@@ -53,6 +53,13 @@
 		657526061E34A6A00077CAE0 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 657526051E34A6A00077CAE0 /* libc++.tbd */; };
 		6575260A1E34A9920077CAE0 /* CXUMSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 657526081E34A9920077CAE0 /* CXUMSocial.m */; };
 		6575260B1E34A9920077CAE0 /* umsocial_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 657526091E34A9920077CAE0 /* umsocial_default.png */; };
+		657526121E34FB620077CAE0 /* LaunchImage320x480@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6575260D1E34FB620077CAE0 /* LaunchImage320x480@2x.png */; };
+		657526131E34FB620077CAE0 /* LaunchImage320x568@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6575260E1E34FB620077CAE0 /* LaunchImage320x568@2x.png */; };
+		657526141E34FB620077CAE0 /* LaunchImage375x667@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6575260F1E34FB620077CAE0 /* LaunchImage375x667@1x.png */; };
+		657526151E34FB620077CAE0 /* LaunchImage375x667@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 657526101E34FB620077CAE0 /* LaunchImage375x667@2x.png */; };
+		657526161E34FB620077CAE0 /* LaunchImage414x736@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 657526111E34FB620077CAE0 /* LaunchImage414x736@3x.png */; };
+		6575261E1E34FC240077CAE0 /* CXLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6575261C1E34FC240077CAE0 /* CXLaunchViewController.m */; };
+		6575261F1E34FC240077CAE0 /* CXLaunchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6575261D1E34FC240077CAE0 /* CXLaunchViewController.xib */; };
 		65AFD28E1E2C7B6A0035B40A /* MaxIssues.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AFD2891E2C7B6A0035B40A /* MaxIssues.framework */; };
 		65AFD28F1E2C7B6A0035B40A /* MLIssuesImages.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 65AFD28B1E2C7B6A0035B40A /* MLIssuesImages.bundle */; };
 		65AFD2901E2C7B6A0035B40A /* MLIssuesLocalizable.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 65AFD28C1E2C7B6A0035B40A /* MLIssuesLocalizable.bundle */; };
@@ -205,6 +212,14 @@
 		657526071E34A9920077CAE0 /* CXUMSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXUMSocial.h; sourceTree = "<group>"; };
 		657526081E34A9920077CAE0 /* CXUMSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXUMSocial.m; sourceTree = "<group>"; };
 		657526091E34A9920077CAE0 /* umsocial_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = umsocial_default.png; sourceTree = "<group>"; };
+		6575260D1E34FB620077CAE0 /* LaunchImage320x480@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage320x480@2x.png"; sourceTree = "<group>"; };
+		6575260E1E34FB620077CAE0 /* LaunchImage320x568@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage320x568@2x.png"; sourceTree = "<group>"; };
+		6575260F1E34FB620077CAE0 /* LaunchImage375x667@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage375x667@1x.png"; sourceTree = "<group>"; };
+		657526101E34FB620077CAE0 /* LaunchImage375x667@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage375x667@2x.png"; sourceTree = "<group>"; };
+		657526111E34FB620077CAE0 /* LaunchImage414x736@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage414x736@3x.png"; sourceTree = "<group>"; };
+		6575261B1E34FC240077CAE0 /* CXLaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXLaunchViewController.h; sourceTree = "<group>"; };
+		6575261C1E34FC240077CAE0 /* CXLaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXLaunchViewController.m; sourceTree = "<group>"; };
+		6575261D1E34FC240077CAE0 /* CXLaunchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CXLaunchViewController.xib; sourceTree = "<group>"; };
 		65AFD2891E2C7B6A0035B40A /* MaxIssues.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MaxIssues.framework; sourceTree = "<group>"; };
 		65AFD28B1E2C7B6A0035B40A /* MLIssuesImages.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MLIssuesImages.bundle; sourceTree = "<group>"; };
 		65AFD28C1E2C7B6A0035B40A /* MLIssuesLocalizable.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MLIssuesLocalizable.bundle; sourceTree = "<group>"; };
@@ -375,6 +390,7 @@
 		652F5BB71E19E0EC00D3783C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6575260C1E34FB620077CAE0 /* 启动图片 */,
 				652F5BC31E19E0EC00D3783C /* Assets.xcassets */,
 				652F5BC51E19E0EC00D3783C /* LaunchScreen.storyboard */,
 				652F5BC81E19E0EC00D3783C /* Info.plist */,
@@ -403,6 +419,7 @@
 		652F5BEA1E19E36B00D3783C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				657526171E34FBF00077CAE0 /* Launch */,
 				65DB00231E29B18E005D4364 /* Third */,
 				65C350AE1E1A451B00A84399 /* Tool */,
 				653CF2081E1DD4C80063CAD2 /* Main */,
@@ -583,6 +600,52 @@
 				657525F41E34A6570077CAE0 /* UShareUI.framework */,
 			);
 			path = UMSocialUI;
+			sourceTree = "<group>";
+		};
+		6575260C1E34FB620077CAE0 /* 启动图片 */ = {
+			isa = PBXGroup;
+			children = (
+				6575260D1E34FB620077CAE0 /* LaunchImage320x480@2x.png */,
+				6575260E1E34FB620077CAE0 /* LaunchImage320x568@2x.png */,
+				6575260F1E34FB620077CAE0 /* LaunchImage375x667@1x.png */,
+				657526101E34FB620077CAE0 /* LaunchImage375x667@2x.png */,
+				657526111E34FB620077CAE0 /* LaunchImage414x736@3x.png */,
+			);
+			path = "启动图片";
+			sourceTree = "<group>";
+		};
+		657526171E34FBF00077CAE0 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				657526181E34FBF00077CAE0 /* Controller */,
+				657526191E34FBF00077CAE0 /* Model */,
+				6575261A1E34FBF00077CAE0 /* View */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		657526181E34FBF00077CAE0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6575261B1E34FC240077CAE0 /* CXLaunchViewController.h */,
+				6575261C1E34FC240077CAE0 /* CXLaunchViewController.m */,
+				6575261D1E34FC240077CAE0 /* CXLaunchViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		657526191E34FBF00077CAE0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6575261A1E34FBF00077CAE0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		65AFD2881E2C7B6A0035B40A /* MaxIssues.embeddedframework */ = {
@@ -1072,10 +1135,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				653CF2251E1E38B00063CAD2 /* CXPictureViewController.xib in Resources */,
+				657526131E34FB620077CAE0 /* LaunchImage320x568@2x.png in Resources */,
 				65C351011E1A866E00A84399 /* CXBottomView.xib in Resources */,
 				6511479F1E2E656000405386 /* CXMyCollectionViewController.xib in Resources */,
 				65DBFFB51E28C4EB005D4364 /* CXVerificationCodeView.xib in Resources */,
 				65C350A71E19E5F600A84399 /* CXHomeViewController.xib in Resources */,
+				657526161E34FB620077CAE0 /* LaunchImage414x736@3x.png in Resources */,
+				6575261F1E34FC240077CAE0 /* CXLaunchViewController.xib in Resources */,
 				65C351691E1B872B00A84399 /* article.css in Resources */,
 				65C3510E1E1B42A200A84399 /* CXArticleViewController.xib in Resources */,
 				6575260B1E34A9920077CAE0 /* umsocial_default.png in Resources */,
@@ -1088,6 +1154,9 @@
 				657525FA1E34A6570077CAE0 /* WeiboSDK.bundle in Resources */,
 				657525FE1E34A6570077CAE0 /* README.txt in Resources */,
 				653CF2201E1DE42C0063CAD2 /* poem.js in Resources */,
+				657526121E34FB620077CAE0 /* LaunchImage320x480@2x.png in Resources */,
+				657526151E34FB620077CAE0 /* LaunchImage375x667@2x.png in Resources */,
+				657526141E34FB620077CAE0 /* LaunchImage375x667@1x.png in Resources */,
 				65C3516A1E1B872B00A84399 /* article.js in Resources */,
 				652F5BC71E19E0EC00D3783C /* LaunchScreen.storyboard in Resources */,
 				65DBFFA81E28BB9F005D4364 /* CXLoginRegisterViewController.xib in Resources */,
@@ -1206,6 +1275,7 @@
 				653CF21A1E1DE11C0063CAD2 /* CXPoemViewController.m in Sources */,
 				65DBFF961E27DD96005D4364 /* CXMineViewController.m in Sources */,
 				651147951E2E511A00405386 /* CXCollectionItem.m in Sources */,
+				6575261E1E34FC240077CAE0 /* CXLaunchViewController.m in Sources */,
 				65C351001E1A866E00A84399 /* CXBottomView.m in Sources */,
 				65DBFFB01E28C4AD005D4364 /* CXNumberTextField.m in Sources */,
 				6575260A1E34A9920077CAE0 /* CXUMSocial.m in Sources */,
