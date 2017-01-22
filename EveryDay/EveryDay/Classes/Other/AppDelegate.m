@@ -11,6 +11,7 @@
 #import "CXUserDefaults.h"
 #import "CXNavigationController.h"
 #import <MaxLeap/MaxLeap.h>
+#import <UMSocialCore/UMSocialCore.h>
 
 @interface AppDelegate ()
 
@@ -23,6 +24,8 @@
     [self initialization];
     //MaxLeap
     [self setupMaxLeap];
+    //友盟分享设置
+    [self setupUMSocial];
     return YES;
 }
 - (void)initialization
@@ -50,6 +53,31 @@
             NSLog(@"\n\n应用访问凭证可能不正确，请检查。错误信息：\n%@\n\n", error);
         }
     }];
+}
+- (void)setupUMSocial
+{
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@"583be0791c5dd0638c0016ea"];
+    
+    //设置微信的appKey和appSecret
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxe786a7197f4e8b6f" appSecret:@"fccf2a9d06857ad4da5cedebb4de5712" redirectURL:@"http://mobile.umeng.com/social"];
+    [[UMSocialManager defaultManager] removePlatformProviderWithPlatformTypes:@[@(UMSocialPlatformType_WechatFavorite)]];
+    
+    //设置分享到QQ互联的appKey
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1105776989"  appSecret:nil redirectURL:@"http://mobile.umeng.com/social"];
+    //设置新浪的appKey和appSecret
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"4224357295"  appSecret:@"79537020aff2d7055848644c4eb54c88" redirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+}
+// 设置系统回调
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

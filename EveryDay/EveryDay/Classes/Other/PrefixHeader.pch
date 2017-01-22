@@ -21,6 +21,8 @@
 #define lastArticleUpdateKey @"lastArticleUpdateKey"
 /** 诗上次更新的日期 */
 #define lastPoemUpdateKey @"lastPoemUpdateKey"
+/** 歌曲上次更新的日期 */
+#define lastMusicUpdateKey @"lastMusicUpdateKey"
 /** 登录成功 */
 #define LoginSuccess @"loginSuccess"
 /** 手机号 */

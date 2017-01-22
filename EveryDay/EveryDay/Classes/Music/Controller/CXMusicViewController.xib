@@ -78,13 +78,6 @@
                         <action selector="share" destination="-1" eventType="touchUpInside" id="56P-M8-2iQ"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NSK-TS-FqP" userLabel="collect">
-                    <rect key="frame" x="281" y="615" width="32" height="32"/>
-                    <state key="normal" image="collect"/>
-                    <connections>
-                        <action selector="collect" destination="-1" eventType="touchUpInside" id="RzQ-f0-6Gl"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -103,9 +96,7 @@
                 <constraint firstAttribute="trailing" secondItem="hum-aC-B90" secondAttribute="trailing" constant="20" id="eJC-lL-hPv"/>
                 <constraint firstItem="vUP-Hr-bDQ" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="50" id="eij-6p-xsP"/>
                 <constraint firstItem="jrW-JO-FhH" firstAttribute="top" secondItem="vUP-Hr-bDQ" secondAttribute="bottom" id="fmf-Pm-QNv"/>
-                <constraint firstAttribute="bottom" secondItem="NSK-TS-FqP" secondAttribute="bottom" constant="20" id="irq-Oz-FSf"/>
                 <constraint firstItem="vUP-Hr-bDQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ljq-0p-GKA"/>
-                <constraint firstItem="hum-aC-B90" firstAttribute="leading" secondItem="NSK-TS-FqP" secondAttribute="trailing" constant="10" id="pxE-xK-hpG"/>
                 <constraint firstItem="IqA-cK-V6N" firstAttribute="top" secondItem="hrb-km-U8S" secondAttribute="bottom" constant="30" id="q3z-xt-9k6"/>
                 <constraint firstItem="bsy-L5-FFW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="szF-Zm-tTn"/>
                 <constraint firstItem="jrW-JO-FhH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="w8J-ba-GkZ"/>
@@ -116,7 +107,6 @@
     </objects>
     <resources>
         <image name="close_black" width="32" height="32"/>
-        <image name="collect" width="32" height="32"/>
         <image name="player_pause" width="68" height="68"/>
         <image name="player_start" width="68" height="68"/>
         <image name="share" width="32" height="32"/>

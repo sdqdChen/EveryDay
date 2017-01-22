@@ -11,6 +11,8 @@
 #import <SVProgressHUD.h>
 #import "CXLoadingAnimation.h"
 #import <MaxLeap/MaxLeap.h>
+#import "CXWebViewScreenShot.h"
+#import "CXUMSocial.h"
 
 static NSString * articleItemidKey = @"articleItemidKey";
 static NSString * articleNumberKey = @"articleNumberKey";
@@ -336,7 +338,8 @@ static NSString * articleNumberKey = @"articleNumberKey";
 }
 #pragma mark - 分享
 - (IBAction)share {
-    
+    UIImage *image = [CXWebViewScreenShot screenShotWithWebView:self.webView];
+    [[CXUMSocial defaultSocialManager] shareImageWithImage:image completion:nil];
 }
 #pragma mark - 退出
 - (IBAction)back {

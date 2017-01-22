@@ -19,9 +19,14 @@
 #import "CXLoadingAnimation.h"
 #import <SVProgressHUD.h>
 #import "CXCircleView.h"
+#import "CXUMSocial.h"
 
 static NSString * const musicUrl = @"http://route.showapi.com/213-4";
 static NSString * const lrcUrl = @"http://route.showapi.com/213-2";
+static NSString * const searchUrl = @"http://route.showapi.com/213-1";
+static NSInteger const showapi_appid = 16085;
+static NSString * const showapi_sign = @"8ec343d2c5cd450da68391505fd73a76";
+static NSString * const randomKey = @"randomKey";
 
 @interface CXMusicViewController ()
 @property (nonatomic, strong) AFHTTPSessionManager *manager;
@@ -127,17 +132,48 @@ static NSString * const lrcUrl = @"http://route.showapi.com/213-2";
     self.circle.frame = self.playOrPauseButton.bounds;
 }
 #pragma mark - 获取音乐数据
+/*
+ * 根据时间判断是否应该更新数据
+ */
+- (BOOL)isShouldUpdate
+{
+    NSString *lastUpdateDateStr = [CXUserDefaults readObjectForKey:lastMusicUpdateKey];
+    if (!lastUpdateDateStr) return YES;
+    [CXUserDefaults setObject:lastUpdateDateStr forKey:lastMusicUpdateKey];
+    //今天
+    NSDate *date = [NSDate date];
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *cmps = [cal components:NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
+    //把日期保存起来，为了判断是否刷新文章
+    NSString *todayDateStr = [NSString stringWithFormat:@"%ld月%ld日", cmps.month, cmps.day];
+    [CXUserDefaults setObject:todayDateStr forKey:lastMusicUpdateKey];
+    if ([lastUpdateDateStr isEqualToString:todayDateStr]) { //同一天
+        return NO;
+    } else {
+        return YES;
+    }
+}
 - (void)loadMusicData
 {
+    BOOL update = [self isShouldUpdate];
+    if (update) {
+        NSInteger randomIndex = arc4random() % 300;
+        [self loadDataWithIndex:randomIndex];
+    } else {
+        NSInteger specificIndex = [[CXUserDefaults readObjectForKey:randomKey] integerValue];
+        [self loadDataWithIndex:specificIndex];
+    }
+}
+- (void)loadDataWithIndex:(NSInteger)index
+{
     NSMutableDictionary *para = [NSMutableDictionary dictionary];
-    para[@"showapi_appid"] = @16085;
-    para[@"showapi_sign"] = @"8ec343d2c5cd450da68391505fd73a76";
+    para[@"showapi_appid"] = @(showapi_appid);
+    para[@"showapi_sign"] = showapi_sign;
     para[@"topid"] = @26;
     [self.manager GET:musicUrl parameters:para progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dic = responseObject[@"showapi_res_body"][@"pagebean"];
         self.allSongsArray = [CXMusicItem mj_objectArrayWithKeyValuesArray:dic[@"songlist"]];
-        NSInteger randomIndex = arc4random() % self.allSongsArray.count;
-        CXMusicItem *currentItem = self.allSongsArray[randomIndex];
+        CXMusicItem *currentItem = self.allSongsArray[index];
         self.currentItem = currentItem;
         //刷新界面
         [self reloadUIWithItem:currentItem];
@@ -145,18 +181,24 @@ static NSString * const lrcUrl = @"http://route.showapi.com/213-2";
         [self playMusicWithItem:currentItem];
         //获取歌词
         [self loadLrcWithSongid:currentItem.songid];
+        //保存特定歌曲信息
+        [CXUserDefaults setObject:@(index) forKey:randomKey];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         CXLog(@"%@", error);
-        [SVProgressHUD showErrorWithStatus:@"似乎已断开与网络的链接..."];
         //移除加载动画
-        if (self.animationView) {
-            [self.animationView removeFromSuperview];
-        } else {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.animationView removeFromSuperview];
-            });
-        }
+        [self loadFailed];
     }];
+}
+- (void)loadFailed
+{
+    [SVProgressHUD showErrorWithStatus:@"似乎已断开与网络的链接..."];
+    if (self.animationView) {
+        [self.animationView removeFromSuperview];
+    } else {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.animationView removeFromSuperview];
+        });
+    }
 }
 #pragma mark - 获取歌词
 - (void)loadLrcWithSongid:(NSString *)songid
@@ -324,6 +366,8 @@ static NSString * const lrcUrl = @"http://route.showapi.com/213-2";
                 NSLog(@"未知状态");
                 break;
             case AVPlayerItemStatusFailed:
+                [SVProgressHUD showErrorWithStatus:@"网络状况不佳,请稍后再试"];
+                self.playOrPauseButton.enabled = NO;
                 //移除加载动画
                 [self.animationView removeFromSuperview];
                 [self.whiteView removeFromSuperview];
@@ -363,13 +407,8 @@ static NSString * const lrcUrl = @"http://route.showapi.com/213-2";
  * 分享
  */
 - (IBAction)share {
-    
-}
-/*
- * 收藏
- */
-- (IBAction)collect {
-    
+    CXMusicItem *item = self.currentItem;
+    [[CXUMSocial defaultSocialManager] shareMusicWithTitle:item.songname content:item.singername image:item.albumpic_big url:item.url completion:nil];
 }
 
 @end
