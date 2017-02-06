@@ -15,7 +15,7 @@
     [button setImage:image forState:UIControlStateNormal];
     [button setImage:highImage forState:UIControlStateHighlighted];
 //    [button sizeToFit];
-    button.frame = CGRectMake(0, 0, 25*KRATE, 25*KRATE);
+    button.frame = CGRectMake(0, 0, 21*KRATE, 21*KRATE);
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     UIView *view = [[UIView alloc] initWithFrame:button.bounds];
     [view addSubview:button];

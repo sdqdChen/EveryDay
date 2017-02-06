@@ -47,12 +47,12 @@
 /*
  * 设置状态栏颜色
  */
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    if ([self.topViewController isKindOfClass:[CXHomeViewController class]]) {
-        return UIStatusBarStyleLightContent;
-    } else {
-        return UIStatusBarStyleDefault;
-    }
-}
+//- (UIStatusBarStyle)preferredStatusBarStyle
+//{
+//    if ([self.topViewController isKindOfClass:[CXHomeViewController class]]) {
+//        return UIStatusBarStyleLightContent;
+//    } else {
+//        return UIStatusBarStyleDefault;
+//    }
+//}
 @end

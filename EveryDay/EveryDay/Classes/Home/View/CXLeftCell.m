@@ -1,50 +1,52 @@
 //
-//  CXMineCell.m
+//  CXLeftCell.m
 //  EveryDay
 //
-//  Created by 陈晓 on 2017/1/13.
+//  Created by 陈晓 on 2017/2/5.
 //  Copyright © 2017年 陈晓. All rights reserved.
 //
 
-#import "CXMineCell.h"
+#import "CXLeftCell.h"
 #import <Masonry.h>
 
 static CGFloat const labelFont = 17;
+static CGFloat const separatorW = 75;
 
-@interface CXMineCell ()
+@interface CXLeftCell ()
 //分割线
 @property (nonatomic, strong) UIView *separatorView;
 @end
-
-@implementation CXMineCell
+@implementation CXLeftCell
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {
-    static NSString *ID = @"cell";
-    CXMineCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    static NSString *ID = @"left";
+    CXLeftCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     if (!cell) {
-        cell = [[CXMineCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+        cell = [[CXLeftCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
     }
     return cell;
+}
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])
+    {
+        self.textLabel.textAlignment = NSTextAlignmentCenter;
+        self.textLabel.font = [UIFont fontWithName:CXPingFangLight size:labelFont * KRATE];
+        self.backgroundColor = [UIColor blackColor];
+        self.textLabel.textColor = [UIColor whiteColor];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        [self addSubview:self.separatorView];
+    }
+    return self;
 }
 #pragma mark - 懒加载
 - (UIView *)separatorView
 {
     if (!_separatorView) {
         _separatorView = [[UIView alloc] init];
-        _separatorView.backgroundColor = [UIColor darkGrayColor];
+        _separatorView.backgroundColor = [UIColor whiteColor];
     }
     return _separatorView;
-}
-#pragma mark - 初始化
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.textLabel.textAlignment = NSTextAlignmentCenter;
-        self.textLabel.font = [UIFont fontWithName:CXPingFangLight size:labelFont * KRATE];
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-        [self addSubview:self.separatorView];
-    }
-    return self;
 }
 - (void)layoutSubviews
 {
@@ -54,9 +56,5 @@ static CGFloat const labelFont = 17;
         make.centerX.mas_equalTo(self);
         make.bottom.offset(0);
     }];
-    self.cx_width = separatorW * KRATE;
-    self.cx_centerX = CXScreenW * 0.5;
-    self.textLabel.cx_x = 0;
-    self.textLabel.cx_width = self.cx_width;
 }
 @end

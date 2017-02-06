@@ -25,14 +25,14 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smile" translatesAutoresizingMaskIntoConstraints="NO" id="OuK-o4-gll">
-                    <rect key="frame" x="139.5" y="246.5" width="95" height="95"/>
+                    <rect key="frame" x="145.5" y="257" width="83" height="74"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="95" id="FJP-LJ-1Fj"/>
-                        <constraint firstAttribute="height" constant="95" id="iWn-o8-tDQ"/>
+                        <constraint firstAttribute="width" constant="83" id="FJP-LJ-1Fj"/>
+                        <constraint firstAttribute="height" constant="74" id="iWn-o8-tDQ"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KZM-wU-W6J">
-                    <rect key="frame" x="60" y="371.5" width="255" height="26"/>
+                    <rect key="frame" x="60" y="361" width="255" height="26"/>
                     <attributedString key="attributedText">
                         <fragment content="Everyday is a beautiful day.">
                             <attributes>

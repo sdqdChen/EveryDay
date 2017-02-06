@@ -151,7 +151,6 @@ static int seconds = countDownSeconds;
             for (CXNumberTextField *tf in self.inputView.subviews) {
                 [verificationCode appendString:tf.text];
             }
-//            [self verifySuccess];
             //验证码验证
             [MLUser loginWithPhoneNumber:self.phoneNumber smsCode:verificationCode block:^(MLUser * _Nullable user, NSError * _Nullable error) {
                 if (user) { //成功
@@ -180,6 +179,15 @@ static int seconds = countDownSeconds;
     });
     //3.销毁定时器
     [self invalidateTimer];
+    //4.判断收藏是否为空，如果为空就创建个空的数组
+    MLUser *user = [MLUser currentUser];
+    if (!user[@"collection"]) {
+        NSArray *array = [NSArray array];
+        user[@"collection"] = array;
+        [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            
+        }];
+    }
 }
 - (void)verifyFailed
 {

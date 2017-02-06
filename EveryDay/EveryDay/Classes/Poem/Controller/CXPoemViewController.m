@@ -13,6 +13,7 @@
 #import <MaxLeap/MaxLeap.h>
 #import "CXWebViewScreenShot.h"
 #import "CXUMSocial.h"
+#import "CXLoginRegisterViewController.h"
 
 static NSString * poemItemidKey = @"poemItemidKey";
 static NSString * poemNumberKey = @"poemNumberKey";
@@ -274,10 +275,16 @@ static NSString * poemNumberKey = @"poemNumberKey";
 }
 #pragma mark - 收藏
 - (IBAction)collect:(UIButton *)button {
-    if (!button.selected) {
-        [self addCollectionWithButton:button];
-    } else {
-        [self cancelCollectionWithButton:button];
+    //未登录就去登录界面
+    if ([CXUserDefaults readBoolForKey:LoginSuccess]) { //已登录
+        if (!button.selected) {
+            [self addCollectionWithButton:button];
+        } else {
+            [self cancelCollectionWithButton:button];
+        }
+    } else { //未登录
+        CXLoginRegisterViewController *loginVc = [[CXLoginRegisterViewController alloc] init];
+        [self presentViewController:loginVc animated:YES completion:nil];
     }
 }
 /*

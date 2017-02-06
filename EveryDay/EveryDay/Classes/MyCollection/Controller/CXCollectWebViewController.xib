@@ -28,7 +28,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="grp-Zt-Cki">
                     <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ui8-ph-2vG">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ui8-ph-2vG" userLabel="返回">
                             <rect key="frame" x="10" y="6" width="32" height="32"/>
                             <state key="normal" image="returnBtn"/>
                             <connections>
@@ -42,15 +42,24 @@
                                 <constraint firstAttribute="height" constant="1" id="jBN-aa-OjV"/>
                             </constraints>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ls0-ce-3NC" userLabel="分享">
+                            <rect key="frame" x="333" y="6" width="32" height="32"/>
+                            <state key="normal" image="share"/>
+                            <connections>
+                                <action selector="share" destination="-1" eventType="touchUpInside" id="1bP-WJ-qfW"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="ls0-ce-3NC" secondAttribute="trailing" constant="10" id="0vE-WD-1oq"/>
                         <constraint firstItem="WQf-Pn-9vl" firstAttribute="leading" secondItem="grp-Zt-Cki" secondAttribute="leading" id="1NH-rk-cMS"/>
                         <constraint firstItem="Ui8-ph-2vG" firstAttribute="centerY" secondItem="grp-Zt-Cki" secondAttribute="centerY" id="IFk-WI-inB"/>
                         <constraint firstItem="Ui8-ph-2vG" firstAttribute="leading" secondItem="grp-Zt-Cki" secondAttribute="leading" constant="10" id="Ipj-br-AM2"/>
                         <constraint firstAttribute="trailing" secondItem="WQf-Pn-9vl" secondAttribute="trailing" id="Jdr-eS-vRZ"/>
                         <constraint firstItem="WQf-Pn-9vl" firstAttribute="top" secondItem="grp-Zt-Cki" secondAttribute="top" id="NrF-YC-tpH"/>
                         <constraint firstAttribute="height" constant="44" id="Y5g-rj-p0e"/>
+                        <constraint firstItem="ls0-ce-3NC" firstAttribute="centerY" secondItem="grp-Zt-Cki" secondAttribute="centerY" id="t6b-sZ-wBC"/>
                     </constraints>
                 </view>
             </subviews>
@@ -69,5 +78,6 @@
     </objects>
     <resources>
         <image name="returnBtn" width="32" height="32"/>
+        <image name="share" width="32" height="32"/>
     </resources>
 </document>

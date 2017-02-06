@@ -23,6 +23,8 @@
 #define lastPoemUpdateKey @"lastPoemUpdateKey"
 /** 歌曲上次更新的日期 */
 #define lastMusicUpdateKey @"lastMusicUpdateKey"
+/** 图片上次更新的日期 */
+#define lastPictureUpdateKey @"lastPictureUpdateKey"
 /** 登录成功 */
 #define LoginSuccess @"loginSuccess"
 /** 手机号 */

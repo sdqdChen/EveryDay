@@ -16,6 +16,7 @@
 #import <SVProgressHUD.h>
 #import <MaxIssues/MaxIssues.h>
 #import "CXMyCollectionViewController.h"
+#import "CXLoginRegisterViewController.h"
 
 
 typedef NS_ENUM(NSInteger, CellRow) {
@@ -165,10 +166,13 @@ typedef NS_ENUM(NSInteger, CellRow) {
 #pragma mark - 我的收藏
 - (void)myCollection
 {
-    CXMyCollectionViewController *collection = [[CXMyCollectionViewController alloc] init];
+    if ([CXUserDefaults readBoolForKey:LoginSuccess]) {
+        CXMyCollectionViewController *collection = [[CXMyCollectionViewController alloc] init];
         [self.navigationController pushViewController:collection animated:YES];
-//    UINavigationController *navCtrl = [[UINavigationController alloc] initWithRootViewController:collection];
-//    [self presentViewController:navCtrl animated:YES completion:nil];
+    } else {
+        CXLoginRegisterViewController *loginVc = [[CXLoginRegisterViewController alloc] init];
+        [self presentViewController:loginVc animated:YES completion:nil];
+    }
 }
 #pragma mark - 清除缓存
 - (void)setupClearCache

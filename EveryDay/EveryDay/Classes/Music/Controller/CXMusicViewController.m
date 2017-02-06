@@ -129,6 +129,8 @@ static NSString * const randomKey = @"randomKey";
     //设置歌曲图片为圆形
     self.albumPicture.layer.cornerRadius = self.albumPicture.cx_width * 0.5;
     self.albumPicture.layer.masksToBounds = YES;
+    self.albumPicture.layer.borderWidth = 1;
+    self.albumPicture.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.circle.frame = self.playOrPauseButton.bounds;
 }
 #pragma mark - 获取音乐数据
@@ -138,7 +140,7 @@ static NSString * const randomKey = @"randomKey";
 - (BOOL)isShouldUpdate
 {
     NSString *lastUpdateDateStr = [CXUserDefaults readObjectForKey:lastMusicUpdateKey];
-    if (!lastUpdateDateStr) return YES;
+//    if (!lastUpdateDateStr) return YES;
     [CXUserDefaults setObject:lastUpdateDateStr forKey:lastMusicUpdateKey];
     //今天
     NSDate *date = [NSDate date];
@@ -363,7 +365,7 @@ static NSString * const randomKey = @"randomKey";
     if ([keyPath isEqualToString:@"status"]) { //播放器状态回调
         switch (self.player.currentItem.status) {
             case AVPlayerItemStatusUnknown:
-                NSLog(@"未知状态");
+                CXLog(@"未知状态");
                 break;
             case AVPlayerItemStatusFailed:
                 [SVProgressHUD showErrorWithStatus:@"网络状况不佳,请稍后再试"];
@@ -373,6 +375,7 @@ static NSString * const randomKey = @"randomKey";
                 [self.whiteView removeFromSuperview];
                 break;
             case AVPlayerItemStatusReadyToPlay:
+                CXLog(@"准备");
                 self.readyToPlay = YES;
                 //移除加载动画
                 [self.animationView removeFromSuperview];

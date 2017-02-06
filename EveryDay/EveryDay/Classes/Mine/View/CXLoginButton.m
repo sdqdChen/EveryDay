@@ -250,13 +250,17 @@
 - (void)readImageFromServer
 {
     MLFile *file = [MLUser currentUser][@"avatar"];
-    [file getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
-        UIImage *image = [UIImage imageWithData:data];
-        if (image) {
-            [self setBackgroundImage:image forState:UIControlStateNormal];
-        } else { //服务器也没有就设置默认头像
-            [self setBackgroundImage:[UIImage imageNamed:@"avatar"] forState:UIControlStateNormal];
-        }
-    }];
+    if (!file) {
+        [self setBackgroundImage:[UIImage imageNamed:@"avatar"] forState:UIControlStateNormal];
+    } else {
+        [file getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+            UIImage *image = [UIImage imageWithData:data];
+            if (image) {
+                [self setBackgroundImage:image forState:UIControlStateNormal];
+            } else {
+                [self setBackgroundImage:[UIImage imageNamed:@"avatar"] forState:UIControlStateNormal];
+            }
+        }];
+    }
 }
 @end

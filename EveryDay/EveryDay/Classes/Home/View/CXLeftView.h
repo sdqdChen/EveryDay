@@ -1,5 +1,5 @@
 //
-//  CXHomeViewController.h
+//  CXLeftView.h
 //  EveryDay
 //
 //  Created by 陈晓 on 2017/2/5.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CXHomeViewController : UIViewController
+@interface CXLeftView : UITableView
 
 @end

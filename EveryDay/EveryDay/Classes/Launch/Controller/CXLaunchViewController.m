@@ -33,14 +33,13 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:1 animations:^{
             self.view.alpha = 0;
         } completion:^(BOOL finished) {
             CXNavigationController *nav = [[CXNavigationController alloc] initWithRootViewController:[[CXHomeViewController alloc] init]];
             [UIApplication sharedApplication].keyWindow.rootViewController = nav;
         }];
-        
     });
 }
 - (void)setupDate
@@ -49,7 +48,6 @@
     NSCalendar *cal = [NSCalendar currentCalendar];
     NSDateComponents *cmps = [cal components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
     self.dateLabel.text = [NSString stringWithFormat:@"%@年%@月%@日", [self dateFromNumberToChinese:cmps.year], [self dateFromNumberToChinese:cmps.month], [self dateFromNumberToChinese:cmps.day]];
-    CXLog(@"%ld-%ld-%ld", cmps.year, cmps.month, cmps.day);
 }
 - (void)setupLaunchImage
 {

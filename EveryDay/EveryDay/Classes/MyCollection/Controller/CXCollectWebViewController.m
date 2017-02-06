@@ -9,6 +9,8 @@
 #import "CXCollectWebViewController.h"
 #import "CXCollectionItem.h"
 #import "CXLoadingAnimation.h"
+#import "CXWebViewScreenShot.h"
+#import "CXUMSocial.h"
 
 @interface CXCollectWebViewController () <UIWebViewDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -184,5 +186,9 @@
 }
 - (IBAction)back {
     [self.navigationController popViewControllerAnimated:YES];
+}
+- (IBAction)share {
+    UIImage *image = [CXWebViewScreenShot screenShotWithWebView:self.webView];
+    [[CXUMSocial defaultSocialManager] shareImageWithImage:image completion:nil];
 }
 @end
