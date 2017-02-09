@@ -11,6 +11,8 @@
 #import "CXLoadingAnimation.h"
 #import "CXWebViewScreenShot.h"
 #import "CXUMSocial.h"
+#import "CXReadSetupView.h"
+#import "CXSetupWebView.h"
 
 @interface CXCollectWebViewController () <UIWebViewDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -21,6 +23,10 @@
 @property (nonatomic, strong) CXLoadingAnimation *animationView;
 /** 网页是否加载完成 */
 @property (nonatomic, assign, getter=isLoadComplete) BOOL loadComplete;
+/** 阅读设置view */
+@property (nonatomic, strong) CXReadSetupView *readSetupView;
+/** 阅读设置view是否已经显示 */
+@property (nonatomic, assign, getter=isReadSetupDisplayed) BOOL readSetupDisplayed;
 
 @end
 
@@ -33,6 +39,15 @@
         _animationView.frame = CGRectMake(0, 0, CXScreenW, CXScreenH);
     }
     return _animationView;
+}
+- (CXReadSetupView *)readSetupView
+{
+    if (!_readSetupView) {
+        _readSetupView = [CXReadSetupView loadFromXib];
+        _readSetupView.webView = self.webView;
+        [self.view addSubview:_readSetupView];
+    }
+    return _readSetupView;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -66,7 +81,7 @@
 - (void)setupPoemHtml
 {
     //内容标签
-    NSString *mes = self.item.content;
+    NSString *mes = [NSString stringWithFormat:@"<div id=content>%@</div>", self.item.content];
     //标题标签
     NSString *titleHtml = [NSString stringWithFormat:@"<div id=mainTitle>%@</div>", self.item.title];
     //作者标签
@@ -130,6 +145,8 @@
     self.loadComplete = YES;
     //移除加载动画
     [self.animationView removeFromSuperview];
+    [self setupDefaultFont];
+    [self setupDefaultBgColor];
 }
 #pragma mark - 处理webView的滑动
 /*
@@ -167,6 +184,10 @@
         } else {
             self.bottomView.cx_y = CXScreenH - self.bottomView.cx_height;
         }
+        if (self.isReadSetupDisplayed) {
+            self.readSetupView.cx_y = CXScreenH;
+            self.readSetupDisplayed = NO;
+        }
     }];
 }
 /*
@@ -190,5 +211,33 @@
 - (IBAction)share {
     UIImage *image = [CXWebViewScreenShot screenShotWithWebView:self.webView];
     [[CXUMSocial defaultSocialManager] shareImageWithImage:image completion:nil];
+}
+#pragma mark - 设置字体及背景
+- (IBAction)setupFontAndBgColor {
+    CGFloat height = 180;
+    self.readSetupView.frame = CGRectMake(0, CXScreenH, CXScreenW, height);
+    [UIView animateWithDuration:0.25 animations:^{
+        self.readSetupView.cx_y = CXScreenH - self.readSetupView.cx_height;
+    }];
+    self.readSetupDisplayed = YES;
+}
+/*
+ * 一进入页面就设置存储到本地的字体和背景颜色
+ */
+- (void)setupDefaultFont
+{
+    NSInteger size = [CXUserDefaults readIntegerForKey:CXFontSizeKey];
+    if (size) {
+        [CXSetupWebView setupTextFontWith:size webView:self.webView];
+    }
+}
+- (void)setupDefaultBgColor
+{
+    NSString *bgColor = [CXUserDefaults readObjectForKey:CXReadBgColorKey];
+    NSString *textColor = [CXUserDefaults readObjectForKey:CXTextColorKey];
+    if (bgColor && textColor) {
+        [CXSetupWebView setupBgColorWith:bgColor webView:self.webView];
+        [CXSetupWebView setupTextColorWith:textColor webView:self.webView];
+    }
 }
 @end

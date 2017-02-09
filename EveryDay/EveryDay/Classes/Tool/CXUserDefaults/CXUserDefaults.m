@@ -50,4 +50,15 @@
     NSData *data = [defaults objectForKey:key];
     return [UIImage imageWithData:data];
 }
++ (void)setInteger:(NSInteger)integer forKey:(NSString *)key
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:integer forKey:key];
+    [defaults synchronize];
+}
++ (NSInteger)readIntegerForKey:(NSString *)key
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults integerForKey:key];
+}
 @end

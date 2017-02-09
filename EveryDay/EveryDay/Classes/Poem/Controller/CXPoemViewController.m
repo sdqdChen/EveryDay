@@ -14,6 +14,8 @@
 #import "CXWebViewScreenShot.h"
 #import "CXUMSocial.h"
 #import "CXLoginRegisterViewController.h"
+#import "CXReadSetupView.h"
+#import "CXSetupWebView.h"
 
 static NSString * poemItemidKey = @"poemItemidKey";
 static NSString * poemNumberKey = @"poemNumberKey";
@@ -41,6 +43,10 @@ static NSString * poemNumberKey = @"poemNumberKey";
 @property (nonatomic, copy) NSString *content;
 /** 诗的ID */
 @property (nonatomic, copy) NSString *itemid;
+/** 阅读设置view */
+@property (nonatomic, strong) CXReadSetupView *readSetupView;
+/** 阅读设置view是否已经显示 */
+@property (nonatomic, assign, getter=isReadSetupDisplayed) BOOL readSetupDisplayed;
 @end
 
 @implementation CXPoemViewController
@@ -60,6 +66,15 @@ static NSString * poemNumberKey = @"poemNumberKey";
     }
     return _animationView;
 }
+- (CXReadSetupView *)readSetupView
+{
+    if (!_readSetupView) {
+        _readSetupView = [CXReadSetupView loadFromXib];
+        _readSetupView.webView = self.webView;
+        [self.view addSubview:_readSetupView];
+    }
+    return _readSetupView;
+}
 #pragma mark - 初始化
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -68,6 +83,9 @@ static NSString * poemNumberKey = @"poemNumberKey";
     self.webView.delegate = self;
     self.hideStatus = [UIApplication sharedApplication].statusBarHidden;
     [self.view bringSubviewToFront:self.bottomView];
+    //添加侧滑返回手势
+    UISwipeGestureRecognizer *backGest = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(back)];
+    [self.webView addGestureRecognizer:backGest];
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -171,7 +189,7 @@ static NSString * poemNumberKey = @"poemNumberKey";
 - (void)setupHtmlWithDictionary:(NSDictionary *)random
 {
     //内容标签
-    NSString *mes = random[@"message"];
+    NSString *mes = [NSString stringWithFormat:@"<div id=content>%@</div>", random[@"message"]];
     //标题标签
     NSString *titleHtml = [NSString stringWithFormat:@"<div id=mainTitle>%@</div>", random[@"subject"]];
     //作者标签
@@ -223,6 +241,8 @@ static NSString * poemNumberKey = @"poemNumberKey";
     self.loadComplete = YES;
     //移除加载动画
     [self.animationView removeFromSuperview];
+    [self setupDefaultFont];
+    [self setupDefaultBgColor];
 }
 #pragma mark - 处理webView的点击与滑动
 /*
@@ -259,6 +279,10 @@ static NSString * poemNumberKey = @"poemNumberKey";
             self.bottomView.cx_y = CXScreenH;
         } else {
             self.bottomView.cx_y = CXScreenH - self.bottomView.cx_height;
+        }
+        if (self.isReadSetupDisplayed) {
+            self.readSetupView.cx_y = CXScreenH;
+            self.readSetupDisplayed = NO;
         }
     }];
 }
@@ -346,6 +370,34 @@ static NSString * poemNumberKey = @"poemNumberKey";
             //如果有一样的id，说明已经添加过
             self.collectButton.selected = YES;
         }
+    }
+}
+#pragma mark - 设置字体及背景
+- (IBAction)setupFontAndBgColor {
+    CGFloat height = 180;
+    self.readSetupView.frame = CGRectMake(0, CXScreenH, CXScreenW, height);
+    [UIView animateWithDuration:0.25 animations:^{
+        self.readSetupView.cx_y = CXScreenH - self.readSetupView.cx_height;
+    }];
+    self.readSetupDisplayed = YES;
+}
+/*
+ * 一进入页面就设置存储到本地的字体和背景颜色
+ */
+- (void)setupDefaultFont
+{
+    NSInteger size = [CXUserDefaults readIntegerForKey:CXFontSizeKey];
+    if (size) {
+        [CXSetupWebView setupTextFontWith:size webView:self.webView];
+    }
+}
+- (void)setupDefaultBgColor
+{
+    NSString *bgColor = [CXUserDefaults readObjectForKey:CXReadBgColorKey];
+    NSString *textColor = [CXUserDefaults readObjectForKey:CXTextColorKey];
+    if (bgColor && textColor) {
+        [CXSetupWebView setupBgColorWith:bgColor webView:self.webView];
+        [CXSetupWebView setupTextColorWith:textColor webView:self.webView];
     }
 }
 #pragma mark - 分享

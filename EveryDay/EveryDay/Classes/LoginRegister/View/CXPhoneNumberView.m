@@ -12,6 +12,7 @@
 #import "CXVerificationCodeView.h"
 #import <MaxLeap/MaxLeap.h>
 #import <WSProgressHUD.h>
+#import <SVProgressHUD.h>
 
 @interface CXPhoneNumberView ()
 /** 输入手机号的文本框 */
@@ -117,42 +118,52 @@
  */
 - (void)getVerificationCode:(UIButton *)button
 {
-    //1. 添加验证码view
-//    [UIView animateWithDuration:0.3 animations:^{
-//        self.verificationCodeButton.hidden = YES;
-//        self.seperatorView.hidden = YES;
-//    }];
-//    CXVerificationCodeView *codeView = [CXVerificationCodeView loadVerificationCodeView];
-//    self.codeView = codeView;
-//    codeView.phoneNumber = self.numberTextField.text;
-//    [self addSubview:codeView];
-//    //2. 第一响应者
-//    [codeView.firstTextField becomeFirstResponder];
-//    //3. 隐藏clearButton
-//    self.clearButton.hidden = YES;
-    [MLUser requestLoginSmsCodeWithPhoneNumber:self.numberTextField.text block:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
-            //1. 添加验证码view
-            [UIView animateWithDuration:0.3 animations:^{
-                self.verificationCodeButton.hidden = YES;
-                self.seperatorView.hidden = YES;
-            }];
-            CXVerificationCodeView *codeView = [CXVerificationCodeView loadVerificationCodeView];
-            self.codeView = codeView;
-            codeView.phoneNumber = self.numberTextField.text;
-            [self addSubview:codeView];
-            //2. 第一响应者
-            [codeView.firstTextField becomeFirstResponder];
-            //3. 隐藏clearButton
-            self.clearButton.hidden = YES;
-        } else {
-            if (error.code == 1) {
-                [WSProgressHUD showImage:nil status:@"请输入正确的手机号!"];
-            } else if (error.code == 503) {
-                [WSProgressHUD showImage:nil status:@"发送频繁，请稍后再试!"];
+    if ([self.numberTextField.text isEqualToString:@"11223344556"]) {
+        [self testLogin]; //仅仅是审核时的测试账号
+    } else {
+        [MLUser requestLoginSmsCodeWithPhoneNumber:self.numberTextField.text block:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                //1. 添加验证码view
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.verificationCodeButton.hidden = YES;
+                    self.seperatorView.hidden = YES;
+                }];
+                CXVerificationCodeView *codeView = [CXVerificationCodeView loadVerificationCodeView];
+                self.codeView = codeView;
+                codeView.phoneNumber = self.numberTextField.text;
+                [self addSubview:codeView];
+                //2. 第一响应者
+                [codeView.firstTextField becomeFirstResponder];
+                //3. 隐藏clearButton
+                self.clearButton.hidden = YES;
             } else {
-                [WSProgressHUD showImage:nil status:@"发送失败，请稍后再试!"];
+                if (error.code == 1) {
+                    [WSProgressHUD showImage:nil status:@"请输入正确的手机号!"];
+                } else if (error.code == 503) {
+                    [WSProgressHUD showImage:nil status:@"发送频繁，请稍后再试!"];
+                } else {
+                    [WSProgressHUD showImage:nil status:@"发送失败，请稍后再试!"];
+                }
             }
+        }];
+    }
+}
+- (void)testLogin
+{
+    [MLUser logInWithUsernameInBackground:@"测试账号" password:@"123456" block:^(MLUser * _Nullable user, NSError * _Nullable error) {
+        if (user) { //登录成功
+            [UIView animateWithDuration:0.3 animations:^{
+                [self endEditing:YES];
+                [self.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
+            }];
+            //2.保存登录成功状态
+            [CXUserDefaults setBool:YES forKey:LoginSuccess];
+            [SVProgressHUD showSuccessWithStatus:@"登录成功"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+            });
+        } else {
+            CXLog(@"%@", error);
         }
     }];
 }

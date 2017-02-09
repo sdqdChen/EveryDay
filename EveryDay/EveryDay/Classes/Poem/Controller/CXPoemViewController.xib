@@ -25,6 +25,13 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1lj-Ez-v2k">
                     <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                     <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="brN-sv-nIh" userLabel="设置按钮">
+                            <rect key="frame" x="249" y="6" width="32" height="32"/>
+                            <state key="normal" image="fontSet"/>
+                            <connections>
+                                <action selector="setupFontAndBgColor" destination="-1" eventType="touchUpInside" id="1Gw-n0-62z"/>
+                            </connections>
+                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWk-rv-CV1" userLabel="收藏按钮">
                             <rect key="frame" x="291" y="6" width="32" height="32"/>
                             <state key="normal" image="collect"/>
@@ -60,6 +67,8 @@
                         <constraint firstItem="tmM-Mq-e43" firstAttribute="leading" secondItem="1lj-Ez-v2k" secondAttribute="leading" id="EI3-ZQ-ZF2"/>
                         <constraint firstAttribute="trailing" secondItem="Q5h-a5-GkL" secondAttribute="trailing" constant="10" id="HWd-79-uU5"/>
                         <constraint firstAttribute="height" constant="44" id="SCt-oJ-MHa"/>
+                        <constraint firstItem="gWk-rv-CV1" firstAttribute="leading" secondItem="brN-sv-nIh" secondAttribute="trailing" constant="10" id="Tfl-gC-K3h"/>
+                        <constraint firstItem="brN-sv-nIh" firstAttribute="centerY" secondItem="1lj-Ez-v2k" secondAttribute="centerY" id="YVC-8d-7sM"/>
                         <constraint firstItem="Q5h-a5-GkL" firstAttribute="leading" secondItem="gWk-rv-CV1" secondAttribute="trailing" constant="10" id="cBm-Yh-Kus"/>
                         <constraint firstAttribute="trailing" secondItem="tmM-Mq-e43" secondAttribute="trailing" id="cFF-ua-5tF"/>
                         <constraint firstItem="tmM-Mq-e43" firstAttribute="top" secondItem="1lj-Ez-v2k" secondAttribute="top" id="eOu-ZE-Hwb"/>
@@ -90,6 +99,7 @@
     <resources>
         <image name="collect" width="32" height="32"/>
         <image name="collect_s" width="32" height="32"/>
+        <image name="fontSet" width="32" height="32"/>
         <image name="returnBtn" width="32" height="32"/>
         <image name="share" width="32" height="32"/>
     </resources>

@@ -14,6 +14,8 @@
 #import "CXWebViewScreenShot.h"
 #import "CXUMSocial.h"
 #import "CXLoginRegisterViewController.h"
+#import "CXReadSetupView.h"
+#import "CXSetupWebView.h"
 
 static NSString * articleItemidKey = @"articleItemidKey";
 static NSString * articleNumberKey = @"articleNumberKey";
@@ -42,6 +44,10 @@ static NSString * articleNumberKey = @"articleNumberKey";
 @property (nonatomic, copy) NSString *itemid;
 /** 当前用户 */
 @property (nonatomic, strong) MLUser *user;
+/** 阅读设置view */
+@property (nonatomic, strong) CXReadSetupView *readSetupView;
+/** 阅读设置view是否已经显示 */
+@property (nonatomic, assign, getter=isReadSetupDisplayed) BOOL readSetupDisplayed;
 @end
 
 @implementation CXArticleViewController
@@ -61,6 +67,15 @@ static NSString * articleNumberKey = @"articleNumberKey";
     }
     return _animationView;
 }
+- (CXReadSetupView *)readSetupView
+{
+    if (!_readSetupView) {
+        _readSetupView = [CXReadSetupView loadFromXib];
+        _readSetupView.webView = self.webView;
+        [self.view addSubview:_readSetupView];
+    }
+    return _readSetupView;
+}
 #pragma mark - 初始化
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -70,6 +85,9 @@ static NSString * articleNumberKey = @"articleNumberKey";
     //状态栏状态
     self.hideStatus = [UIApplication sharedApplication].statusBarHidden;
     [self.view bringSubviewToFront:self.bottomView];
+    //添加侧滑返回手势
+    UISwipeGestureRecognizer *backGest = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(back)];
+    [self.webView addGestureRecognizer:backGest];
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -229,6 +247,8 @@ static NSString * articleNumberKey = @"articleNumberKey";
     self.loadComplete = YES;
     //移除加载动画
     [self.animationView removeFromSuperview];
+    [self setupDefaultFont];
+    [self setupDefaultBgColor];
 }
 #pragma mark - 处理webView的点击与滑动
 /*
@@ -265,6 +285,10 @@ static NSString * articleNumberKey = @"articleNumberKey";
             self.bottomView.cx_y = CXScreenH;
         } else {
             self.bottomView.cx_y = CXScreenH - self.bottomView.cx_height;
+        }
+        if (self.isReadSetupDisplayed) {
+            self.readSetupView.cx_y = CXScreenH;
+            self.readSetupDisplayed = NO;
         }
     }];
 }
@@ -347,6 +371,34 @@ static NSString * articleNumberKey = @"articleNumberKey";
 - (IBAction)share {
     UIImage *image = [CXWebViewScreenShot screenShotWithWebView:self.webView];
     [[CXUMSocial defaultSocialManager] shareImageWithImage:image completion:nil];
+}
+#pragma mark - 设置字体及背景
+- (IBAction)setupFontAndBgColor {
+    CGFloat height = 180;
+    self.readSetupView.frame = CGRectMake(0, CXScreenH, CXScreenW, height);
+    [UIView animateWithDuration:0.25 animations:^{
+        self.readSetupView.cx_y = CXScreenH - self.readSetupView.cx_height;
+    }];
+    self.readSetupDisplayed = YES;
+}
+/*
+ * 一进入页面就设置存储到本地的字体和背景颜色
+ */
+- (void)setupDefaultFont
+{
+    NSInteger size = [CXUserDefaults readIntegerForKey:CXFontSizeKey];
+    if (size) {
+        [CXSetupWebView setupTextFontWith:size webView:self.webView];
+    }
+}
+- (void)setupDefaultBgColor
+{
+    NSString *bgColor = [CXUserDefaults readObjectForKey:CXReadBgColorKey];
+    NSString *textColor = [CXUserDefaults readObjectForKey:CXTextColorKey];
+    if (bgColor && textColor) {
+        [CXSetupWebView setupBgColorWith:bgColor webView:self.webView];
+        [CXSetupWebView setupTextColorWith:textColor webView:self.webView];
+    }
 }
 #pragma mark - 退出
 - (IBAction)back {

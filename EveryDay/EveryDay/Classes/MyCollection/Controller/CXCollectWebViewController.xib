@@ -28,6 +28,13 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="grp-Zt-Cki">
                     <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                     <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NyK-Bb-KCt" userLabel="设置按钮">
+                            <rect key="frame" x="291" y="6" width="32" height="32"/>
+                            <state key="normal" image="fontSet"/>
+                            <connections>
+                                <action selector="setupFontAndBgColor" destination="-1" eventType="touchUpInside" id="98K-yd-UyZ"/>
+                            </connections>
+                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ui8-ph-2vG" userLabel="返回">
                             <rect key="frame" x="10" y="6" width="32" height="32"/>
                             <state key="normal" image="returnBtn"/>
@@ -59,7 +66,9 @@
                         <constraint firstAttribute="trailing" secondItem="WQf-Pn-9vl" secondAttribute="trailing" id="Jdr-eS-vRZ"/>
                         <constraint firstItem="WQf-Pn-9vl" firstAttribute="top" secondItem="grp-Zt-Cki" secondAttribute="top" id="NrF-YC-tpH"/>
                         <constraint firstAttribute="height" constant="44" id="Y5g-rj-p0e"/>
+                        <constraint firstItem="ls0-ce-3NC" firstAttribute="leading" secondItem="NyK-Bb-KCt" secondAttribute="trailing" constant="10" id="a4I-ry-M3E"/>
                         <constraint firstItem="ls0-ce-3NC" firstAttribute="centerY" secondItem="grp-Zt-Cki" secondAttribute="centerY" id="t6b-sZ-wBC"/>
+                        <constraint firstItem="NyK-Bb-KCt" firstAttribute="centerY" secondItem="grp-Zt-Cki" secondAttribute="centerY" id="xyt-cg-pzL"/>
                     </constraints>
                 </view>
             </subviews>
@@ -77,6 +86,7 @@
         </view>
     </objects>
     <resources>
+        <image name="fontSet" width="32" height="32"/>
         <image name="returnBtn" width="32" height="32"/>
         <image name="share" width="32" height="32"/>
     </resources>

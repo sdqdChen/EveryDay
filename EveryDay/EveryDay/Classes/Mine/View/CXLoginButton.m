@@ -249,18 +249,17 @@
  */
 - (void)readImageFromServer
 {
+    //先设置默认头像
+    [self setBackgroundImage:[UIImage imageNamed:@"avatar"] forState:UIControlStateNormal];
+    //再看看之前有没有头像
     MLFile *file = [MLUser currentUser][@"avatar"];
-    if (!file) {
-        [self setBackgroundImage:[UIImage imageNamed:@"avatar"] forState:UIControlStateNormal];
-    } else {
-        [file getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
-            UIImage *image = [UIImage imageWithData:data];
-            if (image) {
-                [self setBackgroundImage:image forState:UIControlStateNormal];
-            } else {
-                [self setBackgroundImage:[UIImage imageNamed:@"avatar"] forState:UIControlStateNormal];
-            }
-        }];
-    }
+    [file getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+        UIImage *image = [UIImage imageWithData:data];
+        if (image) {
+            [self setBackgroundImage:image forState:UIControlStateNormal];
+        } else {
+            [self setBackgroundImage:[UIImage imageNamed:@"avatar"] forState:UIControlStateNormal];
+        }
+    }];
 }
 @end

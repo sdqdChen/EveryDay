@@ -19,4 +19,7 @@
 //image
 + (void)setImage:(UIImage *)image forKey:(NSString *)key;
 + (UIImage *)readImageForKey:(NSString *)key;
+//integer
++ (void)setInteger:(NSInteger)integer forKey:(NSString *)key;
++ (NSInteger)readIntegerForKey:(NSString *)key;
 @end

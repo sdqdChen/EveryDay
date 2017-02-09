@@ -16,9 +16,11 @@
 #import "CXNoteLabel.h"
 #import "CXLeftView.h"
 #import "CXUserDefaults.h"
+#import <WSProgressHUD.h>
 
 @interface CXHomeViewController ()
 @property (nonatomic, strong) AFHTTPSessionManager *manager;
+@property (weak, nonatomic) IBOutlet UIView *wholeView;
 /** 背景图 */
 @property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
 /** 整个view的左约束 */
@@ -175,13 +177,19 @@ static NSString * const noteLabelKey = @"noteLabelKey";
     NSString *imageURL = [NSString stringWithFormat:@"https://unsplash.it/%f/%f/?random", CXScreenW, CXScreenH];
     if (update) { //需要更新
         [[SDImageCache sharedImageCache] removeImageForKey:imageURL withCompletion:nil];
-        [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]];
+        [WSProgressHUD showShimmeringString:@"正在努力加载..."];
+        [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            [WSProgressHUD dismiss];
+        }];
     } else {
         UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:imageURL];
         if (image) {
             self.bgImageView.image = image;
         } else {
-            [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]];
+            [WSProgressHUD showShimmeringString:@"正在努力加载..."];
+            [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                [WSProgressHUD dismiss];
+            }];
         }
     }
     [self addGestureToImageView];
@@ -191,8 +199,8 @@ static NSString * const noteLabelKey = @"noteLabelKey";
  */
 - (void)addGestureToImageView
 {
-    //添加点击手势
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toLeft)];
+    //添加点击刷新
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toRefresh)];
     self.bgImageView.userInteractionEnabled = YES;
     [self.bgImageView addGestureRecognizer:tap];
     //向右滑动
@@ -216,6 +224,12 @@ static NSString * const noteLabelKey = @"noteLabelKey";
         [self moreButtonClick];
     }
 }
+- (void)toRefresh
+{
+    if (self.leftContraint.constant == 0) {
+        [self refresh];
+    }
+}
 #pragma mark - 设置句子
 - (void)setupNoteLabel
 {
@@ -229,7 +243,7 @@ static NSString * const noteLabelKey = @"noteLabelKey";
         [CXUserDefaults setObject:responseObject[@"note"] forKey:noteLabelKey];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         CXLog(@"%@", error);
-        [SVProgressHUD showErrorWithStatus:@"似乎已断开与网络的链接..."];
+        [SVProgressHUD showErrorWithStatus:@"网络出错,点击屏幕重试"];
     }];
 }
 #pragma mark - 设置日期

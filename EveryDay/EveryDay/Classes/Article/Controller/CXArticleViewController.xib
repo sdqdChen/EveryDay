@@ -25,6 +25,13 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PfH-fO-puy">
                     <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                     <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4FV-lT-77a" userLabel="设置按钮">
+                            <rect key="frame" x="249" y="6" width="32" height="32"/>
+                            <state key="normal" image="fontSet"/>
+                            <connections>
+                                <action selector="setupFontAndBgColor" destination="-1" eventType="touchUpInside" id="q0I-Dl-NeC"/>
+                            </connections>
+                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Izp-DD-mY4" userLabel="收藏按钮">
                             <rect key="frame" x="291" y="6" width="32" height="32"/>
                             <state key="normal" image="collect"/>
@@ -59,11 +66,13 @@
                     <constraints>
                         <constraint firstItem="PlQ-V5-fFn" firstAttribute="leading" secondItem="PfH-fO-puy" secondAttribute="leading" constant="10" id="6P6-gd-4fm"/>
                         <constraint firstItem="PlQ-V5-fFn" firstAttribute="centerY" secondItem="PfH-fO-puy" secondAttribute="centerY" id="8BU-Jk-i6w"/>
+                        <constraint firstItem="4FV-lT-77a" firstAttribute="centerY" secondItem="PfH-fO-puy" secondAttribute="centerY" id="AqR-st-qdf"/>
                         <constraint firstItem="Izp-DD-mY4" firstAttribute="centerY" secondItem="PfH-fO-puy" secondAttribute="centerY" id="Svh-oH-9J7"/>
                         <constraint firstItem="ChN-jT-x6B" firstAttribute="centerY" secondItem="PfH-fO-puy" secondAttribute="centerY" id="a6V-N5-mC0"/>
                         <constraint firstAttribute="trailing" secondItem="ChN-jT-x6B" secondAttribute="trailing" constant="10" id="bbb-eg-YFz"/>
                         <constraint firstAttribute="height" constant="44" id="dR1-og-Als"/>
                         <constraint firstItem="pNh-Nh-UGZ" firstAttribute="leading" secondItem="PfH-fO-puy" secondAttribute="leading" id="ePv-s2-mCN"/>
+                        <constraint firstItem="Izp-DD-mY4" firstAttribute="leading" secondItem="4FV-lT-77a" secondAttribute="trailing" constant="10" id="iSh-H3-DOO"/>
                         <constraint firstAttribute="trailing" secondItem="pNh-Nh-UGZ" secondAttribute="trailing" id="pce-yL-kMQ"/>
                         <constraint firstItem="pNh-Nh-UGZ" firstAttribute="top" secondItem="PfH-fO-puy" secondAttribute="top" id="uVi-cu-cdJ"/>
                         <constraint firstItem="ChN-jT-x6B" firstAttribute="leading" secondItem="Izp-DD-mY4" secondAttribute="trailing" constant="10" id="wus-Dv-PLn"/>
@@ -90,6 +99,7 @@
     <resources>
         <image name="collect" width="32" height="32"/>
         <image name="collect_s" width="32" height="32"/>
+        <image name="fontSet" width="32" height="32"/>
         <image name="returnBtn" width="32" height="32"/>
         <image name="share" width="32" height="32"/>
     </resources>

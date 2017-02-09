@@ -136,7 +136,7 @@ typedef NS_ENUM(NSInteger, CellRow) {
             [self setupRecommand];
             break;
         case kGrade:
-            CXLog(@"给我评分");
+            [self toGrade];
             break;
             
         default:
@@ -219,5 +219,11 @@ typedef NS_ENUM(NSInteger, CellRow) {
     HCConversationViewController *issuesViewController = [[HCConversationViewController alloc] init];
     UINavigationController *navCtrl = [[UINavigationController alloc] initWithRootViewController:issuesViewController];
     [self presentViewController:navCtrl animated:YES completion:nil];
+}
+#pragma mark - 给我评分
+- (void)toGrade
+{
+    NSString *urlStr = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%ld&pageNumber=0&sortOrdering=2&mt=8", CXAPPLEID];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
 }
 @end

@@ -15,8 +15,16 @@ UIKIT_EXTERN NSString * const CXLoginSuccessNotification;
 UIKIT_EXTERN NSString * const CXEditPersonalInfoNotification;
 //退出登录的通知
 UIKIT_EXTERN NSString * const CXLoginOutNotification;
-//头像下载完成的通知
-UIKIT_EXTERN NSString * const CXIconDownloadNotification;
 
 //平方字体
 UIKIT_EXTERN NSString * const CXPingFangLight;
+
+//APPLE ID
+UIKIT_EXTERN NSInteger const CXAPPLEID;
+
+//阅读界面字体大小
+UIKIT_EXTERN NSString * const CXFontSizeKey;
+//阅读界面背景颜色
+UIKIT_EXTERN NSString * const CXReadBgColorKey;
+//阅读界面字体颜色
+UIKIT_EXTERN NSString * const CXTextColorKey;

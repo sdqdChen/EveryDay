@@ -14,9 +14,17 @@ NSString * const CXLoginSuccessNotification = @"CXLoginSuccessNotification";
 //编辑个人信息的通知
 NSString * const CXEditPersonalInfoNotification = @"CXEditPersonalInfoNotification";
 //退出登录的通知
-NSString * const CXLoginOutNotification = @"CXLoginOutNotification";
-//头像下载完成的通知
-NSString * const CXIconDownloadNotification = @"CXIconDownloadNotification";
+NSString * const CXLoginOutNotification = @"CXLoginOutNotification";;
 
 //平方字体
 NSString * const CXPingFangLight = @"PingFangSC-Light";
+
+//APPLE ID
+NSInteger const CXAPPLEID = 1202823847;
+
+//阅读界面字体大小
+NSString * const CXFontSizeKey = @"CXFontSizeKey";
+//阅读界面背景颜色
+NSString * const CXReadBgColorKey = @"CXReadBgColorKey";
+//阅读界面字体颜色
+NSString * const CXTextColorKey = @"CXTextColorKey";

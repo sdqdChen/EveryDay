@@ -60,15 +60,25 @@
                         <constraint firstItem="VhQ-04-NYe" firstAttribute="centerX" secondItem="fwB-Rh-vte" secondAttribute="centerX" id="vm2-Wa-h5M"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nxv-IM-bNv">
+                    <rect key="frame" x="137" y="593" width="100" height="34"/>
+                    <string key="text">手机验证码登录
+无需输入密码</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="Nxv-IM-bNv" secondAttribute="bottom" constant="40" id="87H-Zn-KAD"/>
                 <constraint firstItem="ueE-oG-e5b" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="5" id="9U3-0v-Rgg"/>
                 <constraint firstItem="ueE-oG-e5b" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="25" id="AG6-zs-BEx"/>
                 <constraint firstItem="fwB-Rh-vte" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-40" id="FGH-jD-BFB"/>
                 <constraint firstItem="fwB-Rh-vte" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Iv8-Wx-8vK"/>
                 <constraint firstItem="fwB-Rh-vte" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JhW-AW-bbv"/>
                 <constraint firstAttribute="trailing" secondItem="fwB-Rh-vte" secondAttribute="trailing" id="k3X-9Q-atx"/>
+                <constraint firstItem="Nxv-IM-bNv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="mIq-p7-PxF"/>
             </constraints>
         </view>
     </objects>

@@ -10,7 +10,8 @@
 #import "CXUserDefaults.h"
 #import <MaxLeap/MaxLeap.h>
 #import <UMSocialCore/UMSocialCore.h>
-#import "CXLaunchViewController.h"
+#import "CXHomeViewController.h"
+#import "CXNavigationController.h"
 
 @interface AppDelegate ()
 
@@ -31,7 +32,8 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = [[CXLaunchViewController alloc] init];
+    CXNavigationController *nav = [[CXNavigationController alloc] initWithRootViewController:[[CXHomeViewController alloc] init]];
+    self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
 }
 - (void)setupMaxLeap
@@ -40,15 +42,15 @@
     MLObject *obj = [MLObject objectWithoutDataWithClassName:@"Test" objectId:@"561c83c0226"];
     [obj fetchIfNeededInBackgroundWithBlock:^(MLObject * _Nullable object, NSError * _Nullable error) {
         if (error.code == kMLErrorInvalidObjectId) {
-            NSLog(@"已经能够正确连接上您的云端应用");
+            CXLog(@"已经能够正确连接上您的云端应用");
         } else if (error && error.code < kMLErrorInternalServer) {
-            NSLog(@"未知错误： %@", error);
+            CXLog(@"未知错误： %@", error);
         } else if (error && error.code == kMLErrorInternalServer) {
-            NSLog(@"服务器出错： %@", error);
+            CXLog(@"服务器出错： %@", error);
         } else if (error && error.code == kMLErrorConnectionFailed) {
-            NSLog(@"网络错误： %@", error);
+            CXLog(@"网络错误： %@", error);
         } else {
-            NSLog(@"\n\n应用访问凭证可能不正确，请检查。错误信息：\n%@\n\n", error);
+            CXLog(@"\n\n应用访问凭证可能不正确，请检查。错误信息：\n%@\n\n", error);
         }
     }];
 }

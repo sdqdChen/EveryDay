@@ -92,9 +92,6 @@ static int seconds = countDownSeconds;
 #pragma mark - 重新获取验证码
 - (IBAction)obtainAgainButtonClick:(UIButton *)sender
 {
-//    self.obtainAgainButton.enabled = NO;
-//    [self.obtainAgainButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
-//    [self.timer fire];
     [MLUser requestLoginSmsCodeWithPhoneNumber:self.phoneNumber block:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             self.obtainAgainButton.enabled = NO;
